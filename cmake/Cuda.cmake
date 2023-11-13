@@ -97,4 +97,158 @@ function(caffe_select_nvcc_arch_flags out_variable)
     set(__cuda_arch_bin ${CUDA_ARCH_BIN})
   endif()
 
-  # remove dots 
+  # remove dots and convert to lists
+  string(REGEX REPLACE "\\." "" __cuda_arch_bin "${__cuda_arch_bin}")
+  string(REGEX REPLACE "\\." "" __cuda_arch_ptx "${CUDA_ARCH_PTX}")
+  string(REGEX MATCHALL "[0-9()]+" __cuda_arch_bin "${__cuda_arch_bin}")
+  string(REGEX MATCHALL "[0-9]+"   __cuda_arch_ptx "${__cuda_arch_ptx}")
+  caffe_list_unique(__cuda_arch_bin __cuda_arch_ptx)
+
+  set(__nvcc_flags "")
+  set(__nvcc_archs_readable "")
+
+  # Tell NVCC to add binaries for the specified GPUs
+  foreach(__arch ${__cuda_arch_bin})
+    if(__arch MATCHES "([0-9]+)\\(([0-9]+)\\)")
+      # User explicitly specified PTX for the concrete BIN
+      list(APPEND __nvcc_flags -gencode arch=compute_${CMAKE_MATCH_2},code=sm_${CMAKE_MATCH_1})
+      list(APPEND __nvcc_archs_readable sm_${CMAKE_MATCH_1})
+    else()
+      # User didn't explicitly specify PTX for the concrete BIN, we assume PTX=BIN
+      list(APPEND __nvcc_flags -gencode arch=compute_${__arch},code=sm_${__arch})
+      list(APPEND __nvcc_archs_readable sm_${__arch})
+    endif()
+  endforeach()
+
+  # Tell NVCC to add PTX intermediate code for the specified architectures
+  foreach(__arch ${__cuda_arch_ptx})
+    list(APPEND __nvcc_flags -gencode arch=compute_${__arch},code=compute_${__arch})
+    list(APPEND __nvcc_archs_readable compute_${__arch})
+  endforeach()
+
+  string(REPLACE ";" " " __nvcc_archs_readable "${__nvcc_archs_readable}")
+  set(${out_variable}          ${__nvcc_flags}          PARENT_SCOPE)
+  set(${out_variable}_readable ${__nvcc_archs_readable} PARENT_SCOPE)
+endfunction()
+
+################################################################################################
+# Short command for cuda comnpilation
+# Usage:
+#   caffe_cuda_compile(<objlist_variable> <cuda_files>)
+macro(caffe_cuda_compile objlist_variable)
+  foreach(var CMAKE_CXX_FLAGS CMAKE_CXX_FLAGS_RELEASE CMAKE_CXX_FLAGS_DEBUG)
+    set(${var}_backup_in_cuda_compile_ "${${var}}")
+
+    # we remove /EHa as it generates warnings under windows
+    string(REPLACE "/EHa" "" ${var} "${${var}}")
+
+  endforeach()
+
+  if(UNIX OR APPLE)
+    list(APPEND CUDA_NVCC_FLAGS -Xcompiler -fPIC)
+  endif()
+
+  if(APPLE)
+    list(APPEND CUDA_NVCC_FLAGS -Xcompiler -Wno-unused-function)
+  endif()
+
+  cuda_compile(cuda_objcs ${ARGN})
+
+  foreach(var CMAKE_CXX_FLAGS CMAKE_CXX_FLAGS_RELEASE CMAKE_CXX_FLAGS_DEBUG)
+    set(${var} "${${var}_backup_in_cuda_compile_}")
+    unset(${var}_backup_in_cuda_compile_)
+  endforeach()
+
+  set(${objlist_variable} ${cuda_objcs})
+endmacro()
+
+################################################################################################
+# Short command for cuDNN detection. Believe it soon will be a part of CUDA toolkit distribution.
+# That's why not FindcuDNN.cmake file, but just the macro
+# Usage:
+#   detect_cuDNN()
+function(detect_cuDNN)
+  set(CUDNN_ROOT "" CACHE PATH "CUDNN root folder")
+
+  find_path(CUDNN_INCLUDE cudnn.h
+            PATHS ${CUDNN_ROOT} $ENV{CUDNN_ROOT} ${CUDA_TOOLKIT_INCLUDE}
+            DOC "Path to cuDNN include directory." )
+
+  get_filename_component(__libpath_hist ${CUDA_CUDART_LIBRARY} PATH)
+  find_library(CUDNN_LIBRARY NAMES libcudnn.so # libcudnn_static.a
+                             PATHS ${CUDNN_ROOT} $ENV{CUDNN_ROOT} ${CUDNN_INCLUDE} ${__libpath_hist}
+                             DOC "Path to cuDNN library.")
+
+  if(CUDNN_INCLUDE AND CUDNN_LIBRARY)
+    set(HAVE_CUDNN  TRUE PARENT_SCOPE)
+    set(CUDNN_FOUND TRUE PARENT_SCOPE)
+
+    mark_as_advanced(CUDNN_INCLUDE CUDNN_LIBRARY CUDNN_ROOT)
+    message(STATUS "Found cuDNN (include: ${CUDNN_INCLUDE}, library: ${CUDNN_LIBRARY})")
+  endif()
+endfunction()
+
+
+################################################################################################
+###  Non macro section
+################################################################################################
+
+find_package(CUDA 5.5 QUIET)
+find_cuda_helper_libs(curand)  # cmake 2.8.7 compartibility which doesn't search for curand
+
+if(NOT CUDA_FOUND)
+  return()
+endif()
+
+set(HAVE_CUDA TRUE)
+message(STATUS "CUDA detected: " ${CUDA_VERSION})
+include_directories(SYSTEM ${CUDA_INCLUDE_DIRS})
+list(APPEND Caffe_LINKER_LIBS ${CUDA_CUDART_LIBRARY}
+                              ${CUDA_curand_LIBRARY} ${CUDA_CUBLAS_LIBRARIES})
+
+# cudnn detection
+if(USE_CUDNN)
+  detect_cuDNN()
+  if(HAVE_CUDNN)
+    add_definitions(-DUSE_CUDNN)
+    include_directories(SYSTEM ${CUDNN_INCLUDE})
+    list(APPEND Caffe_LINKER_LIBS ${CUDNN_LIBRARY})
+  endif()
+endif()
+
+# setting nvcc arch flags
+caffe_select_nvcc_arch_flags(NVCC_FLAGS_EXTRA)
+list(APPEND CUDA_NVCC_FLAGS ${NVCC_FLAGS_EXTRA})
+message(STATUS "Added CUDA NVCC flags for: ${NVCC_FLAGS_EXTRA_readable}")
+
+# Boost 1.55 workaround, see https://svn.boost.org/trac/boost/ticket/9392 or
+# https://github.com/ComputationalRadiationPhysics/picongpu/blob/master/src/picongpu/CMakeLists.txt
+if(Boost_VERSION EQUAL 105500)
+  message(STATUS "Cuda + Boost 1.55: Applying noinline work around")
+  # avoid warning for CMake >= 2.8.12
+  set(CUDA_NVCC_FLAGS "${CUDA_NVCC_FLAGS} \"-DBOOST_NOINLINE=__attribute__((noinline))\" ")
+endif()
+
+# disable some nvcc diagnostic that apears in boost, glog, glags, opencv, etc.
+foreach(diag cc_clobber_ignored integer_sign_change useless_using_declaration set_but_not_used)
+  list(APPEND CUDA_NVCC_FLAGS -Xcudafe --diag_suppress=${diag})
+endforeach()
+
+# setting default testing device
+if(NOT CUDA_TEST_DEVICE)
+  set(CUDA_TEST_DEVICE -1)
+endif()
+
+mark_as_advanced(CUDA_BUILD_CUBIN CUDA_BUILD_EMULATION CUDA_VERBOSE_BUILD)
+mark_as_advanced(CUDA_SDK_ROOT_DIR CUDA_SEPARABLE_COMPILATION)
+
+# Handle clang/libc++ issue
+if(APPLE)
+  caffe_detect_darwin_version(OSX_VERSION)
+
+  # OSX 10.9 and higher uses clang/libc++ by default which is incompartible with old CUDA toolkits
+  if(OSX_VERSION VERSION_GREATER 10.8)
+    # enabled by default if and only if CUDA version is less than 7.0
+    caffe_option(USE_libstdcpp "Use libstdc++ instead of libc++" (CUDA_VERSION VERSION_LESS 7.0))
+  endif()
+endif()
