@@ -1,4 +1,5 @@
-net: "hdf5_classification/train_val.prototxt"
+
+net: "hdf5_classification/train_val2.prototxt"
 test_iter: 250
 test_interval: 1000
 base_lr: 0.01
