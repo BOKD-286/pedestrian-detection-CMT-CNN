@@ -1,0 +1,2 @@
+#ifndef CAFFE_RNG_CPP_HPP_
+#define CAFFE_RNG_CPP_HPP_
