@@ -599,3 +599,87 @@ static void read_mean(MEX_ARGS) {
   mxCHECK(nrhs == 1 && mxIsChar(prhs[0]),
       "Usage: caffe_('read_mean', mean_proto_file)");
   char* mean_proto_file = mxArrayToString(prhs[0]);
+  mxCHECK_FILE_EXIST(mean_proto_file);
+  Blob<float> data_mean;
+  BlobProto blob_proto;
+  bool result = ReadProtoFromBinaryFile(mean_proto_file, &blob_proto);
+  mxCHECK(result, "Could not read your mean file");
+  data_mean.FromProto(blob_proto);
+  plhs[0] = blob_to_mx_mat(&data_mean, DATA);
+  mxFree(mean_proto_file);
+}
+
+/** -----------------------------------------------------------------
+ ** Available commands.
+ **/
+struct handler_registry {
+  string cmd;
+  void (*func)(MEX_ARGS);
+};
+
+static handler_registry handlers[] = {
+  // Public API functions
+  { "get_solver",                    get_solver                     },
+  { "solver_get_attr",               solver_get_attr                },
+  { "solver_get_iter",               solver_get_iter                },
+  { "solver_get_max_iter",           solver_get_max_iter            },
+  { "solver_restore",                solver_restore                 },
+  { "solver_solve",                  solver_solve                   },
+  { "solver_step",                   solver_step                    },
+  { "get_net",                       get_net                        },
+  { "net_get_attr",                  net_get_attr                   },
+  { "net_set_phase",                 net_set_phase                  },
+  { "net_forward",                   net_forward                    },
+  { "net_backward",                  net_backward                   },
+  { "net_copy_from",                 net_copy_from                  },
+  { "net_share_trained_layers_with", net_share_trained_layers_with  },
+  { "net_reshape",                   net_reshape                    },
+  { "net_save",                      net_save                       },
+  { "layer_get_attr",                layer_get_attr                 },
+  { "layer_get_type",                layer_get_type                 },
+  { "blob_get_shape",                blob_get_shape                 },
+  { "blob_reshape",                  blob_reshape                   },
+  { "blob_get_data",                 blob_get_data                  },
+  { "blob_set_data",                 blob_set_data                  },
+  { "blob_copy_data",				 blob_copy_data					},
+  { "blob_get_diff",                 blob_get_diff                  },
+  { "blob_set_diff",                 blob_set_diff                  },
+  { "set_mode_cpu",                  set_mode_cpu                   },
+  { "set_mode_gpu",                  set_mode_gpu                   },
+  { "set_device",                    set_device                     },
+  { "set_random_seed",               set_random_seed                },
+  { "get_init_key",                  get_init_key                   },
+  { "init_log",                      init_log                       },
+  { "reset",                         reset                          },
+  { "read_mean",                     read_mean                      },
+  // The end.
+  { "END",                           NULL                           },
+};
+
+/** -----------------------------------------------------------------
+ ** matlab entry point.
+ **/
+// Usage: caffe_(api_command, arg1, arg2, ...)
+void mexFunction(MEX_ARGS) {
+  //mexLock();  // Avoid clearing the mex file.
+  mxCHECK(nrhs > 0, "Usage: caffe_(api_command, arg1, arg2, ...)");
+  // Handle input command
+  char* cmd = mxArrayToString(prhs[0]);
+  bool dispatched = false;
+  // Dispatch to cmd handler
+  for (int i = 0; handlers[i].func != NULL; i++) {
+    if (handlers[i].cmd.compare(cmd) == 0) {
+      handlers[i].func(nlhs, plhs, nrhs-1, prhs+1);
+      dispatched = true;
+      break;
+    }
+  }
+  if (!dispatched) {
+    ostringstream error_msg;
+    error_msg << "Unknown command '" << cmd << "'";
+    mxERROR(error_msg.str().c_str());
+  }
+  mxFree(cmd);
+}
+
+#endif
