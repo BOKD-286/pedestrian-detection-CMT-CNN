@@ -45,4 +45,78 @@ void ContrastiveLossLayer<Dtype>::Forward_cpu(
       this->layer_param_.contrastive_loss_param().legacy_version();
   Dtype loss(0.0);
   for (int i = 0; i < bottom[0]->num(); ++i) {
-    dist_sq_.mutable_cpu_data()[i] = caffe
+    dist_sq_.mutable_cpu_data()[i] = caffe_cpu_dot(channels,
+        diff_.cpu_data() + (i*channels), diff_.cpu_data() + (i*channels));
+    if (static_cast<int>(bottom[2]->cpu_data()[i])) {  // similar pairs
+      loss += dist_sq_.cpu_data()[i];
+    } else {  // dissimilar pairs
+      if (legacy_version) {
+        loss += std::max(Dtype(margin - dist_sq_.cpu_data()[i]), Dtype(0.0));
+      } else {
+        Dtype dist = std::max(Dtype(margin - sqrt(dist_sq_.cpu_data()[i])),
+                              Dtype(0.0));
+        loss += dist*dist;
+      }
+    }
+  }
+  loss = loss / static_cast<Dtype>(bottom[0]->num()) / Dtype(2);
+  top[0]->mutable_cpu_data()[0] = loss;
+}
+
+template <typename Dtype>
+void ContrastiveLossLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype>*>& top,
+    const vector<bool>& propagate_down, const vector<Blob<Dtype>*>& bottom) {
+  Dtype margin = this->layer_param_.contrastive_loss_param().margin();
+  bool legacy_version =
+      this->layer_param_.contrastive_loss_param().legacy_version();
+  for (int i = 0; i < 2; ++i) {
+    if (propagate_down[i]) {
+      const Dtype sign = (i == 0) ? 1 : -1;
+      const Dtype alpha = sign * top[0]->cpu_diff()[0] /
+          static_cast<Dtype>(bottom[i]->num());
+      int num = bottom[i]->num();
+      int channels = bottom[i]->channels();
+      for (int j = 0; j < num; ++j) {
+        Dtype* bout = bottom[i]->mutable_cpu_diff();
+        if (static_cast<int>(bottom[2]->cpu_data()[j])) {  // similar pairs
+          caffe_cpu_axpby(
+              channels,
+              alpha,
+              diff_.cpu_data() + (j*channels),
+              Dtype(0.0),
+              bout + (j*channels));
+        } else {  // dissimilar pairs
+          Dtype mdist(0.0);
+          Dtype beta(0.0);
+          if (legacy_version) {
+            mdist = margin - dist_sq_.cpu_data()[j];
+            beta = -alpha;
+          } else {
+            Dtype dist = sqrt(dist_sq_.cpu_data()[j]);
+            mdist = margin - dist;
+            beta = -alpha * mdist / (dist + Dtype(1e-4));
+          }
+          if (mdist > Dtype(0.0)) {
+            caffe_cpu_axpby(
+                channels,
+                beta,
+                diff_.cpu_data() + (j*channels),
+                Dtype(0.0),
+                bout + (j*channels));
+          } else {
+            caffe_set(channels, Dtype(0), bout + (j*channels));
+          }
+        }
+      }
+    }
+  }
+}
+
+#ifdef CPU_ONLY
+STUB_GPU(ContrastiveLossLayer);
+#endif
+
+INSTANTIATE_CLASS(ContrastiveLossLayer);
+REGISTER_LAYER_CLASS(ContrastiveLoss);
+
+}  // namespace caffe
