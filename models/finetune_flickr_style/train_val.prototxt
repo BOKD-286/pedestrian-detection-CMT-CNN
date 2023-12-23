@@ -1,9 +1,45 @@
+
 name: "FlickrStyleCaffeNet"
-input: "data"
-input_dim: 10
-input_dim: 3
-input_dim: 227
-input_dim: 227
+layer {
+  name: "data"
+  type: "ImageData"
+  top: "data"
+  top: "label"
+  include {
+    phase: TRAIN
+  }
+  transform_param {
+    mirror: true
+    crop_size: 227
+    mean_file: "data/ilsvrc12/imagenet_mean.binaryproto"
+  }
+  image_data_param {
+    source: "data/flickr_style/train.txt"
+    batch_size: 50
+    new_height: 256
+    new_width: 256
+  }
+}
+layer {
+  name: "data"
+  type: "ImageData"
+  top: "data"
+  top: "label"
+  include {
+    phase: TEST
+  }
+  transform_param {
+    mirror: false
+    crop_size: 227
+    mean_file: "data/ilsvrc12/imagenet_mean.binaryproto"
+  }
+  image_data_param {
+    source: "data/flickr_style/test.txt"
+    batch_size: 50
+    new_height: 256
+    new_width: 256
+  }
+}
 layer {
   name: "conv1"
   type: "Convolution"
@@ -335,8 +371,18 @@ layer {
   }
 }
 layer {
-  name: "prob"
-  type: "Softmax"
+  name: "loss"
+  type: "SoftmaxWithLoss"
   bottom: "fc8_flickr"
-  top: "prob"
+  bottom: "label"
+}
+layer {
+  name: "accuracy"
+  type: "Accuracy"
+  bottom: "fc8_flickr"
+  bottom: "label"
+  top: "accuracy"
+  include {
+    phase: TEST
+  }
 }
