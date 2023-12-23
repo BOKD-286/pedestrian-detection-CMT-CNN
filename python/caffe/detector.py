@@ -154,4 +154,63 @@ class Detector(caffe.Net):
             scale_h = crop_size / full_h
             scale_w = crop_size / full_w
             pad_y = round(max(0, -box[0]) * scale_h)  # amount out-of-bounds
-            pad_x = rou
+            pad_x = round(max(0, -box[1]) * scale_w)
+
+            # Clip box to image dimensions.
+            im_h, im_w = im.shape[:2]
+            box = np.clip(box, 0., [im_h, im_w, im_h, im_w])
+            clip_h = box[2] - box[0] + 1
+            clip_w = box[3] - box[1] + 1
+            assert(clip_h > 0 and clip_w > 0)
+            crop_h = round(clip_h * scale_h)
+            crop_w = round(clip_w * scale_w)
+            if pad_y + crop_h > crop_size:
+                crop_h = crop_size - pad_y
+            if pad_x + crop_w > crop_size:
+                crop_w = crop_size - pad_x
+
+            # collect with context padding and place in input
+            # with mean padding
+            context_crop = im[box[0]:box[2], box[1]:box[3]]
+            context_crop = caffe.io.resize_image(context_crop, (crop_h, crop_w))
+            crop = np.ones(self.crop_dims, dtype=np.float32) * self.crop_mean
+            crop[pad_y:(pad_y + crop_h), pad_x:(pad_x + crop_w)] = context_crop
+
+        return crop
+
+    def configure_crop(self, context_pad):
+        """
+        Configure crop dimensions and amount of context for cropping.
+        If context is included, make the special input mean for context padding.
+
+        Parameters
+        ----------
+        context_pad : amount of context for cropping.
+        """
+        # crop dimensions
+        in_ = self.inputs[0]
+        tpose = self.transformer.transpose[in_]
+        inv_tpose = [tpose[t] for t in tpose]
+        self.crop_dims = np.array(self.blobs[in_].data.shape[1:])[inv_tpose]
+        #.transpose(inv_tpose)
+        # context padding
+        self.context_pad = context_pad
+        if self.context_pad:
+            in_ = self.inputs[0]
+            transpose = self.transformer.transpose.get(in_)
+            channel_order = self.transformer.channel_swap.get(in_)
+            raw_scale = self.transformer.raw_scale.get(in_)
+            # Padding context crops needs the mean in unprocessed input space.
+            mean = self.transformer.mean.get(in_)
+            if mean is not None:
+                inv_transpose = [transpose[t] for t in transpose]
+                crop_mean = mean.copy().transpose(inv_transpose)
+                if channel_order is not None:
+                    channel_order_inverse = [channel_order.index(i)
+                                             for i in range(crop_mean.shape[2])]
+                    crop_mean = crop_mean[:, :, channel_order_inverse]
+                if raw_scale is not None:
+                    crop_mean /= raw_scale
+                self.crop_mean = crop_mean
+            else:
+                self.crop_mean = np.zeros(self.crop_dims, dtype=np.float32)
