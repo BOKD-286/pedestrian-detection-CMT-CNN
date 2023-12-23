@@ -236,4 +236,66 @@ BOOST_PYTHON_MODULE(_caffe) {
     .add_property("width",    &Blob<Dtype>::width)
     .add_property("count",    static_cast<int (Blob<Dtype>::*)() const>(
         &Blob<Dtype>::count))
-    .def("reshape",           bp::ra
+    .def("reshape",           bp::raw_function(&Blob_Reshape))
+    .add_property("data",     bp::make_function(&Blob<Dtype>::mutable_cpu_data,
+          NdarrayCallPolicies()))
+    .add_property("diff",     bp::make_function(&Blob<Dtype>::mutable_cpu_diff,
+          NdarrayCallPolicies()));
+
+  bp::class_<Layer<Dtype>, shared_ptr<PythonLayer<Dtype> >,
+    boost::noncopyable>("Layer", bp::init<const LayerParameter&>())
+    .add_property("blobs", bp::make_function(&Layer<Dtype>::blobs,
+          bp::return_internal_reference<>()))
+    .def("setup", &Layer<Dtype>::LayerSetUp)
+    .def("reshape", &Layer<Dtype>::Reshape)
+    .add_property("type", bp::make_function(&Layer<Dtype>::type));
+  bp::register_ptr_to_python<shared_ptr<Layer<Dtype> > >();
+
+  bp::class_<LayerParameter>("LayerParameter", bp::no_init);
+
+  bp::class_<Solver<Dtype>, shared_ptr<Solver<Dtype> >, boost::noncopyable>(
+    "Solver", bp::no_init)
+    .add_property("net", &Solver<Dtype>::net)
+    .add_property("test_nets", bp::make_function(&Solver<Dtype>::test_nets,
+          bp::return_internal_reference<>()))
+    .add_property("iter", &Solver<Dtype>::iter)
+    .def("solve", static_cast<void (Solver<Dtype>::*)(const char*)>(
+          &Solver<Dtype>::Solve), SolveOverloads())
+    .def("step", &Solver<Dtype>::Step)
+    .def("restore", &Solver<Dtype>::Restore);
+
+  bp::class_<SGDSolver<Dtype>, bp::bases<Solver<Dtype> >,
+    shared_ptr<SGDSolver<Dtype> >, boost::noncopyable>(
+        "SGDSolver", bp::init<string>());
+  bp::class_<NesterovSolver<Dtype>, bp::bases<Solver<Dtype> >,
+    shared_ptr<NesterovSolver<Dtype> >, boost::noncopyable>(
+        "NesterovSolver", bp::init<string>());
+  bp::class_<AdaGradSolver<Dtype>, bp::bases<Solver<Dtype> >,
+    shared_ptr<AdaGradSolver<Dtype> >, boost::noncopyable>(
+        "AdaGradSolver", bp::init<string>());
+
+  bp::def("get_solver", &GetSolverFromFile,
+      bp::return_value_policy<bp::manage_new_object>());
+
+  // vector wrappers for all the vector types we use
+  bp::class_<vector<shared_ptr<Blob<Dtype> > > >("BlobVec")
+    .def(bp::vector_indexing_suite<vector<shared_ptr<Blob<Dtype> > >, true>());
+  bp::class_<vector<Blob<Dtype>*> >("RawBlobVec")
+    .def(bp::vector_indexing_suite<vector<Blob<Dtype>*>, true>());
+  bp::class_<vector<shared_ptr<Layer<Dtype> > > >("LayerVec")
+    .def(bp::vector_indexing_suite<vector<shared_ptr<Layer<Dtype> > >, true>());
+  bp::class_<vector<string> >("StringVec")
+    .def(bp::vector_indexing_suite<vector<string> >());
+  bp::class_<vector<int> >("IntVec")
+    .def(bp::vector_indexing_suite<vector<int> >());
+  bp::class_<vector<shared_ptr<Net<Dtype> > > >("NetVec")
+    .def(bp::vector_indexing_suite<vector<shared_ptr<Net<Dtype> > >, true>());
+  bp::class_<vector<bool> >("BoolVec")
+    .def(bp::vector_indexing_suite<vector<bool> >());
+
+  // boost python expects a void (missing) return value, while import_array
+  // returns NULL for python3. import_array1() forces a void return value.
+  import_array1();
+}
+
+}  // namespace caffe
