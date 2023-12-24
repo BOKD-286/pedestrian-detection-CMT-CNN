@@ -74,4 +74,24 @@ void DropoutLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype>*>& top,
 		  }
 	  }
 	  else{
-		  for (int i =
+		  for (int i = 0; i < count; ++i) {
+			  bottom_diff[i] = top_diff[i] * mask[i];
+		  }
+	  }
+    } else {
+      caffe_copy(top[0]->count(), top_diff, bottom_diff);
+	  if (!scale_train_)
+		  caffe_scal<Dtype>(top[0]->count(), 1. / scale_, bottom_diff);
+    }
+  }
+}
+
+
+#ifdef CPU_ONLY
+STUB_GPU(DropoutLayer);
+#endif
+
+INSTANTIATE_CLASS(DropoutLayer);
+REGISTER_LAYER_CLASS(Dropout);
+
+}  // namespace caffe
