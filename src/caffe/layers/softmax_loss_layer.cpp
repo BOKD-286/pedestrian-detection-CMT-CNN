@@ -86,4 +86,79 @@ void SoftmaxWithLossLayer<Dtype>::Forward_cpu(
       }
       DCHECK_GE(label_value, 0);
       DCHECK_LT(label_value, prob_.shape(softmax_axis_));
-  
+      loss -= weight_value * log(std::max(prob_data[i * dim + label_value * inner_num_ + j],
+                           Dtype(FLT_MIN)));
+      
+	  weights_sum += weight_value;
+    }
+  }
+  if (normalize_) {
+    top[0]->mutable_cpu_data()[0] = weights_sum == Dtype(0.0) ? Dtype(0.0) : (loss / weights_sum);
+  } else {
+    top[0]->mutable_cpu_data()[0] = loss / outer_num_;
+  }
+  if (top.size() == 2) {
+    top[1]->ShareData(prob_);
+  }
+}
+
+template <typename Dtype>
+void SoftmaxWithLossLayer<Dtype>::Backward_cpu(const vector<Blob<Dtype>*>& top,
+    const vector<bool>& propagate_down, const vector<Blob<Dtype>*>& bottom) {
+  if (propagate_down[1]) {
+    LOG(FATAL) << this->type()
+               << " Layer cannot backpropagate to label inputs.";
+  }
+  if (propagate_down[0]) {
+    Dtype* bottom_diff = bottom[0]->mutable_cpu_diff();
+    const Dtype* prob_data = prob_.cpu_data();
+    caffe_copy(prob_.count(), prob_data, bottom_diff);
+    const Dtype* label = bottom[1]->cpu_data();
+	bool has_weight = bottom.size() >= 3;
+	const Dtype* weight;
+	if (has_weight)
+		weight = bottom[2]->cpu_data();
+    int dim = prob_.count() / outer_num_;
+	int channels = prob_.channels();
+    Dtype weights_sum = Dtype(0.0);
+    for (int i = 0; i < outer_num_; ++i) {
+      for (int j = 0; j < inner_num_; ++j) {
+        const int label_value = static_cast<int>(label[i * inner_num_ + j]);
+        if (has_ignore_label_ && label_value == ignore_label_) {
+          for (int c = 0; c < bottom[0]->shape(softmax_axis_); ++c) {
+            bottom_diff[i * dim + c * inner_num_ + j] = 0;
+          }
+        } else {
+          bottom_diff[i * dim + label_value * inner_num_ + j] -= 1;
+
+		  if (has_weight){
+			  const Dtype weight_value = static_cast<Dtype>(weight[i * inner_num_ + j]);
+			  for (int k = 0; k < channels; ++k)
+				  bottom_diff[i * dim + k * inner_num_ + j] *= weight_value;
+
+			  weights_sum += weight_value;
+		  }
+		  else{
+			  weights_sum += 1.0;
+		  }
+        }
+      }
+    }
+    // Scale gradient
+    const Dtype loss_weight = top[0]->cpu_diff()[0];
+    if (normalize_) {
+      caffe_scal(prob_.count(), weights_sum == Dtype(0.0) ? Dtype(0.0) : (loss_weight / weights_sum), bottom_diff);
+    } else {
+      caffe_scal(prob_.count(), loss_weight / outer_num_, bottom_diff);
+    }
+  }
+}
+
+#ifdef CPU_ONLY
+STUB_GPU(SoftmaxWithLossLayer);
+#endif
+
+INSTANTIATE_CLASS(SoftmaxWithLossLayer);
+REGISTER_LAYER_CLASS(SoftmaxWithLoss);
+
+}  // namespace caffe
