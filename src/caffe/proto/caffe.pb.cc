@@ -587,4 +587,221 @@ void protobuf_AssignDesc_caffe_2eproto() {
   ConcatParameter_descriptor_ = file->message_type(16);
   static const int ConcatParameter_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConcatParameter, axis_),
-    GOOGLE_PROTOBUF_GE
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConcatParameter, concat_dim_),
+  };
+  ConcatParameter_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      ConcatParameter_descriptor_,
+      ConcatParameter::default_instance_,
+      ConcatParameter_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConcatParameter, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConcatParameter, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(ConcatParameter));
+  ContrastiveLossParameter_descriptor_ = file->message_type(17);
+  static const int ContrastiveLossParameter_offsets_[2] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ContrastiveLossParameter, margin_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ContrastiveLossParameter, legacy_version_),
+  };
+  ContrastiveLossParameter_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      ContrastiveLossParameter_descriptor_,
+      ContrastiveLossParameter::default_instance_,
+      ContrastiveLossParameter_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ContrastiveLossParameter, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ContrastiveLossParameter, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(ContrastiveLossParameter));
+  ConvolutionParameter_descriptor_ = file->message_type(18);
+  static const int ConvolutionParameter_offsets_[15] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConvolutionParameter, num_output_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConvolutionParameter, bias_term_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConvolutionParameter, pad_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConvolutionParameter, pad_h_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConvolutionParameter, pad_w_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConvolutionParameter, kernel_size_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConvolutionParameter, kernel_h_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConvolutionParameter, kernel_w_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConvolutionParameter, group_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConvolutionParameter, stride_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConvolutionParameter, stride_h_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConvolutionParameter, stride_w_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConvolutionParameter, weight_filler_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConvolutionParameter, bias_filler_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConvolutionParameter, engine_),
+  };
+  ConvolutionParameter_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      ConvolutionParameter_descriptor_,
+      ConvolutionParameter::default_instance_,
+      ConvolutionParameter_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConvolutionParameter, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConvolutionParameter, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(ConvolutionParameter));
+  ConvolutionParameter_Engine_descriptor_ = ConvolutionParameter_descriptor_->enum_type(0);
+  DataParameter_descriptor_ = file->message_type(19);
+  static const int DataParameter_offsets_[9] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataParameter, source_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataParameter, batch_size_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataParameter, rand_skip_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataParameter, backend_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataParameter, scale_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataParameter, mean_file_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataParameter, crop_size_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataParameter, mirror_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataParameter, force_encoded_color_),
+  };
+  DataParameter_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      DataParameter_descriptor_,
+      DataParameter::default_instance_,
+      DataParameter_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataParameter, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DataParameter, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(DataParameter));
+  DataParameter_DB_descriptor_ = DataParameter_descriptor_->enum_type(0);
+  DropoutParameter_descriptor_ = file->message_type(20);
+  static const int DropoutParameter_offsets_[2] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DropoutParameter, dropout_ratio_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DropoutParameter, scale_train_),
+  };
+  DropoutParameter_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      DropoutParameter_descriptor_,
+      DropoutParameter::default_instance_,
+      DropoutParameter_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DropoutParameter, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DropoutParameter, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(DropoutParameter));
+  DummyDataParameter_descriptor_ = file->message_type(21);
+  static const int DummyDataParameter_offsets_[6] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DummyDataParameter, data_filler_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DummyDataParameter, shape_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DummyDataParameter, num_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DummyDataParameter, channels_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DummyDataParameter, height_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DummyDataParameter, width_),
+  };
+  DummyDataParameter_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      DummyDataParameter_descriptor_,
+      DummyDataParameter::default_instance_,
+      DummyDataParameter_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DummyDataParameter, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DummyDataParameter, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(DummyDataParameter));
+  EltwiseParameter_descriptor_ = file->message_type(22);
+  static const int EltwiseParameter_offsets_[3] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EltwiseParameter, operation_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EltwiseParameter, coeff_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EltwiseParameter, stable_prod_grad_),
+  };
+  EltwiseParameter_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      EltwiseParameter_descriptor_,
+      EltwiseParameter::default_instance_,
+      EltwiseParameter_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EltwiseParameter, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(EltwiseParameter, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(EltwiseParameter));
+  EltwiseParameter_EltwiseOp_descriptor_ = EltwiseParameter_descriptor_->enum_type(0);
+  ExpParameter_descriptor_ = file->message_type(23);
+  static const int ExpParameter_offsets_[3] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ExpParameter, base_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ExpParameter, scale_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ExpParameter, shift_),
+  };
+  ExpParameter_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      ExpParameter_descriptor_,
+      ExpParameter::default_instance_,
+      ExpParameter_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ExpParameter, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ExpParameter, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(ExpParameter));
+  FlattenParameter_descriptor_ = file->message_type(24);
+  static const int FlattenParameter_offsets_[2] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FlattenParameter, axis_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FlattenParameter, end_axis_),
+  };
+  FlattenParameter_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      FlattenParameter_descriptor_,
+      FlattenParameter::default_instance_,
+      FlattenParameter_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FlattenParameter, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FlattenParameter, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(FlattenParameter));
+  HDF5DataParameter_descriptor_ = file->message_type(25);
+  static const int HDF5DataParameter_offsets_[3] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(HDF5DataParameter, source_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(HDF5DataParameter, batch_size_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(HDF5DataParameter, shuffle_),
+  };
+  HDF5DataParameter_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      HDF5DataParameter_descriptor_,
+      HDF5DataParameter::default_instance_,
+      HDF5DataParameter_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(HDF5DataParameter, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(HDF5DataParameter, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(HDF5DataParameter));
+  HDF5OutputParameter_descriptor_ = file->message_type(26);
+  static const int HDF5OutputParameter_offsets_[1] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(HDF5OutputParameter, file_name_),
+  };
+  HDF5OutputParameter_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      HDF5OutputParameter_descriptor_,
+      HDF5OutputParameter::default_instance_,
+      HDF5OutputParameter_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(HDF5OutputParameter, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(HDF5OutputParameter, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(HDF5OutputParameter));
+  HingeLossParameter_descriptor_ = file->message_type(27);
+  static const int HingeLossParameter_offsets_[1] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(HingeLossParameter, norm_),
+  };
+  HingeLossParameter_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      HingeLossParameter_descriptor_,
+      HingeLossParameter::default_instance_,
+      HingeLossParameter_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(HingeLossParameter, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(HingeLossParameter, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(HingeLossParameter));
+  HingeLossParameter_Norm_descriptor_ = HingeLossParameter_descrip
