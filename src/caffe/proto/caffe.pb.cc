@@ -1790,4 +1790,184 @@ void protobuf_AddDesc_caffe_2eproto() {
     "AULT\022\017\n\004axis\030\002 \001(\005:\0011\"+\n\006Engine\022\013\n\007DEFAU"
     "LT\020\000\022\t\n\005CAFFE\020\001\022\t\n\005CUDNN\020\002\"r\n\rTanHParame"
     "ter\0224\n\006engine\030\001 \001(\0162\033.caffe.TanHParamete"
-    "r.Engine:\007DEFAULT\"+\n\006Engine\022\
+    "r.Engine:\007DEFAULT\"+\n\006Engine\022\013\n\007DEFAULT\020\000"
+    "\022\t\n\005CAFFE\020\001\022\t\n\005CUDNN\020\002\"*\n\022ThresholdParam"
+    "eter\022\024\n\tthreshold\030\001 \001(\002:\0010\"\301\002\n\023WindowDat"
+    "aParameter\022\016\n\006source\030\001 \001(\t\022\020\n\005scale\030\002 \001("
+    "\002:\0011\022\021\n\tmean_file\030\003 \001(\t\022\022\n\nbatch_size\030\004 "
+    "\001(\r\022\024\n\tcrop_size\030\005 \001(\r:\0010\022\025\n\006mirror\030\006 \001("
+    "\010:\005false\022\031\n\014fg_threshold\030\007 \001(\002:\0030.5\022\031\n\014b"
+    "g_threshold\030\010 \001(\002:\0030.5\022\031\n\013fg_fraction\030\t "
+    "\001(\002:\0040.25\022\026\n\013context_pad\030\n \001(\r:\0010\022\027\n\tcro"
+    "p_mode\030\013 \001(\t:\004warp\022\033\n\014cache_images\030\014 \001(\010"
+    ":\005false\022\025\n\013root_folder\030\r \001(\t:\000\"\353\001\n\014SPPPa"
+    "rameter\022\026\n\016pyramid_height\030\001 \001(\r\0221\n\004pool\030"
+    "\002 \001(\0162\036.caffe.SPPParameter.PoolMethod:\003M"
+    "AX\0223\n\006engine\030\006 \001(\0162\032.caffe.SPPParameter."
+    "Engine:\007DEFAULT\".\n\nPoolMethod\022\007\n\003MAX\020\000\022\007"
+    "\n\003AVE\020\001\022\016\n\nSTOCHASTIC\020\002\"+\n\006Engine\022\013\n\007DEF"
+    "AULT\020\000\022\t\n\005CAFFE\020\001\022\t\n\005CUDNN\020\002\"\370\024\n\020V1Layer"
+    "Parameter\022\016\n\006bottom\030\002 \003(\t\022\013\n\003top\030\003 \003(\t\022\014"
+    "\n\004name\030\004 \001(\t\022$\n\007include\030  \003(\0132\023.caffe.Ne"
+    "tStateRule\022$\n\007exclude\030! \003(\0132\023.caffe.NetS"
+    "tateRule\022/\n\004type\030\005 \001(\0162!.caffe.V1LayerPa"
+    "rameter.LayerType\022\037\n\005blobs\030\006 \003(\0132\020.caffe"
+    ".BlobProto\022\016\n\005param\030\351\007 \003(\t\022>\n\017blob_share"
+    "_mode\030\352\007 \003(\0162$.caffe.V1LayerParameter.Di"
+    "mCheckMode\022\020\n\010blobs_lr\030\007 \003(\002\022\024\n\014weight_d"
+    "ecay\030\010 \003(\002\022\023\n\013loss_weight\030# \003(\002\0220\n\016accur"
+    "acy_param\030\033 \001(\0132\030.caffe.AccuracyParamete"
+    "r\022,\n\014argmax_param\030\027 \001(\0132\026.caffe.ArgMaxPa"
+    "rameter\022,\n\014concat_param\030\t \001(\0132\026.caffe.Co"
+    "ncatParameter\022\?\n\026contrastive_loss_param\030"
+    "( \001(\0132\037.caffe.ContrastiveLossParameter\0226"
+    "\n\021convolution_param\030\n \001(\0132\033.caffe.Convol"
+    "utionParameter\022(\n\ndata_param\030\013 \001(\0132\024.caf"
+    "fe.DataParameter\022.\n\rdropout_param\030\014 \001(\0132"
+    "\027.caffe.DropoutParameter\0223\n\020dummy_data_p"
+    "aram\030\032 \001(\0132\031.caffe.DummyDataParameter\022.\n"
+    "\reltwise_param\030\030 \001(\0132\027.caffe.EltwisePara"
+    "meter\022&\n\texp_param\030) \001(\0132\023.caffe.ExpPara"
+    "meter\0221\n\017hdf5_data_param\030\r \001(\0132\030.caffe.H"
+    "DF5DataParameter\0225\n\021hdf5_output_param\030\016 "
+    "\001(\0132\032.caffe.HDF5OutputParameter\0223\n\020hinge"
+    "_loss_param\030\035 \001(\0132\031.caffe.HingeLossParam"
+    "eter\0223\n\020image_data_param\030\017 \001(\0132\031.caffe.I"
+    "mageDataParameter\0229\n\023infogain_loss_param"
+    "\030\020 \001(\0132\034.caffe.InfogainLossParameter\0229\n\023"
+    "inner_product_param\030\021 \001(\0132\034.caffe.InnerP"
+    "roductParameter\022&\n\tlrn_param\030\022 \001(\0132\023.caf"
+    "fe.LRNParameter\0225\n\021memory_data_param\030\026 \001"
+    "(\0132\032.caffe.MemoryDataParameter\022&\n\tmvn_pa"
+    "ram\030\" \001(\0132\023.caffe.MVNParameter\022.\n\rpoolin"
+    "g_param\030\023 \001(\0132\027.caffe.PoolingParameter\022*"
+    "\n\013power_param\030\025 \001(\0132\025.caffe.PowerParamet"
+    "er\022(\n\nrelu_param\030\036 \001(\0132\024.caffe.ReLUParam"
+    "eter\022.\n\rreshape_param\030, \001(\0132\027.caffe.Resh"
+    "apeParameter\0225\n\021roi_pooling_param\030+ \001(\0132"
+    "\032.caffe.ROIPoolingParameter\022.\n\rsigmoid_p"
+    "aram\030& \001(\0132\027.caffe.SigmoidParameter\022.\n\rs"
+    "oftmax_param\030\' \001(\0132\027.caffe.SoftmaxParame"
+    "ter\022*\n\013slice_param\030\037 \001(\0132\025.caffe.SlicePa"
+    "rameter\022(\n\ntanh_param\030% \001(\0132\024.caffe.TanH"
+    "Parameter\0222\n\017threshold_param\030\031 \001(\0132\031.caf"
+    "fe.ThresholdParameter\0225\n\021window_data_par"
+    "am\030\024 \001(\0132\032.caffe.WindowDataParameter\0227\n\017"
+    "transform_param\030$ \001(\0132\036.caffe.Transforma"
+    "tionParameter\022(\n\nloss_param\030* \001(\0132\024.caff"
+    "e.LossParameter\022&\n\005layer\030\001 \001(\0132\027.caffe.V"
+    "0LayerParameter\"\211\005\n\tLayerType\022\010\n\004NONE\020\000\022"
+    "\n\n\006ABSVAL\020#\022\014\n\010ACCURACY\020\001\022\n\n\006ARGMAX\020\036\022\010\n"
+    "\004BNLL\020\002\022\n\n\006CONCAT\020\003\022\024\n\020CONTRASTIVE_LOSS\020"
+    "%\022\017\n\013CONVOLUTION\020\004\022\010\n\004DATA\020\005\022\021\n\rDECONVOL"
+    "UTION\020\'\022\013\n\007DROPOUT\020\006\022\016\n\nDUMMY_DATA\020 \022\022\n\016"
+    "EUCLIDEAN_LOSS\020\007\022\013\n\007ELTWISE\020\031\022\007\n\003EXP\020&\022\013"
+    "\n\007FLATTEN\020\010\022\r\n\tHDF5_DATA\020\t\022\017\n\013HDF5_OUTPU"
+    "T\020\n\022\016\n\nHINGE_LOSS\020\034\022\n\n\006IM2COL\020\013\022\016\n\nIMAGE"
+    "_DATA\020\014\022\021\n\rINFOGAIN_LOSS\020\r\022\021\n\rINNER_PROD"
+    "UCT\020\016\022\007\n\003LRN\020\017\022\017\n\013MEMORY_DATA\020\035\022\035\n\031MULTI"
+    "NOMIAL_LOGISTIC_LOSS\020\020\022\007\n\003MVN\020\"\022\013\n\007POOLI"
+    "NG\020\021\022\t\n\005POWER\020\032\022\010\n\004RELU\020\022\022\013\n\007RESHAPE\020(\022\016"
+    "\n\nROIPOOLING\020)\022\013\n\007SIGMOID\020\023\022\036\n\032SIGMOID_C"
+    "ROSS_ENTROPY_LOSS\020\033\022\013\n\007SILENCE\020$\022\022\n\016SMOO"
+    "TH_L1_LOSS\020*\022\013\n\007SOFTMAX\020\024\022\020\n\014SOFTMAX_LOS"
+    "S\020\025\022\t\n\005SPLIT\020\026\022\t\n\005SLICE\020!\022\010\n\004TANH\020\027\022\017\n\013W"
+    "INDOW_DATA\020\030\022\r\n\tTHRESHOLD\020\037\"*\n\014DimCheckM"
+    "ode\022\n\n\006STRICT\020\000\022\016\n\nPERMISSIVE\020\001\"\375\007\n\020V0La"
+    "yerParameter\022\014\n\004name\030\001 \001(\t\022\014\n\004type\030\002 \001(\t"
+    "\022\022\n\nnum_output\030\003 \001(\r\022\026\n\010biasterm\030\004 \001(\010:\004"
+    "true\022-\n\rweight_filler\030\005 \001(\0132\026.caffe.Fill"
+    "erParameter\022+\n\013bias_filler\030\006 \001(\0132\026.caffe"
+    ".FillerParameter\022\016\n\003pad\030\007 \001(\r:\0010\022\022\n\nkern"
+    "elsize\030\010 \001(\r\022\020\n\005group\030\t \001(\r:\0011\022\021\n\006stride"
+    "\030\n \001(\r:\0011\0225\n\004pool\030\013 \001(\0162\".caffe.V0LayerP"
+    "arameter.PoolMethod:\003MAX\022\032\n\rdropout_rati"
+    "o\030\014 \001(\002:\0030.5\022\025\n\nlocal_size\030\r \001(\r:\0015\022\020\n\005a"
+    "lpha\030\016 \001(\002:\0011\022\022\n\004beta\030\017 \001(\002:\0040.75\022\014\n\001k\030\026"
+    " \001(\002:\0011\022\016\n\006source\030\020 \001(\t\022\020\n\005scale\030\021 \001(\002:\001"
+    "1\022\020\n\010meanfile\030\022 \001(\t\022\021\n\tbatchsize\030\023 \001(\r\022\023"
+    "\n\010cropsize\030\024 \001(\r:\0010\022\025\n\006mirror\030\025 \001(\010:\005fal"
+    "se\022\037\n\005blobs\0302 \003(\0132\020.caffe.BlobProto\022\020\n\010b"
+    "lobs_lr\0303 \003(\002\022\024\n\014weight_decay\0304 \003(\002\022\024\n\tr"
+    "and_skip\0305 \001(\r:\0010\022\035\n\020det_fg_threshold\0306 "
+    "\001(\002:\0030.5\022\035\n\020det_bg_threshold\0307 \001(\002:\0030.5\022"
+    "\035\n\017det_fg_fraction\0308 \001(\002:\0040.25\022\032\n\017det_co"
+    "ntext_pad\030: \001(\r:\0010\022\033\n\rdet_crop_mode\030; \001("
+    "\t:\004warp\022\022\n\007new_num\030< \001(\005:\0010\022\027\n\014new_chann"
+    "els\030= \001(\005:\0010\022\025\n\nnew_height\030> \001(\005:\0010\022\024\n\tn"
+    "ew_width\030\? \001(\005:\0010\022\035\n\016shuffle_images\030@ \001("
+    "\010:\005false\022\025\n\nconcat_dim\030A \001(\r:\0011\0226\n\021hdf5_"
+    "output_param\030\351\007 \001(\0132\032.caffe.HDF5OutputPa"
+    "rameter\".\n\nPoolMethod\022\007\n\003MAX\020\000\022\007\n\003AVE\020\001\022"
+    "\016\n\nSTOCHASTIC\020\002\"W\n\016PReLUParameter\022&\n\006fil"
+    "ler\030\001 \001(\0132\026.caffe.FillerParameter\022\035\n\016cha"
+    "nnel_shared\030\002 \001(\010:\005false*\034\n\005Phase\022\t\n\005TRA"
+    "IN\020\000\022\010\n\004TEST\020\001", 13574);
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
+    "caffe.proto", &protobuf_RegisterTypes);
+  BlobShape::default_instance_ = new BlobShape();
+  BlobProto::default_instance_ = new BlobProto();
+  BlobProtoVector::default_instance_ = new BlobProtoVector();
+  Datum::default_instance_ = new Datum();
+  FillerParameter::_default_type_ =
+      new ::std::string("constant", 8);
+  FillerParameter::default_instance_ = new FillerParameter();
+  NetParameter::default_instance_ = new NetParameter();
+  SolverParameter::_default_regularization_type_ =
+      new ::std::string("L2", 2);
+  SolverParameter::default_instance_ = new SolverParameter();
+  SolverState::default_instance_ = new SolverState();
+  NetState::default_instance_ = new NetState();
+  NetStateRule::default_instance_ = new NetStateRule();
+  ParamSpec::default_instance_ = new ParamSpec();
+  LayerParameter::default_instance_ = new LayerParameter();
+  TransformationParameter::default_instance_ = new TransformationParameter();
+  LossParameter::default_instance_ = new LossParameter();
+  AccuracyParameter::default_instance_ = new AccuracyParameter();
+  ArgMaxParameter::default_instance_ = new ArgMaxParameter();
+  ConcatParameter::default_instance_ = new ConcatParameter();
+  ContrastiveLossParameter::default_instance_ = new ContrastiveLossParameter();
+  ConvolutionParameter::default_instance_ = new ConvolutionParameter();
+  DataParameter::default_instance_ = new DataParameter();
+  DropoutParameter::default_instance_ = new DropoutParameter();
+  DummyDataParameter::default_instance_ = new DummyDataParameter();
+  EltwiseParameter::default_instance_ = new EltwiseParameter();
+  ExpParameter::default_instance_ = new ExpParameter();
+  FlattenParameter::default_instance_ = new FlattenParameter();
+  HDF5DataParameter::default_instance_ = new HDF5DataParameter();
+  HDF5OutputParameter::default_instance_ = new HDF5OutputParameter();
+  HingeLossParameter::default_instance_ = new HingeLossParameter();
+  ImageDataParameter::default_instance_ = new ImageDataParameter();
+  InfogainLossParameter::default_instance_ = new InfogainLossParameter();
+  InnerProductParameter::default_instance_ = new InnerProductParameter();
+  LogParameter::default_instance_ = new LogParameter();
+  LRNParameter::default_instance_ = new LRNParameter();
+  MemoryDataParameter::default_instance_ = new MemoryDataParameter();
+  MVNParameter::default_instance_ = new MVNParameter();
+  PoolingParameter::default_instance_ = new PoolingParameter();
+  PowerParameter::default_instance_ = new PowerParameter();
+  PythonParameter::default_instance_ = new PythonParameter();
+  ReductionParameter::default_instance_ = new ReductionParameter();
+  ReLUParameter::default_instance_ = new ReLUParameter();
+  ReshapeParameter::default_instance_ = new ReshapeParameter();
+  ROIPoolingParameter::default_instance_ = new ROIPoolingParameter();
+  SigmoidParameter::default_instance_ = new SigmoidParameter();
+  SliceParameter::default_instance_ = new SliceParameter();
+  SoftmaxParameter::default_instance_ = new SoftmaxParameter();
+  TanHParameter::default_instance_ = new TanHParameter();
+  ThresholdParameter::default_instance_ = new ThresholdParameter();
+  WindowDataParameter::_default_crop_mode_ =
+      new ::std::string("warp", 4);
+  WindowDataParameter::default_instance_ = new WindowDataParameter();
+  SPPParameter::default_instance_ = new SPPParameter();
+  V1LayerParameter::default_instance_ = new V1LayerParameter();
+  V0LayerParameter::_default_det_crop_mode_ =
+      new ::std::string("warp", 4);
+  V0LayerParameter::default_instance_ = new V0LayerParameter();
+  PReLUParameter::default_instance_ = new PReLUParameter();
+  BlobShape::default_instance_->InitAsDefaultInstance();
+  BlobProto::default_instance_->InitAsDefaultInstance();
+  BlobProtoVector::default_instance_->InitAsDefaultInstance();
+  Datum::default_instance_->InitAsDefaultInstance();
+  FillerParameter::default_instance_->InitAsDefaultInstance();
+  NetParameter::d
