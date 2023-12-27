@@ -1412,4 +1412,220 @@ void protobuf_RegisterTypes(const ::std::string&) {
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     PowerParameter_descriptor_, &PowerParameter::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    PythonPa
+    PythonParameter_descriptor_, &PythonParameter::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    ReductionParameter_descriptor_, &ReductionParameter::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    ReLUParameter_descriptor_, &ReLUParameter::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    ReshapeParameter_descriptor_, &ReshapeParameter::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    ROIPoolingParameter_descriptor_, &ROIPoolingParameter::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    SigmoidParameter_descriptor_, &SigmoidParameter::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    SliceParameter_descriptor_, &SliceParameter::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    SoftmaxParameter_descriptor_, &SoftmaxParameter::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    TanHParameter_descriptor_, &TanHParameter::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    ThresholdParameter_descriptor_, &ThresholdParameter::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    WindowDataParameter_descriptor_, &WindowDataParameter::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    SPPParameter_descriptor_, &SPPParameter::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    V1LayerParameter_descriptor_, &V1LayerParameter::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    V0LayerParameter_descriptor_, &V0LayerParameter::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    PReLUParameter_descriptor_, &PReLUParameter::default_instance());
+}
+
+}  // namespace
+
+void protobuf_ShutdownFile_caffe_2eproto() {
+  delete BlobShape::default_instance_;
+  delete BlobShape_reflection_;
+  delete BlobProto::default_instance_;
+  delete BlobProto_reflection_;
+  delete BlobProtoVector::default_instance_;
+  delete BlobProtoVector_reflection_;
+  delete Datum::default_instance_;
+  delete Datum_reflection_;
+  delete FillerParameter::default_instance_;
+  delete FillerParameter_reflection_;
+  delete FillerParameter::_default_type_;
+  delete NetParameter::default_instance_;
+  delete NetParameter_reflection_;
+  delete SolverParameter::default_instance_;
+  delete SolverParameter_reflection_;
+  delete SolverParameter::_default_regularization_type_;
+  delete SolverState::default_instance_;
+  delete SolverState_reflection_;
+  delete NetState::default_instance_;
+  delete NetState_reflection_;
+  delete NetStateRule::default_instance_;
+  delete NetStateRule_reflection_;
+  delete ParamSpec::default_instance_;
+  delete ParamSpec_reflection_;
+  delete LayerParameter::default_instance_;
+  delete LayerParameter_reflection_;
+  delete TransformationParameter::default_instance_;
+  delete TransformationParameter_reflection_;
+  delete LossParameter::default_instance_;
+  delete LossParameter_reflection_;
+  delete AccuracyParameter::default_instance_;
+  delete AccuracyParameter_reflection_;
+  delete ArgMaxParameter::default_instance_;
+  delete ArgMaxParameter_reflection_;
+  delete ConcatParameter::default_instance_;
+  delete ConcatParameter_reflection_;
+  delete ContrastiveLossParameter::default_instance_;
+  delete ContrastiveLossParameter_reflection_;
+  delete ConvolutionParameter::default_instance_;
+  delete ConvolutionParameter_reflection_;
+  delete DataParameter::default_instance_;
+  delete DataParameter_reflection_;
+  delete DropoutParameter::default_instance_;
+  delete DropoutParameter_reflection_;
+  delete DummyDataParameter::default_instance_;
+  delete DummyDataParameter_reflection_;
+  delete EltwiseParameter::default_instance_;
+  delete EltwiseParameter_reflection_;
+  delete ExpParameter::default_instance_;
+  delete ExpParameter_reflection_;
+  delete FlattenParameter::default_instance_;
+  delete FlattenParameter_reflection_;
+  delete HDF5DataParameter::default_instance_;
+  delete HDF5DataParameter_reflection_;
+  delete HDF5OutputParameter::default_instance_;
+  delete HDF5OutputParameter_reflection_;
+  delete HingeLossParameter::default_instance_;
+  delete HingeLossParameter_reflection_;
+  delete ImageDataParameter::default_instance_;
+  delete ImageDataParameter_reflection_;
+  delete InfogainLossParameter::default_instance_;
+  delete InfogainLossParameter_reflection_;
+  delete InnerProductParameter::default_instance_;
+  delete InnerProductParameter_reflection_;
+  delete LogParameter::default_instance_;
+  delete LogParameter_reflection_;
+  delete LRNParameter::default_instance_;
+  delete LRNParameter_reflection_;
+  delete MemoryDataParameter::default_instance_;
+  delete MemoryDataParameter_reflection_;
+  delete MVNParameter::default_instance_;
+  delete MVNParameter_reflection_;
+  delete PoolingParameter::default_instance_;
+  delete PoolingParameter_reflection_;
+  delete PowerParameter::default_instance_;
+  delete PowerParameter_reflection_;
+  delete PythonParameter::default_instance_;
+  delete PythonParameter_reflection_;
+  delete ReductionParameter::default_instance_;
+  delete ReductionParameter_reflection_;
+  delete ReLUParameter::default_instance_;
+  delete ReLUParameter_reflection_;
+  delete ReshapeParameter::default_instance_;
+  delete ReshapeParameter_reflection_;
+  delete ROIPoolingParameter::default_instance_;
+  delete ROIPoolingParameter_reflection_;
+  delete SigmoidParameter::default_instance_;
+  delete SigmoidParameter_reflection_;
+  delete SliceParameter::default_instance_;
+  delete SliceParameter_reflection_;
+  delete SoftmaxParameter::default_instance_;
+  delete SoftmaxParameter_reflection_;
+  delete TanHParameter::default_instance_;
+  delete TanHParameter_reflection_;
+  delete ThresholdParameter::default_instance_;
+  delete ThresholdParameter_reflection_;
+  delete WindowDataParameter::default_instance_;
+  delete WindowDataParameter_reflection_;
+  delete WindowDataParameter::_default_crop_mode_;
+  delete SPPParameter::default_instance_;
+  delete SPPParameter_reflection_;
+  delete V1LayerParameter::default_instance_;
+  delete V1LayerParameter_reflection_;
+  delete V0LayerParameter::default_instance_;
+  delete V0LayerParameter_reflection_;
+  delete V0LayerParameter::_default_det_crop_mode_;
+  delete PReLUParameter::default_instance_;
+  delete PReLUParameter_reflection_;
+}
+
+void protobuf_AddDesc_caffe_2eproto() {
+  static bool already_here = false;
+  if (already_here) return;
+  already_here = true;
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
+    "\n\013caffe.proto\022\005caffe\"\034\n\tBlobShape\022\017\n\003dim"
+    "\030\001 \003(\003B\002\020\001\"\232\001\n\tBlobProto\022\037\n\005shape\030\007 \001(\0132"
+    "\020.caffe.BlobShape\022\020\n\004data\030\005 \003(\002B\002\020\001\022\020\n\004d"
+    "iff\030\006 \003(\002B\002\020\001\022\016\n\003num\030\001 \001(\005:\0010\022\023\n\010channel"
+    "s\030\002 \001(\005:\0010\022\021\n\006height\030\003 \001(\005:\0010\022\020\n\005width\030\004"
+    " \001(\005:\0010\"2\n\017BlobProtoVector\022\037\n\005blobs\030\001 \003("
+    "\0132\020.caffe.BlobProto\"\201\001\n\005Datum\022\020\n\010channel"
+    "s\030\001 \001(\005\022\016\n\006height\030\002 \001(\005\022\r\n\005width\030\003 \001(\005\022\014"
+    "\n\004data\030\004 \001(\014\022\r\n\005label\030\005 \001(\005\022\022\n\nfloat_dat"
+    "a\030\006 \003(\002\022\026\n\007encoded\030\007 \001(\010:\005false\"\212\002\n\017Fill"
+    "erParameter\022\026\n\004type\030\001 \001(\t:\010constant\022\020\n\005v"
+    "alue\030\002 \001(\002:\0010\022\016\n\003min\030\003 \001(\002:\0010\022\016\n\003max\030\004 \001"
+    "(\002:\0011\022\017\n\004mean\030\005 \001(\002:\0010\022\016\n\003std\030\006 \001(\002:\0011\022\022"
+    "\n\006sparse\030\007 \001(\005:\002-1\022B\n\rvariance_norm\030\010 \001("
+    "\0162#.caffe.FillerParameter.VarianceNorm:\006"
+    "FAN_IN\"4\n\014VarianceNorm\022\n\n\006FAN_IN\020\000\022\013\n\007FA"
+    "N_OUT\020\001\022\013\n\007AVERAGE\020\002\"\216\002\n\014NetParameter\022\014\n"
+    "\004name\030\001 \001(\t\022\r\n\005input\030\003 \003(\t\022%\n\013input_shap"
+    "e\030\010 \003(\0132\020.caffe.BlobShape\022\021\n\tinput_dim\030\004"
+    " \003(\005\022\035\n\016force_backward\030\005 \001(\010:\005false\022\036\n\005s"
+    "tate\030\006 \001(\0132\017.caffe.NetState\022\031\n\ndebug_inf"
+    "o\030\007 \001(\010:\005false\022$\n\005layer\030d \003(\0132\025.caffe.La"
+    "yerParameter\022\'\n\006layers\030\002 \003(\0132\027.caffe.V1L"
+    "ayerParameter\"\276\010\n\017SolverParameter\022\013\n\003net"
+    "\030\030 \001(\t\022&\n\tnet_param\030\031 \001(\0132\023.caffe.NetPar"
+    "ameter\022\021\n\ttrain_net\030\001 \001(\t\022\020\n\010test_net\030\002 "
+    "\003(\t\022,\n\017train_net_param\030\025 \001(\0132\023.caffe.Net"
+    "Parameter\022+\n\016test_net_param\030\026 \003(\0132\023.caff"
+    "e.NetParameter\022$\n\013train_state\030\032 \001(\0132\017.ca"
+    "ffe.NetState\022#\n\ntest_state\030\033 \003(\0132\017.caffe"
+    ".NetState\022\021\n\ttest_iter\030\003 \003(\005\022\030\n\rtest_int"
+    "erval\030\004 \001(\005:\0010\022 \n\021test_compute_loss\030\023 \001("
+    "\010:\005false\022!\n\023test_initialization\030  \001(\010:\004t"
+    "rue\022\017\n\007base_lr\030\005 \001(\002\022\017\n\007display\030\006 \001(\005\022\027\n"
+    "\014average_loss\030! \001(\005:\0011\022\020\n\010max_iter\030\007 \001(\005"
+    "\022\024\n\titer_size\030$ \001(\005:\0011\022\021\n\tlr_policy\030\010 \001("
+    "\t\022\r\n\005gamma\030\t \001(\002\022\r\n\005power\030\n \001(\002\022\020\n\010momen"
+    "tum\030\013 \001(\002\022\024\n\014weight_decay\030\014 \001(\002\022\037\n\023regul"
+    "arization_type\030\035 \001(\t:\002L2\022\020\n\010stepsize\030\r \001"
+    "(\005\022\021\n\tstepvalue\030\" \003(\005\022\032\n\016clip_gradients\030"
+    "# \001(\002:\002-1\022\023\n\010snapshot\030\016 \001(\005:\0010\022\027\n\017snapsh"
+    "ot_prefix\030\017 \001(\t\022\034\n\rsnapshot_diff\030\020 \001(\010:\005"
+    "false\022;\n\013solver_mode\030\021 \001(\0162!.caffe.Solve"
+    "rParameter.SolverMode:\003GPU\022\024\n\tdevice_id\030"
+    "\022 \001(\005:\0010\022\027\n\013random_seed\030\024 \001(\003:\002-1\022;\n\013sol"
+    "ver_type\030\036 \001(\0162!.caffe.SolverParameter.S"
+    "olverType:\003SGD\022\025\n\005delta\030\037 \001(\002:\0061e-008\022\031\n"
+    "\ndebug_info\030\027 \001(\010:\005false\022\"\n\024snapshot_aft"
+    "er_train\030\034 \001(\010:\004true\"\036\n\nSolverMode\022\007\n\003CP"
+    "U\020\000\022\007\n\003GPU\020\001\"0\n\nSolverType\022\007\n\003SGD\020\000\022\014\n\010N"
+    "ESTEROV\020\001\022\013\n\007ADAGRAD\020\002\"l\n\013SolverState\022\014\n"
+    "\004iter\030\001 \001(\005\022\023\n\013learned_net\030\002 \001(\t\022!\n\007hist"
+    "ory\030\003 \003(\0132\020.caffe.BlobProto\022\027\n\014current_s"
+    "tep\030\004 \001(\005:\0010\"N\n\010NetState\022!\n\005phase\030\001 \001(\0162"
+    "\014.caffe.Phase:\004TEST\022\020\n\005level\030\002 \001(\005:\0010\022\r\n"
+    "\005stage\030\003 \003(\t\"s\n\014NetStateRule\022\033\n\005phase\030\001 "
+    "\001(\0162\014.caffe.Phase\022\021\n\tmin_level\030\002 \001(\005\022\021\n\t"
+    "max_level\030\003 \001(\005\022\r\n\005stage\030\004 \003(\t\022\021\n\tnot_st"
+    "age\030\005 \003(\t\"\243\001\n\tParamSpec\022\014\n\004name\030\001 \001(\t\0221\n"
+    "\nshare_mode\030\002 \001(\0162\035.caffe.ParamSpec.DimC"
+    "heckMode\022\022\n\007lr_mult\030\003 \001(\002:\0011\022\025\n\ndecay_mu"
+    "lt\030\004 \001(\002:\0011\"*\n\014DimCheckMode\022\n\n\006STRICT\020\000\022"
+    "\016\n\nPERMISSIVE\020\001\"\351\020\n\016LayerParameter\022\014\n\004na"
+    "me\030\001 \001(\t\022\014\n\004type\030\002 \001(\t\022\016\n\006bottom\030\003 \003(\t\022\013"
+    "\n\003top\030\004 \003(\t\022\033\n\005phase\030\n \001(\0162\014.caffe.Phase"
+    "\022\023\n\013loss_weight\030\005 \003(\002\022\037\
