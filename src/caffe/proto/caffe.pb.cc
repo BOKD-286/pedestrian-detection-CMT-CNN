@@ -3545,4 +3545,398 @@ void FillerParameter::InitAsDefaultInstance() {
 }
 
 FillerParameter::FillerParameter(const FillerParameter& from)
- 
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:caffe.FillerParameter)
+}
+
+void FillerParameter::SharedCtor() {
+  ::google::protobuf::internal::GetEmptyString();
+  _cached_size_ = 0;
+  type_ = const_cast< ::std::string*>(_default_type_);
+  value_ = 0;
+  min_ = 0;
+  max_ = 1;
+  mean_ = 0;
+  std_ = 1;
+  sparse_ = -1;
+  variance_norm_ = 0;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+FillerParameter::~FillerParameter() {
+  // @@protoc_insertion_point(destructor:caffe.FillerParameter)
+  SharedDtor();
+}
+
+void FillerParameter::SharedDtor() {
+  if (type_ != _default_type_) {
+    delete type_;
+  }
+  if (this != default_instance_) {
+  }
+}
+
+void FillerParameter::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* FillerParameter::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return FillerParameter_descriptor_;
+}
+
+const FillerParameter& FillerParameter::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_caffe_2eproto();
+  return *default_instance_;
+}
+
+FillerParameter* FillerParameter::default_instance_ = NULL;
+
+FillerParameter* FillerParameter::New() const {
+  return new FillerParameter;
+}
+
+void FillerParameter::Clear() {
+#define OFFSET_OF_FIELD_(f) (reinterpret_cast<char*>(      \
+  &reinterpret_cast<FillerParameter*>(16)->f) - \
+   reinterpret_cast<char*>(16))
+
+#define ZR_(first, last) do {                              \
+    size_t f = OFFSET_OF_FIELD_(first);                    \
+    size_t n = OFFSET_OF_FIELD_(last) - f + sizeof(last);  \
+    ::memset(&first, 0, n);                                \
+  } while (0)
+
+  if (_has_bits_[0 / 32] & 255) {
+    ZR_(value_, min_);
+    if (has_type()) {
+      if (type_ != _default_type_) {
+        type_->assign(*_default_type_);
+      }
+    }
+    max_ = 1;
+    mean_ = 0;
+    std_ = 1;
+    sparse_ = -1;
+    variance_norm_ = 0;
+  }
+
+#undef OFFSET_OF_FIELD_
+#undef ZR_
+
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool FillerParameter::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:caffe.FillerParameter)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional string type = 1 [default = "constant"];
+      case 1: {
+        if (tag == 10) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_type()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->type().data(), this->type().length(),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "type");
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(21)) goto parse_value;
+        break;
+      }
+
+      // optional float value = 2 [default = 0];
+      case 2: {
+        if (tag == 21) {
+         parse_value:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &value_)));
+          set_has_value();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(29)) goto parse_min;
+        break;
+      }
+
+      // optional float min = 3 [default = 0];
+      case 3: {
+        if (tag == 29) {
+         parse_min:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &min_)));
+          set_has_min();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(37)) goto parse_max;
+        break;
+      }
+
+      // optional float max = 4 [default = 1];
+      case 4: {
+        if (tag == 37) {
+         parse_max:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &max_)));
+          set_has_max();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(45)) goto parse_mean;
+        break;
+      }
+
+      // optional float mean = 5 [default = 0];
+      case 5: {
+        if (tag == 45) {
+         parse_mean:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &mean_)));
+          set_has_mean();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(53)) goto parse_std;
+        break;
+      }
+
+      // optional float std = 6 [default = 1];
+      case 6: {
+        if (tag == 53) {
+         parse_std:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &std_)));
+          set_has_std();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(56)) goto parse_sparse;
+        break;
+      }
+
+      // optional int32 sparse = 7 [default = -1];
+      case 7: {
+        if (tag == 56) {
+         parse_sparse:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &sparse_)));
+          set_has_sparse();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(64)) goto parse_variance_norm;
+        break;
+      }
+
+      // optional .caffe.FillerParameter.VarianceNorm variance_norm = 8 [default = FAN_IN];
+      case 8: {
+        if (tag == 64) {
+         parse_variance_norm:
+          int value;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          if (::caffe::FillerParameter_VarianceNorm_IsValid(value)) {
+            set_variance_norm(static_cast< ::caffe::FillerParameter_VarianceNorm >(value));
+          } else {
+            mutable_unknown_fields()->AddVarint(8, value);
+          }
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:caffe.FillerParameter)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:caffe.FillerParameter)
+  return false;
+#undef DO_
+}
+
+void FillerParameter::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:caffe.FillerParameter)
+  // optional string type = 1 [default = "constant"];
+  if (has_type()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->type().data(), this->type().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "type");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      1, this->type(), output);
+  }
+
+  // optional float value = 2 [default = 0];
+  if (has_value()) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(2, this->value(), output);
+  }
+
+  // optional float min = 3 [default = 0];
+  if (has_min()) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(3, this->min(), output);
+  }
+
+  // optional float max = 4 [default = 1];
+  if (has_max()) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(4, this->max(), output);
+  }
+
+  // optional float mean = 5 [default = 0];
+  if (has_mean()) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(5, this->mean(), output);
+  }
+
+  // optional float std = 6 [default = 1];
+  if (has_std()) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(6, this->std(), output);
+  }
+
+  // optional int32 sparse = 7 [default = -1];
+  if (has_sparse()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(7, this->sparse(), output);
+  }
+
+  // optional .caffe.FillerParameter.VarianceNorm variance_norm = 8 [default = FAN_IN];
+  if (has_variance_norm()) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      8, this->variance_norm(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:caffe.FillerParameter)
+}
+
+::google::protobuf::uint8* FillerParameter::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:caffe.FillerParameter)
+  // optional string type = 1 [default = "constant"];
+  if (has_type()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->type().data(), this->type().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "type");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        1, this->type(), target);
+  }
+
+  // optional float value = 2 [default = 0];
+  if (has_value()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(2, this->value(), target);
+  }
+
+  // optional float min = 3 [default = 0];
+  if (has_min()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(3, this->min(), target);
+  }
+
+  // optional float max = 4 [default = 1];
+  if (has_max()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(4, this->max(), target);
+  }
+
+  // optional float mean = 5 [default = 0];
+  if (has_mean()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(5, this->mean(), target);
+  }
+
+  // optional float std = 6 [default = 1];
+  if (has_std()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(6, this->std(), target);
+  }
+
+  // optional int32 sparse = 7 [default = -1];
+  if (has_sparse()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(7, this->sparse(), target);
+  }
+
+  // optional .caffe.FillerParameter.VarianceNorm variance_norm = 8 [default = FAN_IN];
+  if (has_variance_norm()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      8, this->variance_norm(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:caffe.FillerParameter)
+  return target;
+}
+
+int FillerParameter::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // optional string type = 1 [default = "constant"];
+    if (has_type()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->type());
+    }
+
+    // optional float value = 2 [default = 0];
+    if (has_value()) {
+      total_size += 1 + 4;
+    }
+
+    // optional float min = 3 [default = 0];
+    if (has_min()) {
+      total_size += 1 + 4;
+    }
+
+    // optional float max = 4 [default = 1];
+    if (has_max()) {
+      total_size += 1 + 4;
+    }
+
+    // optional float mean = 5 [default = 0];
+    if (has_mean()) {
+      total_size += 1 + 4;
+    }
+
+    // optional float std = 6 [default = 1];
+    if (has_std()) {
+      total_size += 1 + 4;
+    }
+
+    // optional int32 sparse = 7 [def
