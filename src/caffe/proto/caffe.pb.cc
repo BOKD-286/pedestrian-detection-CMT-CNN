@@ -2334,4 +2334,373 @@ void BlobProto::SharedDtor() {
 }
 
 void BlobProto::SetCachedSize(int size) const {
-  GOOGLE_S
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* BlobProto::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return BlobProto_descriptor_;
+}
+
+const BlobProto& BlobProto::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_caffe_2eproto();
+  return *default_instance_;
+}
+
+BlobProto* BlobProto::default_instance_ = NULL;
+
+BlobProto* BlobProto::New() const {
+  return new BlobProto;
+}
+
+void BlobProto::Clear() {
+#define OFFSET_OF_FIELD_(f) (reinterpret_cast<char*>(      \
+  &reinterpret_cast<BlobProto*>(16)->f) - \
+   reinterpret_cast<char*>(16))
+
+#define ZR_(first, last) do {                              \
+    size_t f = OFFSET_OF_FIELD_(first);                    \
+    size_t n = OFFSET_OF_FIELD_(last) - f + sizeof(last);  \
+    ::memset(&first, 0, n);                                \
+  } while (0)
+
+  if (_has_bits_[0 / 32] & 121) {
+    ZR_(num_, width_);
+    if (has_shape()) {
+      if (shape_ != NULL) shape_->::caffe::BlobShape::Clear();
+    }
+  }
+
+#undef OFFSET_OF_FIELD_
+#undef ZR_
+
+  data_.Clear();
+  diff_.Clear();
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool BlobProto::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:caffe.BlobProto)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional int32 num = 1 [default = 0];
+      case 1: {
+        if (tag == 8) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &num_)));
+          set_has_num();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(16)) goto parse_channels;
+        break;
+      }
+
+      // optional int32 channels = 2 [default = 0];
+      case 2: {
+        if (tag == 16) {
+         parse_channels:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &channels_)));
+          set_has_channels();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(24)) goto parse_height;
+        break;
+      }
+
+      // optional int32 height = 3 [default = 0];
+      case 3: {
+        if (tag == 24) {
+         parse_height:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &height_)));
+          set_has_height();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(32)) goto parse_width;
+        break;
+      }
+
+      // optional int32 width = 4 [default = 0];
+      case 4: {
+        if (tag == 32) {
+         parse_width:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &width_)));
+          set_has_width();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(42)) goto parse_data;
+        break;
+      }
+
+      // repeated float data = 5 [packed = true];
+      case 5: {
+        if (tag == 42) {
+         parse_data:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPackedPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, this->mutable_data())));
+        } else if (tag == 45) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitiveNoInline<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 1, 42, input, this->mutable_data())));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(50)) goto parse_diff;
+        break;
+      }
+
+      // repeated float diff = 6 [packed = true];
+      case 6: {
+        if (tag == 50) {
+         parse_diff:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPackedPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, this->mutable_diff())));
+        } else if (tag == 53) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitiveNoInline<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 1, 50, input, this->mutable_diff())));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(58)) goto parse_shape;
+        break;
+      }
+
+      // optional .caffe.BlobShape shape = 7;
+      case 7: {
+        if (tag == 58) {
+         parse_shape:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_shape()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:caffe.BlobProto)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:caffe.BlobProto)
+  return false;
+#undef DO_
+}
+
+void BlobProto::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:caffe.BlobProto)
+  // optional int32 num = 1 [default = 0];
+  if (has_num()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->num(), output);
+  }
+
+  // optional int32 channels = 2 [default = 0];
+  if (has_channels()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->channels(), output);
+  }
+
+  // optional int32 height = 3 [default = 0];
+  if (has_height()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->height(), output);
+  }
+
+  // optional int32 width = 4 [default = 0];
+  if (has_width()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->width(), output);
+  }
+
+  // repeated float data = 5 [packed = true];
+  if (this->data_size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteTag(5, ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED, output);
+    output->WriteVarint32(_data_cached_byte_size_);
+  }
+  for (int i = 0; i < this->data_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloatNoTag(
+      this->data(i), output);
+  }
+
+  // repeated float diff = 6 [packed = true];
+  if (this->diff_size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteTag(6, ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED, output);
+    output->WriteVarint32(_diff_cached_byte_size_);
+  }
+  for (int i = 0; i < this->diff_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloatNoTag(
+      this->diff(i), output);
+  }
+
+  // optional .caffe.BlobShape shape = 7;
+  if (has_shape()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      7, this->shape(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:caffe.BlobProto)
+}
+
+::google::protobuf::uint8* BlobProto::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:caffe.BlobProto)
+  // optional int32 num = 1 [default = 0];
+  if (has_num()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->num(), target);
+  }
+
+  // optional int32 channels = 2 [default = 0];
+  if (has_channels()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->channels(), target);
+  }
+
+  // optional int32 height = 3 [default = 0];
+  if (has_height()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->height(), target);
+  }
+
+  // optional int32 width = 4 [default = 0];
+  if (has_width()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->width(), target);
+  }
+
+  // repeated float data = 5 [packed = true];
+  if (this->data_size() > 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteTagToArray(
+      5,
+      ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED,
+      target);
+    target = ::google::protobuf::io::CodedOutputStream::WriteVarint32ToArray(
+      _data_cached_byte_size_, target);
+  }
+  for (int i = 0; i < this->data_size(); i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteFloatNoTagToArray(this->data(i), target);
+  }
+
+  // repeated float diff = 6 [packed = true];
+  if (this->diff_size() > 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteTagToArray(
+      6,
+      ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED,
+      target);
+    target = ::google::protobuf::io::CodedOutputStream::WriteVarint32ToArray(
+      _diff_cached_byte_size_, target);
+  }
+  for (int i = 0; i < this->diff_size(); i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteFloatNoTagToArray(this->diff(i), target);
+  }
+
+  // optional .caffe.BlobShape shape = 7;
+  if (has_shape()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        7, this->shape(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:caffe.BlobProto)
+  return target;
+}
+
+int BlobProto::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // optional .caffe.BlobShape shape = 7;
+    if (has_shape()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->shape());
+    }
+
+    // optional int32 num = 1 [default = 0];
+    if (has_num()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->num());
+    }
+
+    // optional int32 channels = 2 [default = 0];
+    if (has_channels()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->channels());
+    }
+
+    // optional int32 height = 3 [default = 0];
+    if (has_height()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->height());
+    }
+
+    // optional int32 width = 4 [default = 0];
+    if (has_width()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->width());
+    }
+
+  }
+  // repeated float data = 5 [packed = true];
+  {
+    int data_size = 0;
+    data_size = 4 * this->data_size();
+    if (data_size > 0) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(data_size);
+    }
+    GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+    _data_cached_byte_size_ = data_size;
+    GOOGLE_SAFE_CONCURRENT_WRITES_END();
+    total_size += data_size;
+  }
+
+  // repeated float diff = 6 [packed = true];
+  {
+    int data_size = 0;
+    data_size = 4 * this->diff_size();
+    if (data_size > 0) {
+      total_size += 1 +
+        ::google::pr
