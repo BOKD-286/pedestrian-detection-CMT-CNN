@@ -1970,4 +1970,368 @@ void protobuf_AddDesc_caffe_2eproto() {
   BlobProtoVector::default_instance_->InitAsDefaultInstance();
   Datum::default_instance_->InitAsDefaultInstance();
   FillerParameter::default_instance_->InitAsDefaultInstance();
-  NetParameter::d
+  NetParameter::default_instance_->InitAsDefaultInstance();
+  SolverParameter::default_instance_->InitAsDefaultInstance();
+  SolverState::default_instance_->InitAsDefaultInstance();
+  NetState::default_instance_->InitAsDefaultInstance();
+  NetStateRule::default_instance_->InitAsDefaultInstance();
+  ParamSpec::default_instance_->InitAsDefaultInstance();
+  LayerParameter::default_instance_->InitAsDefaultInstance();
+  TransformationParameter::default_instance_->InitAsDefaultInstance();
+  LossParameter::default_instance_->InitAsDefaultInstance();
+  AccuracyParameter::default_instance_->InitAsDefaultInstance();
+  ArgMaxParameter::default_instance_->InitAsDefaultInstance();
+  ConcatParameter::default_instance_->InitAsDefaultInstance();
+  ContrastiveLossParameter::default_instance_->InitAsDefaultInstance();
+  ConvolutionParameter::default_instance_->InitAsDefaultInstance();
+  DataParameter::default_instance_->InitAsDefaultInstance();
+  DropoutParameter::default_instance_->InitAsDefaultInstance();
+  DummyDataParameter::default_instance_->InitAsDefaultInstance();
+  EltwiseParameter::default_instance_->InitAsDefaultInstance();
+  ExpParameter::default_instance_->InitAsDefaultInstance();
+  FlattenParameter::default_instance_->InitAsDefaultInstance();
+  HDF5DataParameter::default_instance_->InitAsDefaultInstance();
+  HDF5OutputParameter::default_instance_->InitAsDefaultInstance();
+  HingeLossParameter::default_instance_->InitAsDefaultInstance();
+  ImageDataParameter::default_instance_->InitAsDefaultInstance();
+  InfogainLossParameter::default_instance_->InitAsDefaultInstance();
+  InnerProductParameter::default_instance_->InitAsDefaultInstance();
+  LogParameter::default_instance_->InitAsDefaultInstance();
+  LRNParameter::default_instance_->InitAsDefaultInstance();
+  MemoryDataParameter::default_instance_->InitAsDefaultInstance();
+  MVNParameter::default_instance_->InitAsDefaultInstance();
+  PoolingParameter::default_instance_->InitAsDefaultInstance();
+  PowerParameter::default_instance_->InitAsDefaultInstance();
+  PythonParameter::default_instance_->InitAsDefaultInstance();
+  ReductionParameter::default_instance_->InitAsDefaultInstance();
+  ReLUParameter::default_instance_->InitAsDefaultInstance();
+  ReshapeParameter::default_instance_->InitAsDefaultInstance();
+  ROIPoolingParameter::default_instance_->InitAsDefaultInstance();
+  SigmoidParameter::default_instance_->InitAsDefaultInstance();
+  SliceParameter::default_instance_->InitAsDefaultInstance();
+  SoftmaxParameter::default_instance_->InitAsDefaultInstance();
+  TanHParameter::default_instance_->InitAsDefaultInstance();
+  ThresholdParameter::default_instance_->InitAsDefaultInstance();
+  WindowDataParameter::default_instance_->InitAsDefaultInstance();
+  SPPParameter::default_instance_->InitAsDefaultInstance();
+  V1LayerParameter::default_instance_->InitAsDefaultInstance();
+  V0LayerParameter::default_instance_->InitAsDefaultInstance();
+  PReLUParameter::default_instance_->InitAsDefaultInstance();
+  ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_caffe_2eproto);
+}
+
+// Force AddDescriptors() to be called at static initialization time.
+struct StaticDescriptorInitializer_caffe_2eproto {
+  StaticDescriptorInitializer_caffe_2eproto() {
+    protobuf_AddDesc_caffe_2eproto();
+  }
+} static_descriptor_initializer_caffe_2eproto_;
+const ::google::protobuf::EnumDescriptor* Phase_descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return Phase_descriptor_;
+}
+bool Phase_IsValid(int value) {
+  switch(value) {
+    case 0:
+    case 1:
+      return true;
+    default:
+      return false;
+  }
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int BlobShape::kDimFieldNumber;
+#endif  // !_MSC_VER
+
+BlobShape::BlobShape()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:caffe.BlobShape)
+}
+
+void BlobShape::InitAsDefaultInstance() {
+}
+
+BlobShape::BlobShape(const BlobShape& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:caffe.BlobShape)
+}
+
+void BlobShape::SharedCtor() {
+  _cached_size_ = 0;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+BlobShape::~BlobShape() {
+  // @@protoc_insertion_point(destructor:caffe.BlobShape)
+  SharedDtor();
+}
+
+void BlobShape::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void BlobShape::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* BlobShape::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return BlobShape_descriptor_;
+}
+
+const BlobShape& BlobShape::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_caffe_2eproto();
+  return *default_instance_;
+}
+
+BlobShape* BlobShape::default_instance_ = NULL;
+
+BlobShape* BlobShape::New() const {
+  return new BlobShape;
+}
+
+void BlobShape::Clear() {
+  dim_.Clear();
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool BlobShape::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:caffe.BlobShape)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // repeated int64 dim = 1 [packed = true];
+      case 1: {
+        if (tag == 10) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPackedPrimitive<
+                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
+                 input, this->mutable_dim())));
+        } else if (tag == 8) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitiveNoInline<
+                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
+                 1, 10, input, this->mutable_dim())));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:caffe.BlobShape)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:caffe.BlobShape)
+  return false;
+#undef DO_
+}
+
+void BlobShape::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:caffe.BlobShape)
+  // repeated int64 dim = 1 [packed = true];
+  if (this->dim_size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteTag(1, ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED, output);
+    output->WriteVarint32(_dim_cached_byte_size_);
+  }
+  for (int i = 0; i < this->dim_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt64NoTag(
+      this->dim(i), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:caffe.BlobShape)
+}
+
+::google::protobuf::uint8* BlobShape::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:caffe.BlobShape)
+  // repeated int64 dim = 1 [packed = true];
+  if (this->dim_size() > 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteTagToArray(
+      1,
+      ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED,
+      target);
+    target = ::google::protobuf::io::CodedOutputStream::WriteVarint32ToArray(
+      _dim_cached_byte_size_, target);
+  }
+  for (int i = 0; i < this->dim_size(); i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteInt64NoTagToArray(this->dim(i), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:caffe.BlobShape)
+  return target;
+}
+
+int BlobShape::ByteSize() const {
+  int total_size = 0;
+
+  // repeated int64 dim = 1 [packed = true];
+  {
+    int data_size = 0;
+    for (int i = 0; i < this->dim_size(); i++) {
+      data_size += ::google::protobuf::internal::WireFormatLite::
+        Int64Size(this->dim(i));
+    }
+    if (data_size > 0) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(data_size);
+    }
+    GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+    _dim_cached_byte_size_ = data_size;
+    GOOGLE_SAFE_CONCURRENT_WRITES_END();
+    total_size += data_size;
+  }
+
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void BlobShape::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const BlobShape* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const BlobShape*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void BlobShape::MergeFrom(const BlobShape& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  dim_.MergeFrom(from.dim_);
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void BlobShape::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void BlobShape::CopyFrom(const BlobShape& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool BlobShape::IsInitialized() const {
+
+  return true;
+}
+
+void BlobShape::Swap(BlobShape* other) {
+  if (other != this) {
+    dim_.Swap(&other->dim_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata BlobShape::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = BlobShape_descriptor_;
+  metadata.reflection = BlobShape_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int BlobProto::kShapeFieldNumber;
+const int BlobProto::kDataFieldNumber;
+const int BlobProto::kDiffFieldNumber;
+const int BlobProto::kNumFieldNumber;
+const int BlobProto::kChannelsFieldNumber;
+const int BlobProto::kHeightFieldNumber;
+const int BlobProto::kWidthFieldNumber;
+#endif  // !_MSC_VER
+
+BlobProto::BlobProto()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:caffe.BlobProto)
+}
+
+void BlobProto::InitAsDefaultInstance() {
+  shape_ = const_cast< ::caffe::BlobShape*>(&::caffe::BlobShape::default_instance());
+}
+
+BlobProto::BlobProto(const BlobProto& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:caffe.BlobProto)
+}
+
+void BlobProto::SharedCtor() {
+  _cached_size_ = 0;
+  shape_ = NULL;
+  num_ = 0;
+  channels_ = 0;
+  height_ = 0;
+  width_ = 0;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+BlobProto::~BlobProto() {
+  // @@protoc_insertion_point(destructor:caffe.BlobProto)
+  SharedDtor();
+}
+
+void BlobProto::SharedDtor() {
+  if (this != default_instance_) {
+    delete shape_;
+  }
+}
+
+void BlobProto::SetCachedSize(int size) const {
+  GOOGLE_S
