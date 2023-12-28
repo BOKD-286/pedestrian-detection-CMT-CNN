@@ -2703,4 +2703,436 @@ int BlobProto::ByteSize() const {
     data_size = 4 * this->diff_size();
     if (data_size > 0) {
       total_size += 1 +
-        ::google::pr
+        ::google::protobuf::internal::WireFormatLite::Int32Size(data_size);
+    }
+    GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+    _diff_cached_byte_size_ = data_size;
+    GOOGLE_SAFE_CONCURRENT_WRITES_END();
+    total_size += data_size;
+  }
+
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void BlobProto::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const BlobProto* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const BlobProto*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void BlobProto::MergeFrom(const BlobProto& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  data_.MergeFrom(from.data_);
+  diff_.MergeFrom(from.diff_);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_shape()) {
+      mutable_shape()->::caffe::BlobShape::MergeFrom(from.shape());
+    }
+    if (from.has_num()) {
+      set_num(from.num());
+    }
+    if (from.has_channels()) {
+      set_channels(from.channels());
+    }
+    if (from.has_height()) {
+      set_height(from.height());
+    }
+    if (from.has_width()) {
+      set_width(from.width());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void BlobProto::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void BlobProto::CopyFrom(const BlobProto& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool BlobProto::IsInitialized() const {
+
+  return true;
+}
+
+void BlobProto::Swap(BlobProto* other) {
+  if (other != this) {
+    std::swap(shape_, other->shape_);
+    data_.Swap(&other->data_);
+    diff_.Swap(&other->diff_);
+    std::swap(num_, other->num_);
+    std::swap(channels_, other->channels_);
+    std::swap(height_, other->height_);
+    std::swap(width_, other->width_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata BlobProto::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = BlobProto_descriptor_;
+  metadata.reflection = BlobProto_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int BlobProtoVector::kBlobsFieldNumber;
+#endif  // !_MSC_VER
+
+BlobProtoVector::BlobProtoVector()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:caffe.BlobProtoVector)
+}
+
+void BlobProtoVector::InitAsDefaultInstance() {
+}
+
+BlobProtoVector::BlobProtoVector(const BlobProtoVector& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:caffe.BlobProtoVector)
+}
+
+void BlobProtoVector::SharedCtor() {
+  _cached_size_ = 0;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+BlobProtoVector::~BlobProtoVector() {
+  // @@protoc_insertion_point(destructor:caffe.BlobProtoVector)
+  SharedDtor();
+}
+
+void BlobProtoVector::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void BlobProtoVector::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* BlobProtoVector::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return BlobProtoVector_descriptor_;
+}
+
+const BlobProtoVector& BlobProtoVector::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_caffe_2eproto();
+  return *default_instance_;
+}
+
+BlobProtoVector* BlobProtoVector::default_instance_ = NULL;
+
+BlobProtoVector* BlobProtoVector::New() const {
+  return new BlobProtoVector;
+}
+
+void BlobProtoVector::Clear() {
+  blobs_.Clear();
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool BlobProtoVector::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:caffe.BlobProtoVector)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // repeated .caffe.BlobProto blobs = 1;
+      case 1: {
+        if (tag == 10) {
+         parse_blobs:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+                input, add_blobs()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(10)) goto parse_blobs;
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:caffe.BlobProtoVector)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:caffe.BlobProtoVector)
+  return false;
+#undef DO_
+}
+
+void BlobProtoVector::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:caffe.BlobProtoVector)
+  // repeated .caffe.BlobProto blobs = 1;
+  for (int i = 0; i < this->blobs_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      1, this->blobs(i), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:caffe.BlobProtoVector)
+}
+
+::google::protobuf::uint8* BlobProtoVector::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:caffe.BlobProtoVector)
+  // repeated .caffe.BlobProto blobs = 1;
+  for (int i = 0; i < this->blobs_size(); i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        1, this->blobs(i), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:caffe.BlobProtoVector)
+  return target;
+}
+
+int BlobProtoVector::ByteSize() const {
+  int total_size = 0;
+
+  // repeated .caffe.BlobProto blobs = 1;
+  total_size += 1 * this->blobs_size();
+  for (int i = 0; i < this->blobs_size(); i++) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        this->blobs(i));
+  }
+
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void BlobProtoVector::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const BlobProtoVector* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const BlobProtoVector*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void BlobProtoVector::MergeFrom(const BlobProtoVector& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  blobs_.MergeFrom(from.blobs_);
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void BlobProtoVector::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void BlobProtoVector::CopyFrom(const BlobProtoVector& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool BlobProtoVector::IsInitialized() const {
+
+  return true;
+}
+
+void BlobProtoVector::Swap(BlobProtoVector* other) {
+  if (other != this) {
+    blobs_.Swap(&other->blobs_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata BlobProtoVector::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = BlobProtoVector_descriptor_;
+  metadata.reflection = BlobProtoVector_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int Datum::kChannelsFieldNumber;
+const int Datum::kHeightFieldNumber;
+const int Datum::kWidthFieldNumber;
+const int Datum::kDataFieldNumber;
+const int Datum::kLabelFieldNumber;
+const int Datum::kFloatDataFieldNumber;
+const int Datum::kEncodedFieldNumber;
+#endif  // !_MSC_VER
+
+Datum::Datum()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:caffe.Datum)
+}
+
+void Datum::InitAsDefaultInstance() {
+}
+
+Datum::Datum(const Datum& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:caffe.Datum)
+}
+
+void Datum::SharedCtor() {
+  ::google::protobuf::internal::GetEmptyString();
+  _cached_size_ = 0;
+  channels_ = 0;
+  height_ = 0;
+  width_ = 0;
+  data_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  label_ = 0;
+  encoded_ = false;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+Datum::~Datum() {
+  // @@protoc_insertion_point(destructor:caffe.Datum)
+  SharedDtor();
+}
+
+void Datum::SharedDtor() {
+  if (data_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete data_;
+  }
+  if (this != default_instance_) {
+  }
+}
+
+void Datum::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* Datum::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return Datum_descriptor_;
+}
+
+const Datum& Datum::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_caffe_2eproto();
+  return *default_instance_;
+}
+
+Datum* Datum::default_instance_ = NULL;
+
+Datum* Datum::New() const {
+  return new Datum;
+}
+
+void Datum::Clear() {
+#define OFFSET_OF_FIELD_(f) (reinterpret_cast<char*>(      \
+  &reinterpret_cast<Datum*>(16)->f) - \
+   reinterpret_cast<char*>(16))
+
+#define ZR_(first, last) do {                              \
+    size_t f = OFFSET_OF_FIELD_(first);                    \
+    size_t n = OFFSET_OF_FIELD_(last) - f + sizeof(last);  \
+    ::memset(&first, 0, n);                                \
+  } while (0)
+
+  if (_has_bits_[0 / 32] & 95) {
+    ZR_(channels_, height_);
+    ZR_(width_, label_);
+    if (has_data()) {
+      if (data_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+        data_->clear();
+      }
+    }
+    encoded_ = false;
+  }
+
+#undef OFFSET_OF_FIELD_
+#undef ZR_
+
+  float_data_.Clear();
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool Datum::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:caffe.Datum)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional int32 channels = 1;
+      case 1: {
+        if (tag == 8) {
+          DO_((::google::protobuf::int
