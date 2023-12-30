@@ -6133,4 +6133,403 @@ int SolverParameter::ByteSize() const {
           this->snapshot_prefix());
     }
 
-    // optional bool snapshot_diff = 16 [d
+    // optional bool snapshot_diff = 16 [default = false];
+    if (has_snapshot_diff()) {
+      total_size += 2 + 1;
+    }
+
+    // optional .caffe.SolverParameter.SolverMode solver_mode = 17 [default = GPU];
+    if (has_solver_mode()) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::EnumSize(this->solver_mode());
+    }
+
+    // optional int32 device_id = 18 [default = 0];
+    if (has_device_id()) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->device_id());
+    }
+
+    // optional int64 random_seed = 20 [default = -1];
+    if (has_random_seed()) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::Int64Size(
+          this->random_seed());
+    }
+
+  }
+  if (_has_bits_[32 / 32] & (0xffu << (32 % 32))) {
+    // optional .caffe.SolverParameter.SolverType solver_type = 30 [default = SGD];
+    if (has_solver_type()) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::EnumSize(this->solver_type());
+    }
+
+    // optional float delta = 31 [default = 1e-008];
+    if (has_delta()) {
+      total_size += 2 + 4;
+    }
+
+    // optional bool debug_info = 23 [default = false];
+    if (has_debug_info()) {
+      total_size += 2 + 1;
+    }
+
+    // optional bool snapshot_after_train = 28 [default = true];
+    if (has_snapshot_after_train()) {
+      total_size += 2 + 1;
+    }
+
+  }
+  // repeated string test_net = 2;
+  total_size += 1 * this->test_net_size();
+  for (int i = 0; i < this->test_net_size(); i++) {
+    total_size += ::google::protobuf::internal::WireFormatLite::StringSize(
+      this->test_net(i));
+  }
+
+  // repeated .caffe.NetParameter test_net_param = 22;
+  total_size += 2 * this->test_net_param_size();
+  for (int i = 0; i < this->test_net_param_size(); i++) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        this->test_net_param(i));
+  }
+
+  // repeated .caffe.NetState test_state = 27;
+  total_size += 2 * this->test_state_size();
+  for (int i = 0; i < this->test_state_size(); i++) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        this->test_state(i));
+  }
+
+  // repeated int32 test_iter = 3;
+  {
+    int data_size = 0;
+    for (int i = 0; i < this->test_iter_size(); i++) {
+      data_size += ::google::protobuf::internal::WireFormatLite::
+        Int32Size(this->test_iter(i));
+    }
+    total_size += 1 * this->test_iter_size() + data_size;
+  }
+
+  // repeated int32 stepvalue = 34;
+  {
+    int data_size = 0;
+    for (int i = 0; i < this->stepvalue_size(); i++) {
+      data_size += ::google::protobuf::internal::WireFormatLite::
+        Int32Size(this->stepvalue(i));
+    }
+    total_size += 2 * this->stepvalue_size() + data_size;
+  }
+
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void SolverParameter::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const SolverParameter* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const SolverParameter*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void SolverParameter::MergeFrom(const SolverParameter& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  test_net_.MergeFrom(from.test_net_);
+  test_net_param_.MergeFrom(from.test_net_param_);
+  test_state_.MergeFrom(from.test_state_);
+  test_iter_.MergeFrom(from.test_iter_);
+  stepvalue_.MergeFrom(from.stepvalue_);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_net()) {
+      set_net(from.net());
+    }
+    if (from.has_net_param()) {
+      mutable_net_param()->::caffe::NetParameter::MergeFrom(from.net_param());
+    }
+    if (from.has_train_net()) {
+      set_train_net(from.train_net());
+    }
+    if (from.has_train_net_param()) {
+      mutable_train_net_param()->::caffe::NetParameter::MergeFrom(from.train_net_param());
+    }
+    if (from.has_train_state()) {
+      mutable_train_state()->::caffe::NetState::MergeFrom(from.train_state());
+    }
+  }
+  if (from._has_bits_[9 / 32] & (0xffu << (9 % 32))) {
+    if (from.has_test_interval()) {
+      set_test_interval(from.test_interval());
+    }
+    if (from.has_test_compute_loss()) {
+      set_test_compute_loss(from.test_compute_loss());
+    }
+    if (from.has_test_initialization()) {
+      set_test_initialization(from.test_initialization());
+    }
+    if (from.has_base_lr()) {
+      set_base_lr(from.base_lr());
+    }
+    if (from.has_display()) {
+      set_display(from.display());
+    }
+    if (from.has_average_loss()) {
+      set_average_loss(from.average_loss());
+    }
+    if (from.has_max_iter()) {
+      set_max_iter(from.max_iter());
+    }
+  }
+  if (from._has_bits_[16 / 32] & (0xffu << (16 % 32))) {
+    if (from.has_iter_size()) {
+      set_iter_size(from.iter_size());
+    }
+    if (from.has_lr_policy()) {
+      set_lr_policy(from.lr_policy());
+    }
+    if (from.has_gamma()) {
+      set_gamma(from.gamma());
+    }
+    if (from.has_power()) {
+      set_power(from.power());
+    }
+    if (from.has_momentum()) {
+      set_momentum(from.momentum());
+    }
+    if (from.has_weight_decay()) {
+      set_weight_decay(from.weight_decay());
+    }
+    if (from.has_regularization_type()) {
+      set_regularization_type(from.regularization_type());
+    }
+    if (from.has_stepsize()) {
+      set_stepsize(from.stepsize());
+    }
+  }
+  if (from._has_bits_[25 / 32] & (0xffu << (25 % 32))) {
+    if (from.has_clip_gradients()) {
+      set_clip_gradients(from.clip_gradients());
+    }
+    if (from.has_snapshot()) {
+      set_snapshot(from.snapshot());
+    }
+    if (from.has_snapshot_prefix()) {
+      set_snapshot_prefix(from.snapshot_prefix());
+    }
+    if (from.has_snapshot_diff()) {
+      set_snapshot_diff(from.snapshot_diff());
+    }
+    if (from.has_solver_mode()) {
+      set_solver_mode(from.solver_mode());
+    }
+    if (from.has_device_id()) {
+      set_device_id(from.device_id());
+    }
+    if (from.has_random_seed()) {
+      set_random_seed(from.random_seed());
+    }
+  }
+  if (from._has_bits_[32 / 32] & (0xffu << (32 % 32))) {
+    if (from.has_solver_type()) {
+      set_solver_type(from.solver_type());
+    }
+    if (from.has_delta()) {
+      set_delta(from.delta());
+    }
+    if (from.has_debug_info()) {
+      set_debug_info(from.debug_info());
+    }
+    if (from.has_snapshot_after_train()) {
+      set_snapshot_after_train(from.snapshot_after_train());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void SolverParameter::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void SolverParameter::CopyFrom(const SolverParameter& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool SolverParameter::IsInitialized() const {
+
+  return true;
+}
+
+void SolverParameter::Swap(SolverParameter* other) {
+  if (other != this) {
+    std::swap(net_, other->net_);
+    std::swap(net_param_, other->net_param_);
+    std::swap(train_net_, other->train_net_);
+    test_net_.Swap(&other->test_net_);
+    std::swap(train_net_param_, other->train_net_param_);
+    test_net_param_.Swap(&other->test_net_param_);
+    std::swap(train_state_, other->train_state_);
+    test_state_.Swap(&other->test_state_);
+    test_iter_.Swap(&other->test_iter_);
+    std::swap(test_interval_, other->test_interval_);
+    std::swap(test_compute_loss_, other->test_compute_loss_);
+    std::swap(test_initialization_, other->test_initialization_);
+    std::swap(base_lr_, other->base_lr_);
+    std::swap(display_, other->display_);
+    std::swap(average_loss_, other->average_loss_);
+    std::swap(max_iter_, other->max_iter_);
+    std::swap(iter_size_, other->iter_size_);
+    std::swap(lr_policy_, other->lr_policy_);
+    std::swap(gamma_, other->gamma_);
+    std::swap(power_, other->power_);
+    std::swap(momentum_, other->momentum_);
+    std::swap(weight_decay_, other->weight_decay_);
+    std::swap(regularization_type_, other->regularization_type_);
+    std::swap(stepsize_, other->stepsize_);
+    stepvalue_.Swap(&other->stepvalue_);
+    std::swap(clip_gradients_, other->clip_gradients_);
+    std::swap(snapshot_, other->snapshot_);
+    std::swap(snapshot_prefix_, other->snapshot_prefix_);
+    std::swap(snapshot_diff_, other->snapshot_diff_);
+    std::swap(solver_mode_, other->solver_mode_);
+    std::swap(device_id_, other->device_id_);
+    std::swap(random_seed_, other->random_seed_);
+    std::swap(solver_type_, other->solver_type_);
+    std::swap(delta_, other->delta_);
+    std::swap(debug_info_, other->debug_info_);
+    std::swap(snapshot_after_train_, other->snapshot_after_train_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    std::swap(_has_bits_[1], other->_has_bits_[1]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata SolverParameter::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = SolverParameter_descriptor_;
+  metadata.reflection = SolverParameter_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int SolverState::kIterFieldNumber;
+const int SolverState::kLearnedNetFieldNumber;
+const int SolverState::kHistoryFieldNumber;
+const int SolverState::kCurrentStepFieldNumber;
+#endif  // !_MSC_VER
+
+SolverState::SolverState()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:caffe.SolverState)
+}
+
+void SolverState::InitAsDefaultInstance() {
+}
+
+SolverState::SolverState(const SolverState& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:caffe.SolverState)
+}
+
+void SolverState::SharedCtor() {
+  ::google::protobuf::internal::GetEmptyString();
+  _cached_size_ = 0;
+  iter_ = 0;
+  learned_net_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  current_step_ = 0;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+SolverState::~SolverState() {
+  // @@protoc_insertion_point(destructor:caffe.SolverState)
+  SharedDtor();
+}
+
+void SolverState::SharedDtor() {
+  if (learned_net_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete learned_net_;
+  }
+  if (this != default_instance_) {
+  }
+}
+
+void SolverState::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* SolverState::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return SolverState_descriptor_;
+}
+
+const SolverState& SolverState::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_caffe_2eproto();
+  return *default_instance_;
+}
+
+SolverState* SolverState::default_instance_ = NULL;
+
+SolverState* SolverState::New() const {
+  return new SolverState;
+}
+
+void SolverState::Clear() {
+#define OFFSET_OF_FIELD_(f) (reinterpret_cast<char*>(      \
+  &reinterpret_cast<SolverState*>(16)->f) - \
+   reinterpret_cast<char*>(16))
+
+#define ZR_(first, last) do {                              \
+    size_t f = OFFSET_OF_FIELD_(first);                    \
+    size_t n = OFFSET_OF_FIELD_(last) - f + sizeof(last);  \
+    ::memset(&first, 0, n);                                \
+  } while (0)
+
+  if (_has_bits_[0 / 32] & 11) {
+    ZR_(iter_, current_step_);
+    if (has_learned_net()) {
+      if (learned_net_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+        learned_net_->clear();
+      }
+    }
+  }
+
+#undef OFFSET_OF_FIELD_
+#undef ZR_
+
+  history_.Clear();
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool SolverState::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(pars
