@@ -5420,4 +5420,340 @@ bool SolverParameter::MergePartialFromCodedStream(
           goto handle_unusual;
         }
         if (input->ExpectTag(264)) goto parse_average_loss;
-        b
+        break;
+      }
+
+      // optional int32 average_loss = 33 [default = 1];
+      case 33: {
+        if (tag == 264) {
+         parse_average_loss:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &average_loss_)));
+          set_has_average_loss();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(272)) goto parse_stepvalue;
+        break;
+      }
+
+      // repeated int32 stepvalue = 34;
+      case 34: {
+        if (tag == 272) {
+         parse_stepvalue:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 2, 272, input, this->mutable_stepvalue())));
+        } else if (tag == 274) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPackedPrimitiveNoInline<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, this->mutable_stepvalue())));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(272)) goto parse_stepvalue;
+        if (input->ExpectTag(285)) goto parse_clip_gradients;
+        break;
+      }
+
+      // optional float clip_gradients = 35 [default = -1];
+      case 35: {
+        if (tag == 285) {
+         parse_clip_gradients:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &clip_gradients_)));
+          set_has_clip_gradients();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(288)) goto parse_iter_size;
+        break;
+      }
+
+      // optional int32 iter_size = 36 [default = 1];
+      case 36: {
+        if (tag == 288) {
+         parse_iter_size:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &iter_size_)));
+          set_has_iter_size();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:caffe.SolverParameter)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:caffe.SolverParameter)
+  return false;
+#undef DO_
+}
+
+void SolverParameter::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:caffe.SolverParameter)
+  // optional string train_net = 1;
+  if (has_train_net()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->train_net().data(), this->train_net().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "train_net");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      1, this->train_net(), output);
+  }
+
+  // repeated string test_net = 2;
+  for (int i = 0; i < this->test_net_size(); i++) {
+  ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+    this->test_net(i).data(), this->test_net(i).length(),
+    ::google::protobuf::internal::WireFormat::SERIALIZE,
+    "test_net");
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      2, this->test_net(i), output);
+  }
+
+  // repeated int32 test_iter = 3;
+  for (int i = 0; i < this->test_iter_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(
+      3, this->test_iter(i), output);
+  }
+
+  // optional int32 test_interval = 4 [default = 0];
+  if (has_test_interval()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->test_interval(), output);
+  }
+
+  // optional float base_lr = 5;
+  if (has_base_lr()) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(5, this->base_lr(), output);
+  }
+
+  // optional int32 display = 6;
+  if (has_display()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(6, this->display(), output);
+  }
+
+  // optional int32 max_iter = 7;
+  if (has_max_iter()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(7, this->max_iter(), output);
+  }
+
+  // optional string lr_policy = 8;
+  if (has_lr_policy()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->lr_policy().data(), this->lr_policy().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "lr_policy");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      8, this->lr_policy(), output);
+  }
+
+  // optional float gamma = 9;
+  if (has_gamma()) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(9, this->gamma(), output);
+  }
+
+  // optional float power = 10;
+  if (has_power()) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(10, this->power(), output);
+  }
+
+  // optional float momentum = 11;
+  if (has_momentum()) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(11, this->momentum(), output);
+  }
+
+  // optional float weight_decay = 12;
+  if (has_weight_decay()) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(12, this->weight_decay(), output);
+  }
+
+  // optional int32 stepsize = 13;
+  if (has_stepsize()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(13, this->stepsize(), output);
+  }
+
+  // optional int32 snapshot = 14 [default = 0];
+  if (has_snapshot()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(14, this->snapshot(), output);
+  }
+
+  // optional string snapshot_prefix = 15;
+  if (has_snapshot_prefix()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->snapshot_prefix().data(), this->snapshot_prefix().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "snapshot_prefix");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      15, this->snapshot_prefix(), output);
+  }
+
+  // optional bool snapshot_diff = 16 [default = false];
+  if (has_snapshot_diff()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(16, this->snapshot_diff(), output);
+  }
+
+  // optional .caffe.SolverParameter.SolverMode solver_mode = 17 [default = GPU];
+  if (has_solver_mode()) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      17, this->solver_mode(), output);
+  }
+
+  // optional int32 device_id = 18 [default = 0];
+  if (has_device_id()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(18, this->device_id(), output);
+  }
+
+  // optional bool test_compute_loss = 19 [default = false];
+  if (has_test_compute_loss()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(19, this->test_compute_loss(), output);
+  }
+
+  // optional int64 random_seed = 20 [default = -1];
+  if (has_random_seed()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt64(20, this->random_seed(), output);
+  }
+
+  // optional .caffe.NetParameter train_net_param = 21;
+  if (has_train_net_param()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      21, this->train_net_param(), output);
+  }
+
+  // repeated .caffe.NetParameter test_net_param = 22;
+  for (int i = 0; i < this->test_net_param_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      22, this->test_net_param(i), output);
+  }
+
+  // optional bool debug_info = 23 [default = false];
+  if (has_debug_info()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(23, this->debug_info(), output);
+  }
+
+  // optional string net = 24;
+  if (has_net()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->net().data(), this->net().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "net");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      24, this->net(), output);
+  }
+
+  // optional .caffe.NetParameter net_param = 25;
+  if (has_net_param()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      25, this->net_param(), output);
+  }
+
+  // optional .caffe.NetState train_state = 26;
+  if (has_train_state()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      26, this->train_state(), output);
+  }
+
+  // repeated .caffe.NetState test_state = 27;
+  for (int i = 0; i < this->test_state_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      27, this->test_state(i), output);
+  }
+
+  // optional bool snapshot_after_train = 28 [default = true];
+  if (has_snapshot_after_train()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(28, this->snapshot_after_train(), output);
+  }
+
+  // optional string regularization_type = 29 [default = "L2"];
+  if (has_regularization_type()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->regularization_type().data(), this->regularization_type().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "regularization_type");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      29, this->regularization_type(), output);
+  }
+
+  // optional .caffe.SolverParameter.SolverType solver_type = 30 [default = SGD];
+  if (has_solver_type()) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      30, this->solver_type(), output);
+  }
+
+  // optional float delta = 31 [default = 1e-008];
+  if (has_delta()) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(31, this->delta(), output);
+  }
+
+  // optional bool test_initialization = 32 [default = true];
+  if (has_test_initialization()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(32, this->test_initialization(), output);
+  }
+
+  // optional int32 average_loss = 33 [default = 1];
+  if (has_average_loss()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(33, this->average_loss(), output);
+  }
+
+  // repeated int32 stepvalue = 34;
+  for (int i = 0; i < this->stepvalue_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(
+      34, this->stepvalue(i), output);
+  }
+
+  // optional float clip_gradients = 35 [default = -1];
+  if (has_clip_gradients()) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(35, this->clip_gradients(), output);
+  }
+
+  // optional int32 iter_size = 36 [default = 1];
+  if (has_iter_size()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(36, this->iter_size(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:caffe.SolverParameter)
+}
+
+::google::protobuf::uint8* SolverParameter::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:caffe.SolverParameter)
+  // optional string train_net = 1;
+  if (has_train_net()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->train_net().data(), this->train_net().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "train_net");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        1, this->train_net(), target);
+  }
+
+  // repeated string test_net = 2;
+  for (int i = 0; i < this->test_net_size(); i++) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->test_net(i).data(), this->test_net(i).length(),
+      ::google::protobuf::i
