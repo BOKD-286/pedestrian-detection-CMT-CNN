@@ -4337,4 +4337,372 @@ void NetParameter::SerializeWithCachedSizes(
   // optional string name = 1;
   if (has_name()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->name().d
+      this->name().data(), this->name().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "name");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      1, this->name(), output);
+  }
+
+  // repeated .caffe.V1LayerParameter layers = 2;
+  for (int i = 0; i < this->layers_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      2, this->layers(i), output);
+  }
+
+  // repeated string input = 3;
+  for (int i = 0; i < this->input_size(); i++) {
+  ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+    this->input(i).data(), this->input(i).length(),
+    ::google::protobuf::internal::WireFormat::SERIALIZE,
+    "input");
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      3, this->input(i), output);
+  }
+
+  // repeated int32 input_dim = 4;
+  for (int i = 0; i < this->input_dim_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(
+      4, this->input_dim(i), output);
+  }
+
+  // optional bool force_backward = 5 [default = false];
+  if (has_force_backward()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(5, this->force_backward(), output);
+  }
+
+  // optional .caffe.NetState state = 6;
+  if (has_state()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      6, this->state(), output);
+  }
+
+  // optional bool debug_info = 7 [default = false];
+  if (has_debug_info()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(7, this->debug_info(), output);
+  }
+
+  // repeated .caffe.BlobShape input_shape = 8;
+  for (int i = 0; i < this->input_shape_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      8, this->input_shape(i), output);
+  }
+
+  // repeated .caffe.LayerParameter layer = 100;
+  for (int i = 0; i < this->layer_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      100, this->layer(i), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:caffe.NetParameter)
+}
+
+::google::protobuf::uint8* NetParameter::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:caffe.NetParameter)
+  // optional string name = 1;
+  if (has_name()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->name().data(), this->name().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "name");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        1, this->name(), target);
+  }
+
+  // repeated .caffe.V1LayerParameter layers = 2;
+  for (int i = 0; i < this->layers_size(); i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        2, this->layers(i), target);
+  }
+
+  // repeated string input = 3;
+  for (int i = 0; i < this->input_size(); i++) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->input(i).data(), this->input(i).length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "input");
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteStringToArray(3, this->input(i), target);
+  }
+
+  // repeated int32 input_dim = 4;
+  for (int i = 0; i < this->input_dim_size(); i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteInt32ToArray(4, this->input_dim(i), target);
+  }
+
+  // optional bool force_backward = 5 [default = false];
+  if (has_force_backward()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(5, this->force_backward(), target);
+  }
+
+  // optional .caffe.NetState state = 6;
+  if (has_state()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        6, this->state(), target);
+  }
+
+  // optional bool debug_info = 7 [default = false];
+  if (has_debug_info()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(7, this->debug_info(), target);
+  }
+
+  // repeated .caffe.BlobShape input_shape = 8;
+  for (int i = 0; i < this->input_shape_size(); i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        8, this->input_shape(i), target);
+  }
+
+  // repeated .caffe.LayerParameter layer = 100;
+  for (int i = 0; i < this->layer_size(); i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        100, this->layer(i), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:caffe.NetParameter)
+  return target;
+}
+
+int NetParameter::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // optional string name = 1;
+    if (has_name()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->name());
+    }
+
+    // optional bool force_backward = 5 [default = false];
+    if (has_force_backward()) {
+      total_size += 1 + 1;
+    }
+
+    // optional .caffe.NetState state = 6;
+    if (has_state()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->state());
+    }
+
+    // optional bool debug_info = 7 [default = false];
+    if (has_debug_info()) {
+      total_size += 1 + 1;
+    }
+
+  }
+  // repeated string input = 3;
+  total_size += 1 * this->input_size();
+  for (int i = 0; i < this->input_size(); i++) {
+    total_size += ::google::protobuf::internal::WireFormatLite::StringSize(
+      this->input(i));
+  }
+
+  // repeated .caffe.BlobShape input_shape = 8;
+  total_size += 1 * this->input_shape_size();
+  for (int i = 0; i < this->input_shape_size(); i++) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        this->input_shape(i));
+  }
+
+  // repeated int32 input_dim = 4;
+  {
+    int data_size = 0;
+    for (int i = 0; i < this->input_dim_size(); i++) {
+      data_size += ::google::protobuf::internal::WireFormatLite::
+        Int32Size(this->input_dim(i));
+    }
+    total_size += 1 * this->input_dim_size() + data_size;
+  }
+
+  // repeated .caffe.LayerParameter layer = 100;
+  total_size += 2 * this->layer_size();
+  for (int i = 0; i < this->layer_size(); i++) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        this->layer(i));
+  }
+
+  // repeated .caffe.V1LayerParameter layers = 2;
+  total_size += 1 * this->layers_size();
+  for (int i = 0; i < this->layers_size(); i++) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        this->layers(i));
+  }
+
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void NetParameter::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const NetParameter* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const NetParameter*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void NetParameter::MergeFrom(const NetParameter& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  input_.MergeFrom(from.input_);
+  input_shape_.MergeFrom(from.input_shape_);
+  input_dim_.MergeFrom(from.input_dim_);
+  layer_.MergeFrom(from.layer_);
+  layers_.MergeFrom(from.layers_);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_name()) {
+      set_name(from.name());
+    }
+    if (from.has_force_backward()) {
+      set_force_backward(from.force_backward());
+    }
+    if (from.has_state()) {
+      mutable_state()->::caffe::NetState::MergeFrom(from.state());
+    }
+    if (from.has_debug_info()) {
+      set_debug_info(from.debug_info());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void NetParameter::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void NetParameter::CopyFrom(const NetParameter& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool NetParameter::IsInitialized() const {
+
+  return true;
+}
+
+void NetParameter::Swap(NetParameter* other) {
+  if (other != this) {
+    std::swap(name_, other->name_);
+    input_.Swap(&other->input_);
+    input_shape_.Swap(&other->input_shape_);
+    input_dim_.Swap(&other->input_dim_);
+    std::swap(force_backward_, other->force_backward_);
+    std::swap(state_, other->state_);
+    std::swap(debug_info_, other->debug_info_);
+    layer_.Swap(&other->layer_);
+    layers_.Swap(&other->layers_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata NetParameter::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = NetParameter_descriptor_;
+  metadata.reflection = NetParameter_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+const ::google::protobuf::EnumDescriptor* SolverParameter_SolverMode_descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return SolverParameter_SolverMode_descriptor_;
+}
+bool SolverParameter_SolverMode_IsValid(int value) {
+  switch(value) {
+    case 0:
+    case 1:
+      return true;
+    default:
+      return false;
+  }
+}
+
+#ifndef _MSC_VER
+const SolverParameter_SolverMode SolverParameter::CPU;
+const SolverParameter_SolverMode SolverParameter::GPU;
+const SolverParameter_SolverMode SolverParameter::SolverMode_MIN;
+const SolverParameter_SolverMode SolverParameter::SolverMode_MAX;
+const int SolverParameter::SolverMode_ARRAYSIZE;
+#endif  // _MSC_VER
+const ::google::protobuf::EnumDescriptor* SolverParameter_SolverType_descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return SolverParameter_SolverType_descriptor_;
+}
+bool SolverParameter_SolverType_IsValid(int value) {
+  switch(value) {
+    case 0:
+    case 1:
+    case 2:
+      return true;
+    default:
+      return false;
+  }
+}
+
+#ifndef _MSC_VER
+const SolverParameter_SolverType SolverParameter::SGD;
+const SolverParameter_SolverType SolverParameter::NESTEROV;
+const SolverParameter_SolverType SolverParameter::ADAGRAD;
+const SolverParameter_SolverType SolverParameter::SolverType_MIN;
+const SolverParameter_SolverType SolverParameter::SolverType_MAX;
+const int SolverParameter::SolverType_ARRAYSIZE;
+#endif  // _MSC_VER
+::std::string* SolverParameter::_default_regularization_type_ = NULL;
+#ifndef _MSC_VER
+const int SolverParameter::kNetFieldNumber;
+const int SolverParameter::kNetParamFieldNumber;
+const int SolverParameter::kTrainNetFieldNumber;
+const int SolverParameter::kTestNetFieldNumber;
+const int SolverParameter::kTrainNetParamFieldNumber;
+const int SolverParameter::kTestNetParamFieldNumber;
+const int SolverParameter::kTrainStateFieldNumber;
+const int SolverParameter::kTestStateFieldNumber;
+const int SolverParameter::kTestIterFieldNumber;
+const int SolverParameter::kTestIntervalFieldNumber;
+const int SolverParameter::kTestComputeLossFieldNumber;
+const int SolverParameter::kTestInitializationFieldNumber;
+const int SolverParameter::kBaseLrFieldNumber;
+const int SolverParameter::kDisplayFieldNumber;
+const int SolverParameter::kAverageLossFieldNumber;
+const int SolverParameter::kMaxIterFieldNumber;
+const int SolverParameter::kIterSizeFieldNumber;
+const int SolverParameter::kLrPolicyFieldNumber;
+const int SolverParameter::kGammaFieldNumber;
+const int SolverParameter::kPowerFieldNumber;
+const int SolverParameter::kMomentumFieldNumbe
