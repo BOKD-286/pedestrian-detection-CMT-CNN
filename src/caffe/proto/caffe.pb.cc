@@ -7732,4 +7732,299 @@ bool ParamSpec::MergePartialFromCodedStream(
 
       default: {
       handle_unusual:
-        if (tag == 0 
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:caffe.ParamSpec)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:caffe.ParamSpec)
+  return false;
+#undef DO_
+}
+
+void ParamSpec::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:caffe.ParamSpec)
+  // optional string name = 1;
+  if (has_name()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->name().data(), this->name().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "name");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      1, this->name(), output);
+  }
+
+  // optional .caffe.ParamSpec.DimCheckMode share_mode = 2;
+  if (has_share_mode()) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      2, this->share_mode(), output);
+  }
+
+  // optional float lr_mult = 3 [default = 1];
+  if (has_lr_mult()) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(3, this->lr_mult(), output);
+  }
+
+  // optional float decay_mult = 4 [default = 1];
+  if (has_decay_mult()) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(4, this->decay_mult(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:caffe.ParamSpec)
+}
+
+::google::protobuf::uint8* ParamSpec::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:caffe.ParamSpec)
+  // optional string name = 1;
+  if (has_name()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->name().data(), this->name().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "name");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        1, this->name(), target);
+  }
+
+  // optional .caffe.ParamSpec.DimCheckMode share_mode = 2;
+  if (has_share_mode()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      2, this->share_mode(), target);
+  }
+
+  // optional float lr_mult = 3 [default = 1];
+  if (has_lr_mult()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(3, this->lr_mult(), target);
+  }
+
+  // optional float decay_mult = 4 [default = 1];
+  if (has_decay_mult()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(4, this->decay_mult(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:caffe.ParamSpec)
+  return target;
+}
+
+int ParamSpec::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // optional string name = 1;
+    if (has_name()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->name());
+    }
+
+    // optional .caffe.ParamSpec.DimCheckMode share_mode = 2;
+    if (has_share_mode()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::EnumSize(this->share_mode());
+    }
+
+    // optional float lr_mult = 3 [default = 1];
+    if (has_lr_mult()) {
+      total_size += 1 + 4;
+    }
+
+    // optional float decay_mult = 4 [default = 1];
+    if (has_decay_mult()) {
+      total_size += 1 + 4;
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void ParamSpec::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const ParamSpec* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const ParamSpec*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void ParamSpec::MergeFrom(const ParamSpec& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_name()) {
+      set_name(from.name());
+    }
+    if (from.has_share_mode()) {
+      set_share_mode(from.share_mode());
+    }
+    if (from.has_lr_mult()) {
+      set_lr_mult(from.lr_mult());
+    }
+    if (from.has_decay_mult()) {
+      set_decay_mult(from.decay_mult());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void ParamSpec::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void ParamSpec::CopyFrom(const ParamSpec& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool ParamSpec::IsInitialized() const {
+
+  return true;
+}
+
+void ParamSpec::Swap(ParamSpec* other) {
+  if (other != this) {
+    std::swap(name_, other->name_);
+    std::swap(share_mode_, other->share_mode_);
+    std::swap(lr_mult_, other->lr_mult_);
+    std::swap(decay_mult_, other->decay_mult_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata ParamSpec::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = ParamSpec_descriptor_;
+  metadata.reflection = ParamSpec_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int LayerParameter::kNameFieldNumber;
+const int LayerParameter::kTypeFieldNumber;
+const int LayerParameter::kBottomFieldNumber;
+const int LayerParameter::kTopFieldNumber;
+const int LayerParameter::kPhaseFieldNumber;
+const int LayerParameter::kLossWeightFieldNumber;
+const int LayerParameter::kParamFieldNumber;
+const int LayerParameter::kBlobsFieldNumber;
+const int LayerParameter::kPropagateDownFieldNumber;
+const int LayerParameter::kIncludeFieldNumber;
+const int LayerParameter::kExcludeFieldNumber;
+const int LayerParameter::kTransformParamFieldNumber;
+const int LayerParameter::kLossParamFieldNumber;
+const int LayerParameter::kAccuracyParamFieldNumber;
+const int LayerParameter::kArgmaxParamFieldNumber;
+const int LayerParameter::kConcatParamFieldNumber;
+const int LayerParameter::kContrastiveLossParamFieldNumber;
+const int LayerParameter::kConvolutionParamFieldNumber;
+const int LayerParameter::kDataParamFieldNumber;
+const int LayerParameter::kDropoutParamFieldNumber;
+const int LayerParameter::kDummyDataParamFieldNumber;
+const int LayerParameter::kEltwiseParamFieldNumber;
+const int LayerParameter::kExpParamFieldNumber;
+const int LayerParameter::kFlattenParamFieldNumber;
+const int LayerParameter::kHdf5DataParamFieldNumber;
+const int LayerParameter::kHdf5OutputParamFieldNumber;
+const int LayerParameter::kHingeLossParamFieldNumber;
+const int LayerParameter::kImageDataParamFieldNumber;
+const int LayerParameter::kInfogainLossParamFieldNumber;
+const int LayerParameter::kInnerProductParamFieldNumber;
+const int LayerParameter::kLogParamFieldNumber;
+const int LayerParameter::kLrnParamFieldNumber;
+const int LayerParameter::kMemoryDataParamFieldNumber;
+const int LayerParameter::kMvnParamFieldNumber;
+const int LayerParameter::kPoolingParamFieldNumber;
+const int LayerParameter::kPowerParamFieldNumber;
+const int LayerParameter::kPreluParamFieldNumber;
+const int LayerParameter::kPythonParamFieldNumber;
+const int LayerParameter::kReductionParamFieldNumber;
+const int LayerParameter::kReluParamFieldNumber;
+const int LayerParameter::kReshapeParamFieldNumber;
+const int LayerParameter::kRoiPoolingParamFieldNumber;
+const int LayerParameter::kSigmoidParamFieldNumber;
+const int LayerParameter::kSoftmaxParamFieldNumber;
+const int LayerParameter::kSppParamFieldNumber;
+const int LayerParameter::kSliceParamFieldNumber;
+const int LayerParameter::kTanhParamFieldNumber;
+const int LayerParameter::kThresholdParamFieldNumber;
+const int LayerParameter::kWindowDataParamFieldNumber;
+#endif  // !_MSC_VER
+
+LayerParameter::LayerParameter()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:caffe.LayerParameter)
+}
+
+void LayerParameter::InitAsDefaultInstance() {
+  transform_param_ = const_cast< ::caffe::TransformationParameter*>(&::caffe::TransformationParameter::default_instance());
+  loss_param_ = const_cast< ::caffe::LossParameter*>(&::caffe::LossParameter::default_instance());
+  accuracy_param_ = const_cast< ::caffe::AccuracyParameter*>(&::caffe::AccuracyParameter::default_instance());
+  argmax_param_ = const_cast< ::caffe::ArgMaxParameter*>(&::caffe::ArgMaxParameter::default_instance());
+  concat_param_ = const_cast< ::caffe::ConcatParameter*>(&::caffe::ConcatParameter::default_instance());
+  contrastive_loss_param_ = const_cast< ::caffe::ContrastiveLossParameter*>(&::caffe::ContrastiveLossParameter::default_instance());
+  convolution_param_ = const_cast< ::caffe::ConvolutionParameter*>(&::caffe::ConvolutionParameter::default_instance());
+  data_param_ = const_cast< ::caffe::DataParameter*>(&::caffe::DataParameter::default_instance());
+  dropout_param_ = const_cast< ::caffe::DropoutParameter*>(&::caffe::DropoutParameter::default_instance());
+  dummy_data_param_ = const_cast< ::caffe::DummyDataParameter*>(&::caffe::DummyDataParameter::default_instance());
+  eltwise_param_ = const_cast< ::caffe::EltwiseParameter*>(&::caffe::EltwiseParameter::default_instance());
+  exp_param_ = const_cast< ::caffe::ExpParameter*>(&::caffe::ExpParameter::default_instance());
+  flatten_param_ = const_cast< ::caffe::FlattenParameter*>(&::caffe::FlattenParameter::default_instance());
+  hdf5_data_param_ = const_cast< ::caffe::HDF5DataParameter*>(&::caffe::HDF5DataParameter::default_instance());
+  hdf5_output_param_ = const_cast< ::caffe::HDF5OutputParameter*>(&::caffe::HDF5OutputParameter::default_instance());
+  hinge_loss_param_ = const_cast< ::caffe::HingeLossParameter*>(&::caffe::HingeLossParameter::default_instance());
+  image_data_param_ = const_cast< ::caffe::ImageDataParameter*>(&::caffe::ImageDataParameter::default_instance());
+  infogain_loss_param_ = const_cast< ::caffe::InfogainLossParameter*>(&::caffe::InfogainLossParameter::default_instance());
+  inner_product_param_ = const_cast< ::caffe::InnerProductParameter*>(&::caffe::InnerProductParameter::default_instance());
+  log_param_ = const_cast< ::caffe::LogParameter*>(&::caffe::LogParameter::default_instance());
+  lrn_param_ = const_cast< ::caffe::LRNParameter*>(&::caffe::LRNParameter::default_instance());
+  memory_data_param_ = const_cast< ::caffe::MemoryDataParameter*>(&::caffe::MemoryDataParameter::default_instance());
+  mvn_param_ = const_cast< ::caffe::MVNParameter*>(&::caffe::MVNParameter::default_instance());
+  pooling_param_ = const_cast< ::caffe::PoolingParameter*>(&::caffe::PoolingParameter::default_instance());
+  power_param_ = const_cast< ::caffe::PowerParameter*>(&::caffe::PowerParameter::default_instance());
+  prelu_param_ = const_cast< ::caffe::PReLUParameter*>(&::caffe::PReLUParameter::default_instance());
+  python_param_ = const_cast< ::caffe::PythonParameter*>(&::caffe::PythonParameter::default_instance());
+  reduction_param_ = const_cast< ::caffe::ReductionParameter*>(&::caffe::ReductionParameter::default_instance());
+  relu_param_ = const_cast< ::caffe::ReLUParameter*>(&::caffe::ReLUParameter::default_instance());
+  reshape_param_ = const_cast< ::caffe::ReshapeParameter*>(&::caffe::ReshapeParameter::default_instance());
+  roi_pooling_param_ = const_cast< ::caffe::ROIPoolingParameter*>(&::caffe::ROIPoolingParameter::default_instance());
+  sigmoid_param_ = const_cast< ::caffe::SigmoidParameter*>(&::caffe::SigmoidParameter::default_instance());
+  softmax_param_ = const_cast< ::caffe::SoftmaxParameter*>(&::caffe::S
