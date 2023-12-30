@@ -6532,4 +6532,402 @@ bool SolverState::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(pars
+  // @@protoc_insertion_point(parse_start:caffe.SolverState)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional int32 iter = 1;
+      case 1: {
+        if (tag == 8) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &iter_)));
+          set_has_iter();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(18)) goto parse_learned_net;
+        break;
+      }
+
+      // optional string learned_net = 2;
+      case 2: {
+        if (tag == 18) {
+         parse_learned_net:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_learned_net()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->learned_net().data(), this->learned_net().length(),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "learned_net");
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(26)) goto parse_history;
+        break;
+      }
+
+      // repeated .caffe.BlobProto history = 3;
+      case 3: {
+        if (tag == 26) {
+         parse_history:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+                input, add_history()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(26)) goto parse_history;
+        if (input->ExpectTag(32)) goto parse_current_step;
+        break;
+      }
+
+      // optional int32 current_step = 4 [default = 0];
+      case 4: {
+        if (tag == 32) {
+         parse_current_step:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &current_step_)));
+          set_has_current_step();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:caffe.SolverState)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:caffe.SolverState)
+  return false;
+#undef DO_
+}
+
+void SolverState::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:caffe.SolverState)
+  // optional int32 iter = 1;
+  if (has_iter()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->iter(), output);
+  }
+
+  // optional string learned_net = 2;
+  if (has_learned_net()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->learned_net().data(), this->learned_net().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "learned_net");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      2, this->learned_net(), output);
+  }
+
+  // repeated .caffe.BlobProto history = 3;
+  for (int i = 0; i < this->history_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      3, this->history(i), output);
+  }
+
+  // optional int32 current_step = 4 [default = 0];
+  if (has_current_step()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->current_step(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:caffe.SolverState)
+}
+
+::google::protobuf::uint8* SolverState::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:caffe.SolverState)
+  // optional int32 iter = 1;
+  if (has_iter()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->iter(), target);
+  }
+
+  // optional string learned_net = 2;
+  if (has_learned_net()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->learned_net().data(), this->learned_net().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "learned_net");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        2, this->learned_net(), target);
+  }
+
+  // repeated .caffe.BlobProto history = 3;
+  for (int i = 0; i < this->history_size(); i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        3, this->history(i), target);
+  }
+
+  // optional int32 current_step = 4 [default = 0];
+  if (has_current_step()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->current_step(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:caffe.SolverState)
+  return target;
+}
+
+int SolverState::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // optional int32 iter = 1;
+    if (has_iter()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->iter());
+    }
+
+    // optional string learned_net = 2;
+    if (has_learned_net()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->learned_net());
+    }
+
+    // optional int32 current_step = 4 [default = 0];
+    if (has_current_step()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->current_step());
+    }
+
+  }
+  // repeated .caffe.BlobProto history = 3;
+  total_size += 1 * this->history_size();
+  for (int i = 0; i < this->history_size(); i++) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        this->history(i));
+  }
+
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void SolverState::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const SolverState* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const SolverState*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void SolverState::MergeFrom(const SolverState& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  history_.MergeFrom(from.history_);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_iter()) {
+      set_iter(from.iter());
+    }
+    if (from.has_learned_net()) {
+      set_learned_net(from.learned_net());
+    }
+    if (from.has_current_step()) {
+      set_current_step(from.current_step());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void SolverState::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void SolverState::CopyFrom(const SolverState& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool SolverState::IsInitialized() const {
+
+  return true;
+}
+
+void SolverState::Swap(SolverState* other) {
+  if (other != this) {
+    std::swap(iter_, other->iter_);
+    std::swap(learned_net_, other->learned_net_);
+    history_.Swap(&other->history_);
+    std::swap(current_step_, other->current_step_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata SolverState::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = SolverState_descriptor_;
+  metadata.reflection = SolverState_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int NetState::kPhaseFieldNumber;
+const int NetState::kLevelFieldNumber;
+const int NetState::kStageFieldNumber;
+#endif  // !_MSC_VER
+
+NetState::NetState()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:caffe.NetState)
+}
+
+void NetState::InitAsDefaultInstance() {
+}
+
+NetState::NetState(const NetState& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:caffe.NetState)
+}
+
+void NetState::SharedCtor() {
+  ::google::protobuf::internal::GetEmptyString();
+  _cached_size_ = 0;
+  phase_ = 1;
+  level_ = 0;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+NetState::~NetState() {
+  // @@protoc_insertion_point(destructor:caffe.NetState)
+  SharedDtor();
+}
+
+void NetState::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void NetState::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* NetState::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return NetState_descriptor_;
+}
+
+const NetState& NetState::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_caffe_2eproto();
+  return *default_instance_;
+}
+
+NetState* NetState::default_instance_ = NULL;
+
+NetState* NetState::New() const {
+  return new NetState;
+}
+
+void NetState::Clear() {
+  if (_has_bits_[0 / 32] & 3) {
+    phase_ = 1;
+    level_ = 0;
+  }
+  stage_.Clear();
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool NetState::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:caffe.NetState)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional .caffe.Phase phase = 1 [default = TEST];
+      case 1: {
+        if (tag == 8) {
+          int value;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          if (::caffe::Phase_IsValid(value)) {
+            set_phase(static_cast< ::caffe::Phase >(value));
+          } else {
+            mutable_unknown_fields()->AddVarint(1, value);
+          }
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(16)) goto parse_level;
+        break;
+      }
+
+      // optional int32 level = 2 [default = 0];
+      case 2: {
+        if (tag == 16) {
+         parse_level:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &level_)));
+          set_has_level();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(26)) goto parse_stage;
+        break;
+      }
+
+      // repeated string stage = 3;
+      case 3: {
+        if (tag == 26) {
+         parse_stage:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->add_stage()));
+          ::google::protobuf::internal::WireFormat::VerifyU
