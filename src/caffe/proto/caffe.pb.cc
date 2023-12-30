@@ -4705,4 +4705,365 @@ const int SolverParameter::kIterSizeFieldNumber;
 const int SolverParameter::kLrPolicyFieldNumber;
 const int SolverParameter::kGammaFieldNumber;
 const int SolverParameter::kPowerFieldNumber;
-const int SolverParameter::kMomentumFieldNumbe
+const int SolverParameter::kMomentumFieldNumber;
+const int SolverParameter::kWeightDecayFieldNumber;
+const int SolverParameter::kRegularizationTypeFieldNumber;
+const int SolverParameter::kStepsizeFieldNumber;
+const int SolverParameter::kStepvalueFieldNumber;
+const int SolverParameter::kClipGradientsFieldNumber;
+const int SolverParameter::kSnapshotFieldNumber;
+const int SolverParameter::kSnapshotPrefixFieldNumber;
+const int SolverParameter::kSnapshotDiffFieldNumber;
+const int SolverParameter::kSolverModeFieldNumber;
+const int SolverParameter::kDeviceIdFieldNumber;
+const int SolverParameter::kRandomSeedFieldNumber;
+const int SolverParameter::kSolverTypeFieldNumber;
+const int SolverParameter::kDeltaFieldNumber;
+const int SolverParameter::kDebugInfoFieldNumber;
+const int SolverParameter::kSnapshotAfterTrainFieldNumber;
+#endif  // !_MSC_VER
+
+SolverParameter::SolverParameter()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:caffe.SolverParameter)
+}
+
+void SolverParameter::InitAsDefaultInstance() {
+  net_param_ = const_cast< ::caffe::NetParameter*>(&::caffe::NetParameter::default_instance());
+  train_net_param_ = const_cast< ::caffe::NetParameter*>(&::caffe::NetParameter::default_instance());
+  train_state_ = const_cast< ::caffe::NetState*>(&::caffe::NetState::default_instance());
+}
+
+SolverParameter::SolverParameter(const SolverParameter& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:caffe.SolverParameter)
+}
+
+void SolverParameter::SharedCtor() {
+  ::google::protobuf::internal::GetEmptyString();
+  _cached_size_ = 0;
+  net_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  net_param_ = NULL;
+  train_net_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  train_net_param_ = NULL;
+  train_state_ = NULL;
+  test_interval_ = 0;
+  test_compute_loss_ = false;
+  test_initialization_ = true;
+  base_lr_ = 0;
+  display_ = 0;
+  average_loss_ = 1;
+  max_iter_ = 0;
+  iter_size_ = 1;
+  lr_policy_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  gamma_ = 0;
+  power_ = 0;
+  momentum_ = 0;
+  weight_decay_ = 0;
+  regularization_type_ = const_cast< ::std::string*>(_default_regularization_type_);
+  stepsize_ = 0;
+  clip_gradients_ = -1;
+  snapshot_ = 0;
+  snapshot_prefix_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  snapshot_diff_ = false;
+  solver_mode_ = 1;
+  device_id_ = 0;
+  random_seed_ = GOOGLE_LONGLONG(-1);
+  solver_type_ = 0;
+  delta_ = 1e-008f;
+  debug_info_ = false;
+  snapshot_after_train_ = true;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+SolverParameter::~SolverParameter() {
+  // @@protoc_insertion_point(destructor:caffe.SolverParameter)
+  SharedDtor();
+}
+
+void SolverParameter::SharedDtor() {
+  if (net_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete net_;
+  }
+  if (train_net_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete train_net_;
+  }
+  if (lr_policy_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete lr_policy_;
+  }
+  if (regularization_type_ != _default_regularization_type_) {
+    delete regularization_type_;
+  }
+  if (snapshot_prefix_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete snapshot_prefix_;
+  }
+  if (this != default_instance_) {
+    delete net_param_;
+    delete train_net_param_;
+    delete train_state_;
+  }
+}
+
+void SolverParameter::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* SolverParameter::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return SolverParameter_descriptor_;
+}
+
+const SolverParameter& SolverParameter::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_caffe_2eproto();
+  return *default_instance_;
+}
+
+SolverParameter* SolverParameter::default_instance_ = NULL;
+
+SolverParameter* SolverParameter::New() const {
+  return new SolverParameter;
+}
+
+void SolverParameter::Clear() {
+#define OFFSET_OF_FIELD_(f) (reinterpret_cast<char*>(      \
+  &reinterpret_cast<SolverParameter*>(16)->f) - \
+   reinterpret_cast<char*>(16))
+
+#define ZR_(first, last) do {                              \
+    size_t f = OFFSET_OF_FIELD_(first);                    \
+    size_t n = OFFSET_OF_FIELD_(last) - f + sizeof(last);  \
+    ::memset(&first, 0, n);                                \
+  } while (0)
+
+  if (_has_bits_[0 / 32] & 87) {
+    if (has_net()) {
+      if (net_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+        net_->clear();
+      }
+    }
+    if (has_net_param()) {
+      if (net_param_ != NULL) net_param_->::caffe::NetParameter::Clear();
+    }
+    if (has_train_net()) {
+      if (train_net_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+        train_net_->clear();
+      }
+    }
+    if (has_train_net_param()) {
+      if (train_net_param_ != NULL) train_net_param_->::caffe::NetParameter::Clear();
+    }
+    if (has_train_state()) {
+      if (train_state_ != NULL) train_state_->::caffe::NetState::Clear();
+    }
+  }
+  if (_has_bits_[8 / 32] & 65024) {
+    ZR_(test_interval_, display_);
+    test_compute_loss_ = false;
+    test_initialization_ = true;
+    average_loss_ = 1;
+    max_iter_ = 0;
+  }
+  if (_has_bits_[16 / 32] & 16711680) {
+    ZR_(gamma_, momentum_);
+    ZR_(weight_decay_, stepsize_);
+    iter_size_ = 1;
+    if (has_lr_policy()) {
+      if (lr_policy_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+        lr_policy_->clear();
+      }
+    }
+    if (has_regularization_type()) {
+      if (regularization_type_ != _default_regularization_type_) {
+        regularization_type_->assign(*_default_regularization_type_);
+      }
+    }
+  }
+  if (_has_bits_[24 / 32] & 4261412864) {
+    clip_gradients_ = -1;
+    snapshot_ = 0;
+    if (has_snapshot_prefix()) {
+      if (snapshot_prefix_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+        snapshot_prefix_->clear();
+      }
+    }
+    snapshot_diff_ = false;
+    solver_mode_ = 1;
+    device_id_ = 0;
+    random_seed_ = GOOGLE_LONGLONG(-1);
+  }
+  if (_has_bits_[32 / 32] & 15) {
+    solver_type_ = 0;
+    delta_ = 1e-008f;
+    debug_info_ = false;
+    snapshot_after_train_ = true;
+  }
+
+#undef OFFSET_OF_FIELD_
+#undef ZR_
+
+  test_net_.Clear();
+  test_net_param_.Clear();
+  test_state_.Clear();
+  test_iter_.Clear();
+  stepvalue_.Clear();
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool SolverParameter::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:caffe.SolverParameter)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(16383);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional string train_net = 1;
+      case 1: {
+        if (tag == 10) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_train_net()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->train_net().data(), this->train_net().length(),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "train_net");
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(18)) goto parse_test_net;
+        break;
+      }
+
+      // repeated string test_net = 2;
+      case 2: {
+        if (tag == 18) {
+         parse_test_net:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->add_test_net()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->test_net(this->test_net_size() - 1).data(),
+            this->test_net(this->test_net_size() - 1).length(),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "test_net");
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(18)) goto parse_test_net;
+        if (input->ExpectTag(24)) goto parse_test_iter;
+        break;
+      }
+
+      // repeated int32 test_iter = 3;
+      case 3: {
+        if (tag == 24) {
+         parse_test_iter:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 1, 24, input, this->mutable_test_iter())));
+        } else if (tag == 26) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPackedPrimitiveNoInline<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, this->mutable_test_iter())));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(24)) goto parse_test_iter;
+        if (input->ExpectTag(32)) goto parse_test_interval;
+        break;
+      }
+
+      // optional int32 test_interval = 4 [default = 0];
+      case 4: {
+        if (tag == 32) {
+         parse_test_interval:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &test_interval_)));
+          set_has_test_interval();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(45)) goto parse_base_lr;
+        break;
+      }
+
+      // optional float base_lr = 5;
+      case 5: {
+        if (tag == 45) {
+         parse_base_lr:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &base_lr_)));
+          set_has_base_lr();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(48)) goto parse_display;
+        break;
+      }
+
+      // optional int32 display = 6;
+      case 6: {
+        if (tag == 48) {
+         parse_display:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &display_)));
+          set_has_display();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(56)) goto parse_max_iter;
+        break;
+      }
+
+      // optional int32 max_iter = 7;
+      case 7: {
+        if (tag == 56) {
+         parse_max_iter:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &max_iter_)));
+          set_has_max_iter();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(66)) goto parse_lr_policy;
+        break;
+      }
+
+      // optional string lr_policy = 8;
+      case 8: {
+        if (tag == 66) {
+         parse_lr_policy:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_lr_policy()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->lr_policy().data(), this->lr_policy().length(),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "lr_policy");
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(77)) goto parse_gamma;
+        break;
+      }
+
+      // optional float gamma = 9;
+      case 9: {
+        if (tag == 77) {
+         parse_gamma:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &gamma_)));
+          set_has_gamma();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(85)) goto pa
