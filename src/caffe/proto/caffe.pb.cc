@@ -5066,4 +5066,358 @@ bool SolverParameter::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(85)) goto pa
+        if (input->ExpectTag(85)) goto parse_power;
+        break;
+      }
+
+      // optional float power = 10;
+      case 10: {
+        if (tag == 85) {
+         parse_power:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &power_)));
+          set_has_power();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(93)) goto parse_momentum;
+        break;
+      }
+
+      // optional float momentum = 11;
+      case 11: {
+        if (tag == 93) {
+         parse_momentum:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &momentum_)));
+          set_has_momentum();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(101)) goto parse_weight_decay;
+        break;
+      }
+
+      // optional float weight_decay = 12;
+      case 12: {
+        if (tag == 101) {
+         parse_weight_decay:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &weight_decay_)));
+          set_has_weight_decay();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(104)) goto parse_stepsize;
+        break;
+      }
+
+      // optional int32 stepsize = 13;
+      case 13: {
+        if (tag == 104) {
+         parse_stepsize:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &stepsize_)));
+          set_has_stepsize();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(112)) goto parse_snapshot;
+        break;
+      }
+
+      // optional int32 snapshot = 14 [default = 0];
+      case 14: {
+        if (tag == 112) {
+         parse_snapshot:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &snapshot_)));
+          set_has_snapshot();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(122)) goto parse_snapshot_prefix;
+        break;
+      }
+
+      // optional string snapshot_prefix = 15;
+      case 15: {
+        if (tag == 122) {
+         parse_snapshot_prefix:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_snapshot_prefix()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->snapshot_prefix().data(), this->snapshot_prefix().length(),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "snapshot_prefix");
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(128)) goto parse_snapshot_diff;
+        break;
+      }
+
+      // optional bool snapshot_diff = 16 [default = false];
+      case 16: {
+        if (tag == 128) {
+         parse_snapshot_diff:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &snapshot_diff_)));
+          set_has_snapshot_diff();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(136)) goto parse_solver_mode;
+        break;
+      }
+
+      // optional .caffe.SolverParameter.SolverMode solver_mode = 17 [default = GPU];
+      case 17: {
+        if (tag == 136) {
+         parse_solver_mode:
+          int value;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          if (::caffe::SolverParameter_SolverMode_IsValid(value)) {
+            set_solver_mode(static_cast< ::caffe::SolverParameter_SolverMode >(value));
+          } else {
+            mutable_unknown_fields()->AddVarint(17, value);
+          }
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(144)) goto parse_device_id;
+        break;
+      }
+
+      // optional int32 device_id = 18 [default = 0];
+      case 18: {
+        if (tag == 144) {
+         parse_device_id:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &device_id_)));
+          set_has_device_id();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(152)) goto parse_test_compute_loss;
+        break;
+      }
+
+      // optional bool test_compute_loss = 19 [default = false];
+      case 19: {
+        if (tag == 152) {
+         parse_test_compute_loss:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &test_compute_loss_)));
+          set_has_test_compute_loss();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(160)) goto parse_random_seed;
+        break;
+      }
+
+      // optional int64 random_seed = 20 [default = -1];
+      case 20: {
+        if (tag == 160) {
+         parse_random_seed:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
+                 input, &random_seed_)));
+          set_has_random_seed();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(170)) goto parse_train_net_param;
+        break;
+      }
+
+      // optional .caffe.NetParameter train_net_param = 21;
+      case 21: {
+        if (tag == 170) {
+         parse_train_net_param:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_train_net_param()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(178)) goto parse_test_net_param;
+        break;
+      }
+
+      // repeated .caffe.NetParameter test_net_param = 22;
+      case 22: {
+        if (tag == 178) {
+         parse_test_net_param:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+                input, add_test_net_param()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(178)) goto parse_test_net_param;
+        if (input->ExpectTag(184)) goto parse_debug_info;
+        break;
+      }
+
+      // optional bool debug_info = 23 [default = false];
+      case 23: {
+        if (tag == 184) {
+         parse_debug_info:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &debug_info_)));
+          set_has_debug_info();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(194)) goto parse_net;
+        break;
+      }
+
+      // optional string net = 24;
+      case 24: {
+        if (tag == 194) {
+         parse_net:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_net()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->net().data(), this->net().length(),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "net");
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(202)) goto parse_net_param;
+        break;
+      }
+
+      // optional .caffe.NetParameter net_param = 25;
+      case 25: {
+        if (tag == 202) {
+         parse_net_param:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_net_param()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(210)) goto parse_train_state;
+        break;
+      }
+
+      // optional .caffe.NetState train_state = 26;
+      case 26: {
+        if (tag == 210) {
+         parse_train_state:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_train_state()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(218)) goto parse_test_state;
+        break;
+      }
+
+      // repeated .caffe.NetState test_state = 27;
+      case 27: {
+        if (tag == 218) {
+         parse_test_state:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+                input, add_test_state()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(218)) goto parse_test_state;
+        if (input->ExpectTag(224)) goto parse_snapshot_after_train;
+        break;
+      }
+
+      // optional bool snapshot_after_train = 28 [default = true];
+      case 28: {
+        if (tag == 224) {
+         parse_snapshot_after_train:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &snapshot_after_train_)));
+          set_has_snapshot_after_train();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(234)) goto parse_regularization_type;
+        break;
+      }
+
+      // optional string regularization_type = 29 [default = "L2"];
+      case 29: {
+        if (tag == 234) {
+         parse_regularization_type:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_regularization_type()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->regularization_type().data(), this->regularization_type().length(),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "regularization_type");
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(240)) goto parse_solver_type;
+        break;
+      }
+
+      // optional .caffe.SolverParameter.SolverType solver_type = 30 [default = SGD];
+      case 30: {
+        if (tag == 240) {
+         parse_solver_type:
+          int value;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          if (::caffe::SolverParameter_SolverType_IsValid(value)) {
+            set_solver_type(static_cast< ::caffe::SolverParameter_SolverType >(value));
+          } else {
+            mutable_unknown_fields()->AddVarint(30, value);
+          }
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(253)) goto parse_delta;
+        break;
+      }
+
+      // optional float delta = 31 [default = 1e-008];
+      case 31: {
+        if (tag == 253) {
+         parse_delta:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &delta_)));
+          set_has_delta();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(256)) goto parse_test_initialization;
+        break;
+      }
+
+      // optional bool test_initialization = 32 [default = true];
+      case 32: {
+        if (tag == 256) {
+         parse_test_initialization:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &test_initialization_)));
+          set_has_test_initialization();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(264)) goto parse_average_loss;
+        b
