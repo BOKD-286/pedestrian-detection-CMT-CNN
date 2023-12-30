@@ -5756,4 +5756,381 @@ void SolverParameter::SerializeWithCachedSizes(
   for (int i = 0; i < this->test_net_size(); i++) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->test_net(i).data(), this->test_net(i).length(),
-      ::google::protobuf::i
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "test_net");
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteStringToArray(2, this->test_net(i), target);
+  }
+
+  // repeated int32 test_iter = 3;
+  for (int i = 0; i < this->test_iter_size(); i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteInt32ToArray(3, this->test_iter(i), target);
+  }
+
+  // optional int32 test_interval = 4 [default = 0];
+  if (has_test_interval()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->test_interval(), target);
+  }
+
+  // optional float base_lr = 5;
+  if (has_base_lr()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(5, this->base_lr(), target);
+  }
+
+  // optional int32 display = 6;
+  if (has_display()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(6, this->display(), target);
+  }
+
+  // optional int32 max_iter = 7;
+  if (has_max_iter()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(7, this->max_iter(), target);
+  }
+
+  // optional string lr_policy = 8;
+  if (has_lr_policy()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->lr_policy().data(), this->lr_policy().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "lr_policy");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        8, this->lr_policy(), target);
+  }
+
+  // optional float gamma = 9;
+  if (has_gamma()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(9, this->gamma(), target);
+  }
+
+  // optional float power = 10;
+  if (has_power()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(10, this->power(), target);
+  }
+
+  // optional float momentum = 11;
+  if (has_momentum()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(11, this->momentum(), target);
+  }
+
+  // optional float weight_decay = 12;
+  if (has_weight_decay()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(12, this->weight_decay(), target);
+  }
+
+  // optional int32 stepsize = 13;
+  if (has_stepsize()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(13, this->stepsize(), target);
+  }
+
+  // optional int32 snapshot = 14 [default = 0];
+  if (has_snapshot()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(14, this->snapshot(), target);
+  }
+
+  // optional string snapshot_prefix = 15;
+  if (has_snapshot_prefix()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->snapshot_prefix().data(), this->snapshot_prefix().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "snapshot_prefix");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        15, this->snapshot_prefix(), target);
+  }
+
+  // optional bool snapshot_diff = 16 [default = false];
+  if (has_snapshot_diff()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(16, this->snapshot_diff(), target);
+  }
+
+  // optional .caffe.SolverParameter.SolverMode solver_mode = 17 [default = GPU];
+  if (has_solver_mode()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      17, this->solver_mode(), target);
+  }
+
+  // optional int32 device_id = 18 [default = 0];
+  if (has_device_id()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(18, this->device_id(), target);
+  }
+
+  // optional bool test_compute_loss = 19 [default = false];
+  if (has_test_compute_loss()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(19, this->test_compute_loss(), target);
+  }
+
+  // optional int64 random_seed = 20 [default = -1];
+  if (has_random_seed()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(20, this->random_seed(), target);
+  }
+
+  // optional .caffe.NetParameter train_net_param = 21;
+  if (has_train_net_param()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        21, this->train_net_param(), target);
+  }
+
+  // repeated .caffe.NetParameter test_net_param = 22;
+  for (int i = 0; i < this->test_net_param_size(); i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        22, this->test_net_param(i), target);
+  }
+
+  // optional bool debug_info = 23 [default = false];
+  if (has_debug_info()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(23, this->debug_info(), target);
+  }
+
+  // optional string net = 24;
+  if (has_net()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->net().data(), this->net().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "net");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        24, this->net(), target);
+  }
+
+  // optional .caffe.NetParameter net_param = 25;
+  if (has_net_param()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        25, this->net_param(), target);
+  }
+
+  // optional .caffe.NetState train_state = 26;
+  if (has_train_state()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        26, this->train_state(), target);
+  }
+
+  // repeated .caffe.NetState test_state = 27;
+  for (int i = 0; i < this->test_state_size(); i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        27, this->test_state(i), target);
+  }
+
+  // optional bool snapshot_after_train = 28 [default = true];
+  if (has_snapshot_after_train()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(28, this->snapshot_after_train(), target);
+  }
+
+  // optional string regularization_type = 29 [default = "L2"];
+  if (has_regularization_type()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->regularization_type().data(), this->regularization_type().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "regularization_type");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        29, this->regularization_type(), target);
+  }
+
+  // optional .caffe.SolverParameter.SolverType solver_type = 30 [default = SGD];
+  if (has_solver_type()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      30, this->solver_type(), target);
+  }
+
+  // optional float delta = 31 [default = 1e-008];
+  if (has_delta()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(31, this->delta(), target);
+  }
+
+  // optional bool test_initialization = 32 [default = true];
+  if (has_test_initialization()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(32, this->test_initialization(), target);
+  }
+
+  // optional int32 average_loss = 33 [default = 1];
+  if (has_average_loss()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(33, this->average_loss(), target);
+  }
+
+  // repeated int32 stepvalue = 34;
+  for (int i = 0; i < this->stepvalue_size(); i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteInt32ToArray(34, this->stepvalue(i), target);
+  }
+
+  // optional float clip_gradients = 35 [default = -1];
+  if (has_clip_gradients()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(35, this->clip_gradients(), target);
+  }
+
+  // optional int32 iter_size = 36 [default = 1];
+  if (has_iter_size()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(36, this->iter_size(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:caffe.SolverParameter)
+  return target;
+}
+
+int SolverParameter::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // optional string net = 24;
+    if (has_net()) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->net());
+    }
+
+    // optional .caffe.NetParameter net_param = 25;
+    if (has_net_param()) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->net_param());
+    }
+
+    // optional string train_net = 1;
+    if (has_train_net()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->train_net());
+    }
+
+    // optional .caffe.NetParameter train_net_param = 21;
+    if (has_train_net_param()) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->train_net_param());
+    }
+
+    // optional .caffe.NetState train_state = 26;
+    if (has_train_state()) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->train_state());
+    }
+
+  }
+  if (_has_bits_[9 / 32] & (0xffu << (9 % 32))) {
+    // optional int32 test_interval = 4 [default = 0];
+    if (has_test_interval()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->test_interval());
+    }
+
+    // optional bool test_compute_loss = 19 [default = false];
+    if (has_test_compute_loss()) {
+      total_size += 2 + 1;
+    }
+
+    // optional bool test_initialization = 32 [default = true];
+    if (has_test_initialization()) {
+      total_size += 2 + 1;
+    }
+
+    // optional float base_lr = 5;
+    if (has_base_lr()) {
+      total_size += 1 + 4;
+    }
+
+    // optional int32 display = 6;
+    if (has_display()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->display());
+    }
+
+    // optional int32 average_loss = 33 [default = 1];
+    if (has_average_loss()) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->average_loss());
+    }
+
+    // optional int32 max_iter = 7;
+    if (has_max_iter()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->max_iter());
+    }
+
+  }
+  if (_has_bits_[16 / 32] & (0xffu << (16 % 32))) {
+    // optional int32 iter_size = 36 [default = 1];
+    if (has_iter_size()) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->iter_size());
+    }
+
+    // optional string lr_policy = 8;
+    if (has_lr_policy()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->lr_policy());
+    }
+
+    // optional float gamma = 9;
+    if (has_gamma()) {
+      total_size += 1 + 4;
+    }
+
+    // optional float power = 10;
+    if (has_power()) {
+      total_size += 1 + 4;
+    }
+
+    // optional float momentum = 11;
+    if (has_momentum()) {
+      total_size += 1 + 4;
+    }
+
+    // optional float weight_decay = 12;
+    if (has_weight_decay()) {
+      total_size += 1 + 4;
+    }
+
+    // optional string regularization_type = 29 [default = "L2"];
+    if (has_regularization_type()) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->regularization_type());
+    }
+
+    // optional int32 stepsize = 13;
+    if (has_stepsize()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->stepsize());
+    }
+
+  }
+  if (_has_bits_[25 / 32] & (0xffu << (25 % 32))) {
+    // optional float clip_gradients = 35 [default = -1];
+    if (has_clip_gradients()) {
+      total_size += 2 + 4;
+    }
+
+    // optional int32 snapshot = 14 [default = 0];
+    if (has_snapshot()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->snapshot());
+    }
+
+    // optional string snapshot_prefix = 15;
+    if (has_snapshot_prefix()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->snapshot_prefix());
+    }
+
+    // optional bool snapshot_diff = 16 [d
