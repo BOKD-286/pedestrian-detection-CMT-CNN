@@ -8752,4 +8752,381 @@ bool LayerParameter::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->Expec
+        if (input->ExpectTag(954)) goto parse_memory_data_param;
+        break;
+      }
+
+      // optional .caffe.MemoryDataParameter memory_data_param = 119;
+      case 119: {
+        if (tag == 954) {
+         parse_memory_data_param:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_memory_data_param()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(962)) goto parse_mvn_param;
+        break;
+      }
+
+      // optional .caffe.MVNParameter mvn_param = 120;
+      case 120: {
+        if (tag == 962) {
+         parse_mvn_param:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_mvn_param()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(970)) goto parse_pooling_param;
+        break;
+      }
+
+      // optional .caffe.PoolingParameter pooling_param = 121;
+      case 121: {
+        if (tag == 970) {
+         parse_pooling_param:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_pooling_param()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(978)) goto parse_power_param;
+        break;
+      }
+
+      // optional .caffe.PowerParameter power_param = 122;
+      case 122: {
+        if (tag == 978) {
+         parse_power_param:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_power_param()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(986)) goto parse_relu_param;
+        break;
+      }
+
+      // optional .caffe.ReLUParameter relu_param = 123;
+      case 123: {
+        if (tag == 986) {
+         parse_relu_param:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_relu_param()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(994)) goto parse_sigmoid_param;
+        break;
+      }
+
+      // optional .caffe.SigmoidParameter sigmoid_param = 124;
+      case 124: {
+        if (tag == 994) {
+         parse_sigmoid_param:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_sigmoid_param()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(1002)) goto parse_softmax_param;
+        break;
+      }
+
+      // optional .caffe.SoftmaxParameter softmax_param = 125;
+      case 125: {
+        if (tag == 1002) {
+         parse_softmax_param:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_softmax_param()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(1010)) goto parse_slice_param;
+        break;
+      }
+
+      // optional .caffe.SliceParameter slice_param = 126;
+      case 126: {
+        if (tag == 1010) {
+         parse_slice_param:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_slice_param()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(1018)) goto parse_tanh_param;
+        break;
+      }
+
+      // optional .caffe.TanHParameter tanh_param = 127;
+      case 127: {
+        if (tag == 1018) {
+         parse_tanh_param:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_tanh_param()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(1026)) goto parse_threshold_param;
+        break;
+      }
+
+      // optional .caffe.ThresholdParameter threshold_param = 128;
+      case 128: {
+        if (tag == 1026) {
+         parse_threshold_param:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_threshold_param()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(1034)) goto parse_window_data_param;
+        break;
+      }
+
+      // optional .caffe.WindowDataParameter window_data_param = 129;
+      case 129: {
+        if (tag == 1034) {
+         parse_window_data_param:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_window_data_param()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(1042)) goto parse_python_param;
+        break;
+      }
+
+      // optional .caffe.PythonParameter python_param = 130;
+      case 130: {
+        if (tag == 1042) {
+         parse_python_param:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_python_param()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(1050)) goto parse_prelu_param;
+        break;
+      }
+
+      // optional .caffe.PReLUParameter prelu_param = 131;
+      case 131: {
+        if (tag == 1050) {
+         parse_prelu_param:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_prelu_param()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(1058)) goto parse_spp_param;
+        break;
+      }
+
+      // optional .caffe.SPPParameter spp_param = 132;
+      case 132: {
+        if (tag == 1058) {
+         parse_spp_param:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_spp_param()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(1066)) goto parse_reshape_param;
+        break;
+      }
+
+      // optional .caffe.ReshapeParameter reshape_param = 133;
+      case 133: {
+        if (tag == 1066) {
+         parse_reshape_param:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_reshape_param()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(1074)) goto parse_log_param;
+        break;
+      }
+
+      // optional .caffe.LogParameter log_param = 134;
+      case 134: {
+        if (tag == 1074) {
+         parse_log_param:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_log_param()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(1082)) goto parse_flatten_param;
+        break;
+      }
+
+      // optional .caffe.FlattenParameter flatten_param = 135;
+      case 135: {
+        if (tag == 1082) {
+         parse_flatten_param:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_flatten_param()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(1090)) goto parse_reduction_param;
+        break;
+      }
+
+      // optional .caffe.ReductionParameter reduction_param = 136;
+      case 136: {
+        if (tag == 1090) {
+         parse_reduction_param:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_reduction_param()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(1098)) goto parse_roi_pooling_param;
+        break;
+      }
+
+      // optional .caffe.ROIPoolingParameter roi_pooling_param = 137;
+      case 137: {
+        if (tag == 1098) {
+         parse_roi_pooling_param:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_roi_pooling_param()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:caffe.LayerParameter)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:caffe.LayerParameter)
+  return false;
+#undef DO_
+}
+
+void LayerParameter::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:caffe.LayerParameter)
+  // optional string name = 1;
+  if (has_name()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->name().data(), this->name().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "name");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      1, this->name(), output);
+  }
+
+  // optional string type = 2;
+  if (has_type()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->type().data(), this->type().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "type");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      2, this->type(), output);
+  }
+
+  // repeated string bottom = 3;
+  for (int i = 0; i < this->bottom_size(); i++) {
+  ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+    this->bottom(i).data(), this->bottom(i).length(),
+    ::google::protobuf::internal::WireFormat::SERIALIZE,
+    "bottom");
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      3, this->bottom(i), output);
+  }
+
+  // repeated string top = 4;
+  for (int i = 0; i < this->top_size(); i++) {
+  ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+    this->top(i).data(), this->top(i).length(),
+    ::google::protobuf::internal::WireFormat::SERIALIZE,
+    "top");
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      4, this->top(i), output);
+  }
+
+  // repeated float loss_weight = 5;
+  for (int i = 0; i < this->loss_weight_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(
+      5, this->loss_weight(i), output);
+  }
+
+  // repeated .caffe.ParamSpec param = 6;
+  for (int i = 0; i < this->param_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      6, this->param(i), output);
+  }
+
+  // repeated .caffe.BlobProto blobs = 7;
+  for (int i = 0; i < this->blobs_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      7, this->blobs(i), output);
+  }
+
+  // repeated .caffe.NetStateRule include = 8;
+  for (int i = 0; i < this->include_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      8, this->include(i), output);
+  }
+
+  // repeated .caffe.NetStateRule exclude = 9;
+  for (int i = 0; i < this->exclude_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      9, this->exclude(i), output);
+  }
+
+  // optional .caffe.Phase phase = 10;
+  if (has_phase()) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      10, this->phase(), output);
+  }
+
+  // repeated bool propagate_down = 11;
+  for (int i = 0; i < this->propagate_down_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(
+      11, this->propagate_down(i), output);
+  }
+
+  // optional .caffe.TransformationParameter transform_param = 100;
+  if (has_transform_param()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      100, this->transform_param(), output);
+  }
+
+  // optional .caffe.LossParameter loss_param = 101;
+  if (has_loss_param()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      101, this->loss_param(), output);
+  }
+
+  // optional .caffe.AccuracyParameter accuracy_param = 102;
+  if (has_accuracy_param()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      102, this->accuracy_param(), output);
+  }
+
+  // optional .caffe.ArgMaxParameter argmax_param = 103;
+  if (has_argmax_p
