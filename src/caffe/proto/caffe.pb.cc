@@ -8027,4 +8027,360 @@ void LayerParameter::InitAsDefaultInstance() {
   reshape_param_ = const_cast< ::caffe::ReshapeParameter*>(&::caffe::ReshapeParameter::default_instance());
   roi_pooling_param_ = const_cast< ::caffe::ROIPoolingParameter*>(&::caffe::ROIPoolingParameter::default_instance());
   sigmoid_param_ = const_cast< ::caffe::SigmoidParameter*>(&::caffe::SigmoidParameter::default_instance());
-  softmax_param_ = const_cast< ::caffe::SoftmaxParameter*>(&::caffe::S
+  softmax_param_ = const_cast< ::caffe::SoftmaxParameter*>(&::caffe::SoftmaxParameter::default_instance());
+  spp_param_ = const_cast< ::caffe::SPPParameter*>(&::caffe::SPPParameter::default_instance());
+  slice_param_ = const_cast< ::caffe::SliceParameter*>(&::caffe::SliceParameter::default_instance());
+  tanh_param_ = const_cast< ::caffe::TanHParameter*>(&::caffe::TanHParameter::default_instance());
+  threshold_param_ = const_cast< ::caffe::ThresholdParameter*>(&::caffe::ThresholdParameter::default_instance());
+  window_data_param_ = const_cast< ::caffe::WindowDataParameter*>(&::caffe::WindowDataParameter::default_instance());
+}
+
+LayerParameter::LayerParameter(const LayerParameter& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:caffe.LayerParameter)
+}
+
+void LayerParameter::SharedCtor() {
+  ::google::protobuf::internal::GetEmptyString();
+  _cached_size_ = 0;
+  name_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  type_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  phase_ = 0;
+  transform_param_ = NULL;
+  loss_param_ = NULL;
+  accuracy_param_ = NULL;
+  argmax_param_ = NULL;
+  concat_param_ = NULL;
+  contrastive_loss_param_ = NULL;
+  convolution_param_ = NULL;
+  data_param_ = NULL;
+  dropout_param_ = NULL;
+  dummy_data_param_ = NULL;
+  eltwise_param_ = NULL;
+  exp_param_ = NULL;
+  flatten_param_ = NULL;
+  hdf5_data_param_ = NULL;
+  hdf5_output_param_ = NULL;
+  hinge_loss_param_ = NULL;
+  image_data_param_ = NULL;
+  infogain_loss_param_ = NULL;
+  inner_product_param_ = NULL;
+  log_param_ = NULL;
+  lrn_param_ = NULL;
+  memory_data_param_ = NULL;
+  mvn_param_ = NULL;
+  pooling_param_ = NULL;
+  power_param_ = NULL;
+  prelu_param_ = NULL;
+  python_param_ = NULL;
+  reduction_param_ = NULL;
+  relu_param_ = NULL;
+  reshape_param_ = NULL;
+  roi_pooling_param_ = NULL;
+  sigmoid_param_ = NULL;
+  softmax_param_ = NULL;
+  spp_param_ = NULL;
+  slice_param_ = NULL;
+  tanh_param_ = NULL;
+  threshold_param_ = NULL;
+  window_data_param_ = NULL;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+LayerParameter::~LayerParameter() {
+  // @@protoc_insertion_point(destructor:caffe.LayerParameter)
+  SharedDtor();
+}
+
+void LayerParameter::SharedDtor() {
+  if (name_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete name_;
+  }
+  if (type_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete type_;
+  }
+  if (this != default_instance_) {
+    delete transform_param_;
+    delete loss_param_;
+    delete accuracy_param_;
+    delete argmax_param_;
+    delete concat_param_;
+    delete contrastive_loss_param_;
+    delete convolution_param_;
+    delete data_param_;
+    delete dropout_param_;
+    delete dummy_data_param_;
+    delete eltwise_param_;
+    delete exp_param_;
+    delete flatten_param_;
+    delete hdf5_data_param_;
+    delete hdf5_output_param_;
+    delete hinge_loss_param_;
+    delete image_data_param_;
+    delete infogain_loss_param_;
+    delete inner_product_param_;
+    delete log_param_;
+    delete lrn_param_;
+    delete memory_data_param_;
+    delete mvn_param_;
+    delete pooling_param_;
+    delete power_param_;
+    delete prelu_param_;
+    delete python_param_;
+    delete reduction_param_;
+    delete relu_param_;
+    delete reshape_param_;
+    delete roi_pooling_param_;
+    delete sigmoid_param_;
+    delete softmax_param_;
+    delete spp_param_;
+    delete slice_param_;
+    delete tanh_param_;
+    delete threshold_param_;
+    delete window_data_param_;
+  }
+}
+
+void LayerParameter::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* LayerParameter::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return LayerParameter_descriptor_;
+}
+
+const LayerParameter& LayerParameter::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_caffe_2eproto();
+  return *default_instance_;
+}
+
+LayerParameter* LayerParameter::default_instance_ = NULL;
+
+LayerParameter* LayerParameter::New() const {
+  return new LayerParameter;
+}
+
+void LayerParameter::Clear() {
+  if (_has_bits_[0 / 32] & 19) {
+    if (has_name()) {
+      if (name_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+        name_->clear();
+      }
+    }
+    if (has_type()) {
+      if (type_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+        type_->clear();
+      }
+    }
+    phase_ = 0;
+  }
+  if (_has_bits_[8 / 32] & 63488) {
+    if (has_transform_param()) {
+      if (transform_param_ != NULL) transform_param_->::caffe::TransformationParameter::Clear();
+    }
+    if (has_loss_param()) {
+      if (loss_param_ != NULL) loss_param_->::caffe::LossParameter::Clear();
+    }
+    if (has_accuracy_param()) {
+      if (accuracy_param_ != NULL) accuracy_param_->::caffe::AccuracyParameter::Clear();
+    }
+    if (has_argmax_param()) {
+      if (argmax_param_ != NULL) argmax_param_->::caffe::ArgMaxParameter::Clear();
+    }
+    if (has_concat_param()) {
+      if (concat_param_ != NULL) concat_param_->::caffe::ConcatParameter::Clear();
+    }
+  }
+  if (_has_bits_[16 / 32] & 16711680) {
+    if (has_contrastive_loss_param()) {
+      if (contrastive_loss_param_ != NULL) contrastive_loss_param_->::caffe::ContrastiveLossParameter::Clear();
+    }
+    if (has_convolution_param()) {
+      if (convolution_param_ != NULL) convolution_param_->::caffe::ConvolutionParameter::Clear();
+    }
+    if (has_data_param()) {
+      if (data_param_ != NULL) data_param_->::caffe::DataParameter::Clear();
+    }
+    if (has_dropout_param()) {
+      if (dropout_param_ != NULL) dropout_param_->::caffe::DropoutParameter::Clear();
+    }
+    if (has_dummy_data_param()) {
+      if (dummy_data_param_ != NULL) dummy_data_param_->::caffe::DummyDataParameter::Clear();
+    }
+    if (has_eltwise_param()) {
+      if (eltwise_param_ != NULL) eltwise_param_->::caffe::EltwiseParameter::Clear();
+    }
+    if (has_exp_param()) {
+      if (exp_param_ != NULL) exp_param_->::caffe::ExpParameter::Clear();
+    }
+    if (has_flatten_param()) {
+      if (flatten_param_ != NULL) flatten_param_->::caffe::FlattenParameter::Clear();
+    }
+  }
+  if (_has_bits_[24 / 32] & 4278190080) {
+    if (has_hdf5_data_param()) {
+      if (hdf5_data_param_ != NULL) hdf5_data_param_->::caffe::HDF5DataParameter::Clear();
+    }
+    if (has_hdf5_output_param()) {
+      if (hdf5_output_param_ != NULL) hdf5_output_param_->::caffe::HDF5OutputParameter::Clear();
+    }
+    if (has_hinge_loss_param()) {
+      if (hinge_loss_param_ != NULL) hinge_loss_param_->::caffe::HingeLossParameter::Clear();
+    }
+    if (has_image_data_param()) {
+      if (image_data_param_ != NULL) image_data_param_->::caffe::ImageDataParameter::Clear();
+    }
+    if (has_infogain_loss_param()) {
+      if (infogain_loss_param_ != NULL) infogain_loss_param_->::caffe::InfogainLossParameter::Clear();
+    }
+    if (has_inner_product_param()) {
+      if (inner_product_param_ != NULL) inner_product_param_->::caffe::InnerProductParameter::Clear();
+    }
+    if (has_log_param()) {
+      if (log_param_ != NULL) log_param_->::caffe::LogParameter::Clear();
+    }
+    if (has_lrn_param()) {
+      if (lrn_param_ != NULL) lrn_param_->::caffe::LRNParameter::Clear();
+    }
+  }
+  if (_has_bits_[32 / 32] & 255) {
+    if (has_memory_data_param()) {
+      if (memory_data_param_ != NULL) memory_data_param_->::caffe::MemoryDataParameter::Clear();
+    }
+    if (has_mvn_param()) {
+      if (mvn_param_ != NULL) mvn_param_->::caffe::MVNParameter::Clear();
+    }
+    if (has_pooling_param()) {
+      if (pooling_param_ != NULL) pooling_param_->::caffe::PoolingParameter::Clear();
+    }
+    if (has_power_param()) {
+      if (power_param_ != NULL) power_param_->::caffe::PowerParameter::Clear();
+    }
+    if (has_prelu_param()) {
+      if (prelu_param_ != NULL) prelu_param_->::caffe::PReLUParameter::Clear();
+    }
+    if (has_python_param()) {
+      if (python_param_ != NULL) python_param_->::caffe::PythonParameter::Clear();
+    }
+    if (has_reduction_param()) {
+      if (reduction_param_ != NULL) reduction_param_->::caffe::ReductionParameter::Clear();
+    }
+    if (has_relu_param()) {
+      if (relu_param_ != NULL) relu_param_->::caffe::ReLUParameter::Clear();
+    }
+  }
+  if (_has_bits_[40 / 32] & 65280) {
+    if (has_reshape_param()) {
+      if (reshape_param_ != NULL) reshape_param_->::caffe::ReshapeParameter::Clear();
+    }
+    if (has_roi_pooling_param()) {
+      if (roi_pooling_param_ != NULL) roi_pooling_param_->::caffe::ROIPoolingParameter::Clear();
+    }
+    if (has_sigmoid_param()) {
+      if (sigmoid_param_ != NULL) sigmoid_param_->::caffe::SigmoidParameter::Clear();
+    }
+    if (has_softmax_param()) {
+      if (softmax_param_ != NULL) softmax_param_->::caffe::SoftmaxParameter::Clear();
+    }
+    if (has_spp_param()) {
+      if (spp_param_ != NULL) spp_param_->::caffe::SPPParameter::Clear();
+    }
+    if (has_slice_param()) {
+      if (slice_param_ != NULL) slice_param_->::caffe::SliceParameter::Clear();
+    }
+    if (has_tanh_param()) {
+      if (tanh_param_ != NULL) tanh_param_->::caffe::TanHParameter::Clear();
+    }
+    if (has_threshold_param()) {
+      if (threshold_param_ != NULL) threshold_param_->::caffe::ThresholdParameter::Clear();
+    }
+  }
+  if (has_window_data_param()) {
+    if (window_data_param_ != NULL) window_data_param_->::caffe::WindowDataParameter::Clear();
+  }
+  bottom_.Clear();
+  top_.Clear();
+  loss_weight_.Clear();
+  param_.Clear();
+  blobs_.Clear();
+  propagate_down_.Clear();
+  include_.Clear();
+  exclude_.Clear();
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool LayerParameter::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:caffe.LayerParameter)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(16383);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional string name = 1;
+      case 1: {
+        if (tag == 10) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_name()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->name().data(), this->name().length(),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "name");
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(18)) goto parse_type;
+        break;
+      }
+
+      // optional string type = 2;
+      case 2: {
+        if (tag == 18) {
+         parse_type:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_type()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->type().data(), this->type().length(),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "type");
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(26)) goto parse_bottom;
+        break;
+      }
+
+      // repeated string bottom = 3;
+      case 3: {
+        if (tag == 26) {
+         parse_bottom:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->add_bottom()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->bottom(this->bottom_size() - 1).data(),
+            this->bottom(this->bottom_size() - 1).length(),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "bottom");
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(26)) goto parse_bottom;
+        if (input->ExpectTag(34)) goto parse_top;
+        break;
+      }
+
+      // repeated string top = 4;
+      case 4: {
+        if (tag == 34) {
+         parse_top:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->add_top()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+   
