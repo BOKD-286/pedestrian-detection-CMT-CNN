@@ -9845,4 +9845,361 @@ int LayerParameter::ByteSize() const {
           this->hdf5_output_param());
     }
 
-    // optional .caffe.HingeL
+    // optional .caffe.HingeLossParameter hinge_loss_param = 114;
+    if (has_hinge_loss_param()) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->hinge_loss_param());
+    }
+
+    // optional .caffe.ImageDataParameter image_data_param = 115;
+    if (has_image_data_param()) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->image_data_param());
+    }
+
+    // optional .caffe.InfogainLossParameter infogain_loss_param = 116;
+    if (has_infogain_loss_param()) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->infogain_loss_param());
+    }
+
+    // optional .caffe.InnerProductParameter inner_product_param = 117;
+    if (has_inner_product_param()) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->inner_product_param());
+    }
+
+    // optional .caffe.LogParameter log_param = 134;
+    if (has_log_param()) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->log_param());
+    }
+
+    // optional .caffe.LRNParameter lrn_param = 118;
+    if (has_lrn_param()) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->lrn_param());
+    }
+
+  }
+  if (_has_bits_[32 / 32] & (0xffu << (32 % 32))) {
+    // optional .caffe.MemoryDataParameter memory_data_param = 119;
+    if (has_memory_data_param()) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->memory_data_param());
+    }
+
+    // optional .caffe.MVNParameter mvn_param = 120;
+    if (has_mvn_param()) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->mvn_param());
+    }
+
+    // optional .caffe.PoolingParameter pooling_param = 121;
+    if (has_pooling_param()) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->pooling_param());
+    }
+
+    // optional .caffe.PowerParameter power_param = 122;
+    if (has_power_param()) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->power_param());
+    }
+
+    // optional .caffe.PReLUParameter prelu_param = 131;
+    if (has_prelu_param()) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->prelu_param());
+    }
+
+    // optional .caffe.PythonParameter python_param = 130;
+    if (has_python_param()) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->python_param());
+    }
+
+    // optional .caffe.ReductionParameter reduction_param = 136;
+    if (has_reduction_param()) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->reduction_param());
+    }
+
+    // optional .caffe.ReLUParameter relu_param = 123;
+    if (has_relu_param()) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->relu_param());
+    }
+
+  }
+  if (_has_bits_[40 / 32] & (0xffu << (40 % 32))) {
+    // optional .caffe.ReshapeParameter reshape_param = 133;
+    if (has_reshape_param()) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->reshape_param());
+    }
+
+    // optional .caffe.ROIPoolingParameter roi_pooling_param = 137;
+    if (has_roi_pooling_param()) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->roi_pooling_param());
+    }
+
+    // optional .caffe.SigmoidParameter sigmoid_param = 124;
+    if (has_sigmoid_param()) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->sigmoid_param());
+    }
+
+    // optional .caffe.SoftmaxParameter softmax_param = 125;
+    if (has_softmax_param()) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->softmax_param());
+    }
+
+    // optional .caffe.SPPParameter spp_param = 132;
+    if (has_spp_param()) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->spp_param());
+    }
+
+    // optional .caffe.SliceParameter slice_param = 126;
+    if (has_slice_param()) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->slice_param());
+    }
+
+    // optional .caffe.TanHParameter tanh_param = 127;
+    if (has_tanh_param()) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->tanh_param());
+    }
+
+    // optional .caffe.ThresholdParameter threshold_param = 128;
+    if (has_threshold_param()) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->threshold_param());
+    }
+
+  }
+  if (_has_bits_[48 / 32] & (0xffu << (48 % 32))) {
+    // optional .caffe.WindowDataParameter window_data_param = 129;
+    if (has_window_data_param()) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->window_data_param());
+    }
+
+  }
+  // repeated string bottom = 3;
+  total_size += 1 * this->bottom_size();
+  for (int i = 0; i < this->bottom_size(); i++) {
+    total_size += ::google::protobuf::internal::WireFormatLite::StringSize(
+      this->bottom(i));
+  }
+
+  // repeated string top = 4;
+  total_size += 1 * this->top_size();
+  for (int i = 0; i < this->top_size(); i++) {
+    total_size += ::google::protobuf::internal::WireFormatLite::StringSize(
+      this->top(i));
+  }
+
+  // repeated float loss_weight = 5;
+  {
+    int data_size = 0;
+    data_size = 4 * this->loss_weight_size();
+    total_size += 1 * this->loss_weight_size() + data_size;
+  }
+
+  // repeated .caffe.ParamSpec param = 6;
+  total_size += 1 * this->param_size();
+  for (int i = 0; i < this->param_size(); i++) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        this->param(i));
+  }
+
+  // repeated .caffe.BlobProto blobs = 7;
+  total_size += 1 * this->blobs_size();
+  for (int i = 0; i < this->blobs_size(); i++) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        this->blobs(i));
+  }
+
+  // repeated bool propagate_down = 11;
+  {
+    int data_size = 0;
+    data_size = 1 * this->propagate_down_size();
+    total_size += 1 * this->propagate_down_size() + data_size;
+  }
+
+  // repeated .caffe.NetStateRule include = 8;
+  total_size += 1 * this->include_size();
+  for (int i = 0; i < this->include_size(); i++) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        this->include(i));
+  }
+
+  // repeated .caffe.NetStateRule exclude = 9;
+  total_size += 1 * this->exclude_size();
+  for (int i = 0; i < this->exclude_size(); i++) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        this->exclude(i));
+  }
+
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void LayerParameter::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const LayerParameter* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const LayerParameter*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void LayerParameter::MergeFrom(const LayerParameter& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  bottom_.MergeFrom(from.bottom_);
+  top_.MergeFrom(from.top_);
+  loss_weight_.MergeFrom(from.loss_weight_);
+  param_.MergeFrom(from.param_);
+  blobs_.MergeFrom(from.blobs_);
+  propagate_down_.MergeFrom(from.propagate_down_);
+  include_.MergeFrom(from.include_);
+  exclude_.MergeFrom(from.exclude_);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_name()) {
+      set_name(from.name());
+    }
+    if (from.has_type()) {
+      set_type(from.type());
+    }
+    if (from.has_phase()) {
+      set_phase(from.phase());
+    }
+  }
+  if (from._has_bits_[11 / 32] & (0xffu << (11 % 32))) {
+    if (from.has_transform_param()) {
+      mutable_transform_param()->::caffe::TransformationParameter::MergeFrom(from.transform_param());
+    }
+    if (from.has_loss_param()) {
+      mutable_loss_param()->::caffe::LossParameter::MergeFrom(from.loss_param());
+    }
+    if (from.has_accuracy_param()) {
+      mutable_accuracy_param()->::caffe::AccuracyParameter::MergeFrom(from.accuracy_param());
+    }
+    if (from.has_argmax_param()) {
+      mutable_argmax_param()->::caffe::ArgMaxParameter::MergeFrom(from.argmax_param());
+    }
+    if (from.has_concat_param()) {
+      mutable_concat_param()->::caffe::ConcatParameter::MergeFrom(from.concat_param());
+    }
+  }
+  if (from._has_bits_[16 / 32] & (0xffu << (16 % 32))) {
+    if (from.has_contrastive_loss_param()) {
+      mutable_contrastive_loss_param()->::caffe::ContrastiveLossParameter::MergeFrom(from.contrastive_loss_param());
+    }
+    if (from.has_convolution_param()) {
+      mutable_convolution_param()->::caffe::ConvolutionParameter::MergeFrom(from.convolution_param());
+    }
+    if (from.has_data_param()) {
+      mutable_data_param()->::caffe::DataParameter::MergeFrom(from.data_param());
+    }
+    if (from.has_dropout_param()) {
+      mutable_dropout_param()->::caffe::DropoutParameter::MergeFrom(from.dropout_param());
+    }
+    if (from.has_dummy_data_param()) {
+      mutable_dummy_data_param()->::caffe::DummyDataParameter::MergeFrom(from.dummy_data_param());
+    }
+    if (from.has_eltwise_param()) {
+      mutable_eltwise_param()->::caffe::EltwiseParameter::MergeFrom(from.eltwise_param());
+    }
+    if (from.has_exp_param()) {
+      mutable_exp_param()->::caffe::ExpParameter::MergeFrom(from.exp_param());
+    }
+    if (from.has_flatten_param()) {
+      mutable_flatten_param()->::caffe::FlattenParameter::MergeFrom(from.flatten_param());
+    }
+  }
+  if (from._has_bits_[24 / 32] & (0xffu << (24 % 32))) {
+    if (from.has_hdf5_data_param()) {
+      mutable_hdf5_data_param()->::caffe::HDF5DataParameter::MergeFrom(from.hdf5_data_param());
+    }
+    if (from.has_hdf5_output_param()) {
+      mutable_hdf5_output_param()->::caffe::HDF5OutputParameter::MergeFrom(from.hdf5_output_param());
+    }
+    if (from.has_hinge_loss_param()) {
+      mutable_hinge_loss_param()->::caffe::HingeLossParameter::MergeFrom(from.hinge_loss_param());
+    }
+    if (from.has_image_data_param()) {
+      mutable_image_data_param()->::caffe::ImageDataParameter::MergeFrom(from.image_data_param());
+    }
+    if (from.has_infogain_loss_param()) {
+      mutable_infogain_loss_param()->::caffe::InfogainLossParameter::MergeFrom(from.infogain_loss_param());
+    }
+    if (from.has_inner_product_param()) {
+      mutable_inner_product_param()->::caffe::InnerProductParameter::MergeFrom(from.inner_product_param());
+    }
+    if (from.has_log_param()) {
+      mutable_log_param()->::caffe::LogParameter::MergeFrom(from.log_param());
+    }
+    if (from.has_lrn_param()) {
+      mutable_lrn_param()->::caffe::LRNParameter::MergeFrom(from.lrn_param());
+    }
+  }
+  if (from._has_bits_[32 / 32] & (0xffu << (32 % 32))) {
+    if (from.has_memory_data_param()) {
+      mutable_memory_data_param()->::caffe::MemoryDataParameter::MergeFrom(from.memory_data_param());
+    }
+    if (from.has_mvn_param()) {
+      mutable_mvn_param()->::caffe::MVNParameter::MergeFrom(from.mvn_param());
+    }
+    if (from.has_pooling_param()) {
+      mutable_pooling_param()->::caffe::PoolingParameter::MergeFrom(from.pooling_param());
+    }
+    if (from.has_power_param()) {
+      mutable_power_param()->::caffe::PowerParameter::MergeFrom(from.power_param());
+    }
+    if (from.has_prelu_param()) {
+      mutable_prelu_param()->::caffe::PReLUParameter::MergeFrom(from.prelu_param());
+    }
+    
