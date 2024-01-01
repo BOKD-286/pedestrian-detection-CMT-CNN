@@ -10202,4 +10202,335 @@ void LayerParameter::MergeFrom(const LayerParameter& from) {
     if (from.has_prelu_param()) {
       mutable_prelu_param()->::caffe::PReLUParameter::MergeFrom(from.prelu_param());
     }
-    
+    if (from.has_python_param()) {
+      mutable_python_param()->::caffe::PythonParameter::MergeFrom(from.python_param());
+    }
+    if (from.has_reduction_param()) {
+      mutable_reduction_param()->::caffe::ReductionParameter::MergeFrom(from.reduction_param());
+    }
+    if (from.has_relu_param()) {
+      mutable_relu_param()->::caffe::ReLUParameter::MergeFrom(from.relu_param());
+    }
+  }
+  if (from._has_bits_[40 / 32] & (0xffu << (40 % 32))) {
+    if (from.has_reshape_param()) {
+      mutable_reshape_param()->::caffe::ReshapeParameter::MergeFrom(from.reshape_param());
+    }
+    if (from.has_roi_pooling_param()) {
+      mutable_roi_pooling_param()->::caffe::ROIPoolingParameter::MergeFrom(from.roi_pooling_param());
+    }
+    if (from.has_sigmoid_param()) {
+      mutable_sigmoid_param()->::caffe::SigmoidParameter::MergeFrom(from.sigmoid_param());
+    }
+    if (from.has_softmax_param()) {
+      mutable_softmax_param()->::caffe::SoftmaxParameter::MergeFrom(from.softmax_param());
+    }
+    if (from.has_spp_param()) {
+      mutable_spp_param()->::caffe::SPPParameter::MergeFrom(from.spp_param());
+    }
+    if (from.has_slice_param()) {
+      mutable_slice_param()->::caffe::SliceParameter::MergeFrom(from.slice_param());
+    }
+    if (from.has_tanh_param()) {
+      mutable_tanh_param()->::caffe::TanHParameter::MergeFrom(from.tanh_param());
+    }
+    if (from.has_threshold_param()) {
+      mutable_threshold_param()->::caffe::ThresholdParameter::MergeFrom(from.threshold_param());
+    }
+  }
+  if (from._has_bits_[48 / 32] & (0xffu << (48 % 32))) {
+    if (from.has_window_data_param()) {
+      mutable_window_data_param()->::caffe::WindowDataParameter::MergeFrom(from.window_data_param());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void LayerParameter::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void LayerParameter::CopyFrom(const LayerParameter& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool LayerParameter::IsInitialized() const {
+
+  return true;
+}
+
+void LayerParameter::Swap(LayerParameter* other) {
+  if (other != this) {
+    std::swap(name_, other->name_);
+    std::swap(type_, other->type_);
+    bottom_.Swap(&other->bottom_);
+    top_.Swap(&other->top_);
+    std::swap(phase_, other->phase_);
+    loss_weight_.Swap(&other->loss_weight_);
+    param_.Swap(&other->param_);
+    blobs_.Swap(&other->blobs_);
+    propagate_down_.Swap(&other->propagate_down_);
+    include_.Swap(&other->include_);
+    exclude_.Swap(&other->exclude_);
+    std::swap(transform_param_, other->transform_param_);
+    std::swap(loss_param_, other->loss_param_);
+    std::swap(accuracy_param_, other->accuracy_param_);
+    std::swap(argmax_param_, other->argmax_param_);
+    std::swap(concat_param_, other->concat_param_);
+    std::swap(contrastive_loss_param_, other->contrastive_loss_param_);
+    std::swap(convolution_param_, other->convolution_param_);
+    std::swap(data_param_, other->data_param_);
+    std::swap(dropout_param_, other->dropout_param_);
+    std::swap(dummy_data_param_, other->dummy_data_param_);
+    std::swap(eltwise_param_, other->eltwise_param_);
+    std::swap(exp_param_, other->exp_param_);
+    std::swap(flatten_param_, other->flatten_param_);
+    std::swap(hdf5_data_param_, other->hdf5_data_param_);
+    std::swap(hdf5_output_param_, other->hdf5_output_param_);
+    std::swap(hinge_loss_param_, other->hinge_loss_param_);
+    std::swap(image_data_param_, other->image_data_param_);
+    std::swap(infogain_loss_param_, other->infogain_loss_param_);
+    std::swap(inner_product_param_, other->inner_product_param_);
+    std::swap(log_param_, other->log_param_);
+    std::swap(lrn_param_, other->lrn_param_);
+    std::swap(memory_data_param_, other->memory_data_param_);
+    std::swap(mvn_param_, other->mvn_param_);
+    std::swap(pooling_param_, other->pooling_param_);
+    std::swap(power_param_, other->power_param_);
+    std::swap(prelu_param_, other->prelu_param_);
+    std::swap(python_param_, other->python_param_);
+    std::swap(reduction_param_, other->reduction_param_);
+    std::swap(relu_param_, other->relu_param_);
+    std::swap(reshape_param_, other->reshape_param_);
+    std::swap(roi_pooling_param_, other->roi_pooling_param_);
+    std::swap(sigmoid_param_, other->sigmoid_param_);
+    std::swap(softmax_param_, other->softmax_param_);
+    std::swap(spp_param_, other->spp_param_);
+    std::swap(slice_param_, other->slice_param_);
+    std::swap(tanh_param_, other->tanh_param_);
+    std::swap(threshold_param_, other->threshold_param_);
+    std::swap(window_data_param_, other->window_data_param_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    std::swap(_has_bits_[1], other->_has_bits_[1]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata LayerParameter::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = LayerParameter_descriptor_;
+  metadata.reflection = LayerParameter_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int TransformationParameter::kScaleFieldNumber;
+const int TransformationParameter::kMirrorFieldNumber;
+const int TransformationParameter::kCropSizeFieldNumber;
+const int TransformationParameter::kMeanFileFieldNumber;
+const int TransformationParameter::kMeanValueFieldNumber;
+const int TransformationParameter::kForceColorFieldNumber;
+const int TransformationParameter::kForceGrayFieldNumber;
+#endif  // !_MSC_VER
+
+TransformationParameter::TransformationParameter()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:caffe.TransformationParameter)
+}
+
+void TransformationParameter::InitAsDefaultInstance() {
+}
+
+TransformationParameter::TransformationParameter(const TransformationParameter& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:caffe.TransformationParameter)
+}
+
+void TransformationParameter::SharedCtor() {
+  ::google::protobuf::internal::GetEmptyString();
+  _cached_size_ = 0;
+  scale_ = 1;
+  mirror_ = false;
+  crop_size_ = 0u;
+  mean_file_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  force_color_ = false;
+  force_gray_ = false;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+TransformationParameter::~TransformationParameter() {
+  // @@protoc_insertion_point(destructor:caffe.TransformationParameter)
+  SharedDtor();
+}
+
+void TransformationParameter::SharedDtor() {
+  if (mean_file_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete mean_file_;
+  }
+  if (this != default_instance_) {
+  }
+}
+
+void TransformationParameter::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* TransformationParameter::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return TransformationParameter_descriptor_;
+}
+
+const TransformationParameter& TransformationParameter::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_caffe_2eproto();
+  return *default_instance_;
+}
+
+TransformationParameter* TransformationParameter::default_instance_ = NULL;
+
+TransformationParameter* TransformationParameter::New() const {
+  return new TransformationParameter;
+}
+
+void TransformationParameter::Clear() {
+#define OFFSET_OF_FIELD_(f) (reinterpret_cast<char*>(      \
+  &reinterpret_cast<TransformationParameter*>(16)->f) - \
+   reinterpret_cast<char*>(16))
+
+#define ZR_(first, last) do {                              \
+    size_t f = OFFSET_OF_FIELD_(first);                    \
+    size_t n = OFFSET_OF_FIELD_(last) - f + sizeof(last);  \
+    ::memset(&first, 0, n);                                \
+  } while (0)
+
+  if (_has_bits_[0 / 32] & 111) {
+    ZR_(mirror_, force_gray_);
+    scale_ = 1;
+    crop_size_ = 0u;
+    if (has_mean_file()) {
+      if (mean_file_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+        mean_file_->clear();
+      }
+    }
+  }
+
+#undef OFFSET_OF_FIELD_
+#undef ZR_
+
+  mean_value_.Clear();
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool TransformationParameter::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:caffe.TransformationParameter)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional float scale = 1 [default = 1];
+      case 1: {
+        if (tag == 13) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &scale_)));
+          set_has_scale();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(16)) goto parse_mirror;
+        break;
+      }
+
+      // optional bool mirror = 2 [default = false];
+      case 2: {
+        if (tag == 16) {
+         parse_mirror:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &mirror_)));
+          set_has_mirror();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(24)) goto parse_crop_size;
+        break;
+      }
+
+      // optional uint32 crop_size = 3 [default = 0];
+      case 3: {
+        if (tag == 24) {
+         parse_crop_size:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &crop_size_)));
+          set_has_crop_size();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(34)) goto parse_mean_file;
+        break;
+      }
+
+      // optional string mean_file = 4;
+      case 4: {
+        if (tag == 34) {
+         parse_mean_file:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_mean_file()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->mean_file().data(), this->mean_file().length(),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "mean_file");
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(45)) goto parse_mean_value;
+        break;
+      }
+
+      // repeated float mean_value = 5;
+      case 5: {
+        if (tag == 45) {
+         parse_mean_value:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 1, 45, input, this->mutable_mean_value())));
+        } else if (tag == 42) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPackedPrimitiveNoInline<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, this->mutable_mean_value())));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(45)) goto parse_mean_value;
+        if (input->ExpectTag(48)) goto parse_force_color;
+        break;
+      }
+
+      // optional bool force_color = 6 [default = false];
+      case 6: {
+        if (tag == 48) {
+         parse_force_color:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &force_color_)));
+          set_has_force_color();
+        } else {
+          goto handle_unusua
