@@ -11324,3 +11324,420 @@ void AccuracyParameter::MergeFrom(const ::google::protobuf::Message& from) {
   } else {
     MergeFrom(*source);
   }
+}
+
+void AccuracyParameter::MergeFrom(const AccuracyParameter& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_top_k()) {
+      set_top_k(from.top_k());
+    }
+    if (from.has_axis()) {
+      set_axis(from.axis());
+    }
+    if (from.has_ignore_label()) {
+      set_ignore_label(from.ignore_label());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void AccuracyParameter::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void AccuracyParameter::CopyFrom(const AccuracyParameter& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool AccuracyParameter::IsInitialized() const {
+
+  return true;
+}
+
+void AccuracyParameter::Swap(AccuracyParameter* other) {
+  if (other != this) {
+    std::swap(top_k_, other->top_k_);
+    std::swap(axis_, other->axis_);
+    std::swap(ignore_label_, other->ignore_label_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata AccuracyParameter::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = AccuracyParameter_descriptor_;
+  metadata.reflection = AccuracyParameter_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int ArgMaxParameter::kOutMaxValFieldNumber;
+const int ArgMaxParameter::kTopKFieldNumber;
+#endif  // !_MSC_VER
+
+ArgMaxParameter::ArgMaxParameter()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:caffe.ArgMaxParameter)
+}
+
+void ArgMaxParameter::InitAsDefaultInstance() {
+}
+
+ArgMaxParameter::ArgMaxParameter(const ArgMaxParameter& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:caffe.ArgMaxParameter)
+}
+
+void ArgMaxParameter::SharedCtor() {
+  _cached_size_ = 0;
+  out_max_val_ = false;
+  top_k_ = 1u;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+ArgMaxParameter::~ArgMaxParameter() {
+  // @@protoc_insertion_point(destructor:caffe.ArgMaxParameter)
+  SharedDtor();
+}
+
+void ArgMaxParameter::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void ArgMaxParameter::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* ArgMaxParameter::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return ArgMaxParameter_descriptor_;
+}
+
+const ArgMaxParameter& ArgMaxParameter::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_caffe_2eproto();
+  return *default_instance_;
+}
+
+ArgMaxParameter* ArgMaxParameter::default_instance_ = NULL;
+
+ArgMaxParameter* ArgMaxParameter::New() const {
+  return new ArgMaxParameter;
+}
+
+void ArgMaxParameter::Clear() {
+  if (_has_bits_[0 / 32] & 3) {
+    out_max_val_ = false;
+    top_k_ = 1u;
+  }
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool ArgMaxParameter::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:caffe.ArgMaxParameter)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional bool out_max_val = 1 [default = false];
+      case 1: {
+        if (tag == 8) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &out_max_val_)));
+          set_has_out_max_val();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(16)) goto parse_top_k;
+        break;
+      }
+
+      // optional uint32 top_k = 2 [default = 1];
+      case 2: {
+        if (tag == 16) {
+         parse_top_k:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &top_k_)));
+          set_has_top_k();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:caffe.ArgMaxParameter)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:caffe.ArgMaxParameter)
+  return false;
+#undef DO_
+}
+
+void ArgMaxParameter::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:caffe.ArgMaxParameter)
+  // optional bool out_max_val = 1 [default = false];
+  if (has_out_max_val()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(1, this->out_max_val(), output);
+  }
+
+  // optional uint32 top_k = 2 [default = 1];
+  if (has_top_k()) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32(2, this->top_k(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:caffe.ArgMaxParameter)
+}
+
+::google::protobuf::uint8* ArgMaxParameter::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:caffe.ArgMaxParameter)
+  // optional bool out_max_val = 1 [default = false];
+  if (has_out_max_val()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(1, this->out_max_val(), target);
+  }
+
+  // optional uint32 top_k = 2 [default = 1];
+  if (has_top_k()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(2, this->top_k(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:caffe.ArgMaxParameter)
+  return target;
+}
+
+int ArgMaxParameter::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // optional bool out_max_val = 1 [default = false];
+    if (has_out_max_val()) {
+      total_size += 1 + 1;
+    }
+
+    // optional uint32 top_k = 2 [default = 1];
+    if (has_top_k()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::UInt32Size(
+          this->top_k());
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void ArgMaxParameter::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const ArgMaxParameter* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const ArgMaxParameter*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void ArgMaxParameter::MergeFrom(const ArgMaxParameter& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_out_max_val()) {
+      set_out_max_val(from.out_max_val());
+    }
+    if (from.has_top_k()) {
+      set_top_k(from.top_k());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void ArgMaxParameter::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void ArgMaxParameter::CopyFrom(const ArgMaxParameter& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool ArgMaxParameter::IsInitialized() const {
+
+  return true;
+}
+
+void ArgMaxParameter::Swap(ArgMaxParameter* other) {
+  if (other != this) {
+    std::swap(out_max_val_, other->out_max_val_);
+    std::swap(top_k_, other->top_k_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata ArgMaxParameter::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = ArgMaxParameter_descriptor_;
+  metadata.reflection = ArgMaxParameter_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int ConcatParameter::kAxisFieldNumber;
+const int ConcatParameter::kConcatDimFieldNumber;
+#endif  // !_MSC_VER
+
+ConcatParameter::ConcatParameter()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:caffe.ConcatParameter)
+}
+
+void ConcatParameter::InitAsDefaultInstance() {
+}
+
+ConcatParameter::ConcatParameter(const ConcatParameter& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:caffe.ConcatParameter)
+}
+
+void ConcatParameter::SharedCtor() {
+  _cached_size_ = 0;
+  axis_ = 1;
+  concat_dim_ = 1u;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+ConcatParameter::~ConcatParameter() {
+  // @@protoc_insertion_point(destructor:caffe.ConcatParameter)
+  SharedDtor();
+}
+
+void ConcatParameter::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void ConcatParameter::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* ConcatParameter::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return ConcatParameter_descriptor_;
+}
+
+const ConcatParameter& ConcatParameter::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_caffe_2eproto();
+  return *default_instance_;
+}
+
+ConcatParameter* ConcatParameter::default_instance_ = NULL;
+
+ConcatParameter* ConcatParameter::New() const {
+  return new ConcatParameter;
+}
+
+void ConcatParameter::Clear() {
+  if (_has_bits_[0 / 32] & 3) {
+    axis_ = 1;
+    concat_dim_ = 1u;
+  }
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool ConcatParameter::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:caffe.ConcatParameter)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional uint32 concat_dim = 1 [default = 1];
+      case 1: {
+        if (tag == 8) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &concat_dim_)));
+          set_has_concat_dim();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(16)) goto parse_axis;
+        break;
+      }
+
+      // optional int32 axis = 2 [default = 1];
+      case 2: {
+        if (tag == 16) {
+         parse_axis:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 inp
