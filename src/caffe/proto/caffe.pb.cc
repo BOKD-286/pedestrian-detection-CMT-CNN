@@ -12134,4 +12134,385 @@ void ContrastiveLossParameter::CopyFrom(const ::google::protobuf::Message& from)
 
 void ContrastiveLossParameter::CopyFrom(const ContrastiveLossParameter& from) {
   if (&from == this) return;
- 
+  Clear();
+  MergeFrom(from);
+}
+
+bool ContrastiveLossParameter::IsInitialized() const {
+
+  return true;
+}
+
+void ContrastiveLossParameter::Swap(ContrastiveLossParameter* other) {
+  if (other != this) {
+    std::swap(margin_, other->margin_);
+    std::swap(legacy_version_, other->legacy_version_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata ContrastiveLossParameter::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = ContrastiveLossParameter_descriptor_;
+  metadata.reflection = ContrastiveLossParameter_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+const ::google::protobuf::EnumDescriptor* ConvolutionParameter_Engine_descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return ConvolutionParameter_Engine_descriptor_;
+}
+bool ConvolutionParameter_Engine_IsValid(int value) {
+  switch(value) {
+    case 0:
+    case 1:
+    case 2:
+      return true;
+    default:
+      return false;
+  }
+}
+
+#ifndef _MSC_VER
+const ConvolutionParameter_Engine ConvolutionParameter::DEFAULT;
+const ConvolutionParameter_Engine ConvolutionParameter::CAFFE;
+const ConvolutionParameter_Engine ConvolutionParameter::CUDNN;
+const ConvolutionParameter_Engine ConvolutionParameter::Engine_MIN;
+const ConvolutionParameter_Engine ConvolutionParameter::Engine_MAX;
+const int ConvolutionParameter::Engine_ARRAYSIZE;
+#endif  // _MSC_VER
+#ifndef _MSC_VER
+const int ConvolutionParameter::kNumOutputFieldNumber;
+const int ConvolutionParameter::kBiasTermFieldNumber;
+const int ConvolutionParameter::kPadFieldNumber;
+const int ConvolutionParameter::kPadHFieldNumber;
+const int ConvolutionParameter::kPadWFieldNumber;
+const int ConvolutionParameter::kKernelSizeFieldNumber;
+const int ConvolutionParameter::kKernelHFieldNumber;
+const int ConvolutionParameter::kKernelWFieldNumber;
+const int ConvolutionParameter::kGroupFieldNumber;
+const int ConvolutionParameter::kStrideFieldNumber;
+const int ConvolutionParameter::kStrideHFieldNumber;
+const int ConvolutionParameter::kStrideWFieldNumber;
+const int ConvolutionParameter::kWeightFillerFieldNumber;
+const int ConvolutionParameter::kBiasFillerFieldNumber;
+const int ConvolutionParameter::kEngineFieldNumber;
+#endif  // !_MSC_VER
+
+ConvolutionParameter::ConvolutionParameter()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:caffe.ConvolutionParameter)
+}
+
+void ConvolutionParameter::InitAsDefaultInstance() {
+  weight_filler_ = const_cast< ::caffe::FillerParameter*>(&::caffe::FillerParameter::default_instance());
+  bias_filler_ = const_cast< ::caffe::FillerParameter*>(&::caffe::FillerParameter::default_instance());
+}
+
+ConvolutionParameter::ConvolutionParameter(const ConvolutionParameter& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:caffe.ConvolutionParameter)
+}
+
+void ConvolutionParameter::SharedCtor() {
+  _cached_size_ = 0;
+  num_output_ = 0u;
+  bias_term_ = true;
+  pad_ = 0u;
+  pad_h_ = 0u;
+  pad_w_ = 0u;
+  kernel_size_ = 0u;
+  kernel_h_ = 0u;
+  kernel_w_ = 0u;
+  group_ = 1u;
+  stride_ = 1u;
+  stride_h_ = 0u;
+  stride_w_ = 0u;
+  weight_filler_ = NULL;
+  bias_filler_ = NULL;
+  engine_ = 0;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+ConvolutionParameter::~ConvolutionParameter() {
+  // @@protoc_insertion_point(destructor:caffe.ConvolutionParameter)
+  SharedDtor();
+}
+
+void ConvolutionParameter::SharedDtor() {
+  if (this != default_instance_) {
+    delete weight_filler_;
+    delete bias_filler_;
+  }
+}
+
+void ConvolutionParameter::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* ConvolutionParameter::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return ConvolutionParameter_descriptor_;
+}
+
+const ConvolutionParameter& ConvolutionParameter::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_caffe_2eproto();
+  return *default_instance_;
+}
+
+ConvolutionParameter* ConvolutionParameter::default_instance_ = NULL;
+
+ConvolutionParameter* ConvolutionParameter::New() const {
+  return new ConvolutionParameter;
+}
+
+void ConvolutionParameter::Clear() {
+#define OFFSET_OF_FIELD_(f) (reinterpret_cast<char*>(      \
+  &reinterpret_cast<ConvolutionParameter*>(16)->f) - \
+   reinterpret_cast<char*>(16))
+
+#define ZR_(first, last) do {                              \
+    size_t f = OFFSET_OF_FIELD_(first);                    \
+    size_t n = OFFSET_OF_FIELD_(last) - f + sizeof(last);  \
+    ::memset(&first, 0, n);                                \
+  } while (0)
+
+  if (_has_bits_[0 / 32] & 255) {
+    ZR_(pad_, kernel_w_);
+    num_output_ = 0u;
+    bias_term_ = true;
+  }
+  if (_has_bits_[8 / 32] & 32512) {
+    ZR_(stride_h_, stride_w_);
+    group_ = 1u;
+    stride_ = 1u;
+    if (has_weight_filler()) {
+      if (weight_filler_ != NULL) weight_filler_->::caffe::FillerParameter::Clear();
+    }
+    if (has_bias_filler()) {
+      if (bias_filler_ != NULL) bias_filler_->::caffe::FillerParameter::Clear();
+    }
+    engine_ = 0;
+  }
+
+#undef OFFSET_OF_FIELD_
+#undef ZR_
+
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool ConvolutionParameter::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:caffe.ConvolutionParameter)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional uint32 num_output = 1;
+      case 1: {
+        if (tag == 8) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &num_output_)));
+          set_has_num_output();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(16)) goto parse_bias_term;
+        break;
+      }
+
+      // optional bool bias_term = 2 [default = true];
+      case 2: {
+        if (tag == 16) {
+         parse_bias_term:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &bias_term_)));
+          set_has_bias_term();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(24)) goto parse_pad;
+        break;
+      }
+
+      // optional uint32 pad = 3 [default = 0];
+      case 3: {
+        if (tag == 24) {
+         parse_pad:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &pad_)));
+          set_has_pad();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(32)) goto parse_kernel_size;
+        break;
+      }
+
+      // optional uint32 kernel_size = 4;
+      case 4: {
+        if (tag == 32) {
+         parse_kernel_size:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &kernel_size_)));
+          set_has_kernel_size();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(40)) goto parse_group;
+        break;
+      }
+
+      // optional uint32 group = 5 [default = 1];
+      case 5: {
+        if (tag == 40) {
+         parse_group:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &group_)));
+          set_has_group();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(48)) goto parse_stride;
+        break;
+      }
+
+      // optional uint32 stride = 6 [default = 1];
+      case 6: {
+        if (tag == 48) {
+         parse_stride:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &stride_)));
+          set_has_stride();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(58)) goto parse_weight_filler;
+        break;
+      }
+
+      // optional .caffe.FillerParameter weight_filler = 7;
+      case 7: {
+        if (tag == 58) {
+         parse_weight_filler:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_weight_filler()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(66)) goto parse_bias_filler;
+        break;
+      }
+
+      // optional .caffe.FillerParameter bias_filler = 8;
+      case 8: {
+        if (tag == 66) {
+         parse_bias_filler:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_bias_filler()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(72)) goto parse_pad_h;
+        break;
+      }
+
+      // optional uint32 pad_h = 9 [default = 0];
+      case 9: {
+        if (tag == 72) {
+         parse_pad_h:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &pad_h_)));
+          set_has_pad_h();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(80)) goto parse_pad_w;
+        break;
+      }
+
+      // optional uint32 pad_w = 10 [default = 0];
+      case 10: {
+        if (tag == 80) {
+         parse_pad_w:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &pad_w_)));
+          set_has_pad_w();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(88)) goto parse_kernel_h;
+        break;
+      }
+
+      // optional uint32 kernel_h = 11;
+      case 11: {
+        if (tag == 88) {
+         parse_kernel_h:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &kernel_h_)));
+          set_has_kernel_h();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(96)) goto parse_kernel_w;
+        break;
+      }
+
+      // optional uint32 kernel_w = 12;
+      case 12: {
+        if (tag == 96) {
+         parse_kernel_w:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &kernel_w_)));
+          set_has_kernel_w();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(104)) goto parse_stride_h;
+        break;
+      }
+
+      // optional uint32 stride_h = 13;
+      case 13: {
+        if (tag == 104) {
+         parse_stride_h:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &stride_h_)));
+          set_has_stride_h();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(112)) goto parse_stride_w;
+        break;
+      }
+
+      // optional uint32 stride_w = 14;
+      case 14: {
+        if (tag == 112) {
+         parse_stride_w:
