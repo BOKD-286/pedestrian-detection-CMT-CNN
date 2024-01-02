@@ -14443,4 +14443,413 @@ bool EltwiseParameter::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
                  input, &stable_prod_grad_)));
-          set_has_st
+          set_has_stable_prod_grad();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:caffe.EltwiseParameter)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:caffe.EltwiseParameter)
+  return false;
+#undef DO_
+}
+
+void EltwiseParameter::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:caffe.EltwiseParameter)
+  // optional .caffe.EltwiseParameter.EltwiseOp operation = 1 [default = SUM];
+  if (has_operation()) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      1, this->operation(), output);
+  }
+
+  // repeated float coeff = 2;
+  for (int i = 0; i < this->coeff_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(
+      2, this->coeff(i), output);
+  }
+
+  // optional bool stable_prod_grad = 3 [default = true];
+  if (has_stable_prod_grad()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(3, this->stable_prod_grad(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:caffe.EltwiseParameter)
+}
+
+::google::protobuf::uint8* EltwiseParameter::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:caffe.EltwiseParameter)
+  // optional .caffe.EltwiseParameter.EltwiseOp operation = 1 [default = SUM];
+  if (has_operation()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      1, this->operation(), target);
+  }
+
+  // repeated float coeff = 2;
+  for (int i = 0; i < this->coeff_size(); i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteFloatToArray(2, this->coeff(i), target);
+  }
+
+  // optional bool stable_prod_grad = 3 [default = true];
+  if (has_stable_prod_grad()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(3, this->stable_prod_grad(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:caffe.EltwiseParameter)
+  return target;
+}
+
+int EltwiseParameter::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // optional .caffe.EltwiseParameter.EltwiseOp operation = 1 [default = SUM];
+    if (has_operation()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::EnumSize(this->operation());
+    }
+
+    // optional bool stable_prod_grad = 3 [default = true];
+    if (has_stable_prod_grad()) {
+      total_size += 1 + 1;
+    }
+
+  }
+  // repeated float coeff = 2;
+  {
+    int data_size = 0;
+    data_size = 4 * this->coeff_size();
+    total_size += 1 * this->coeff_size() + data_size;
+  }
+
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void EltwiseParameter::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const EltwiseParameter* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const EltwiseParameter*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void EltwiseParameter::MergeFrom(const EltwiseParameter& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  coeff_.MergeFrom(from.coeff_);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_operation()) {
+      set_operation(from.operation());
+    }
+    if (from.has_stable_prod_grad()) {
+      set_stable_prod_grad(from.stable_prod_grad());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void EltwiseParameter::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void EltwiseParameter::CopyFrom(const EltwiseParameter& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool EltwiseParameter::IsInitialized() const {
+
+  return true;
+}
+
+void EltwiseParameter::Swap(EltwiseParameter* other) {
+  if (other != this) {
+    std::swap(operation_, other->operation_);
+    coeff_.Swap(&other->coeff_);
+    std::swap(stable_prod_grad_, other->stable_prod_grad_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata EltwiseParameter::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = EltwiseParameter_descriptor_;
+  metadata.reflection = EltwiseParameter_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int ExpParameter::kBaseFieldNumber;
+const int ExpParameter::kScaleFieldNumber;
+const int ExpParameter::kShiftFieldNumber;
+#endif  // !_MSC_VER
+
+ExpParameter::ExpParameter()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:caffe.ExpParameter)
+}
+
+void ExpParameter::InitAsDefaultInstance() {
+}
+
+ExpParameter::ExpParameter(const ExpParameter& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:caffe.ExpParameter)
+}
+
+void ExpParameter::SharedCtor() {
+  _cached_size_ = 0;
+  base_ = -1;
+  scale_ = 1;
+  shift_ = 0;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+ExpParameter::~ExpParameter() {
+  // @@protoc_insertion_point(destructor:caffe.ExpParameter)
+  SharedDtor();
+}
+
+void ExpParameter::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void ExpParameter::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* ExpParameter::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return ExpParameter_descriptor_;
+}
+
+const ExpParameter& ExpParameter::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_caffe_2eproto();
+  return *default_instance_;
+}
+
+ExpParameter* ExpParameter::default_instance_ = NULL;
+
+ExpParameter* ExpParameter::New() const {
+  return new ExpParameter;
+}
+
+void ExpParameter::Clear() {
+  if (_has_bits_[0 / 32] & 7) {
+    base_ = -1;
+    scale_ = 1;
+    shift_ = 0;
+  }
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool ExpParameter::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:caffe.ExpParameter)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional float base = 1 [default = -1];
+      case 1: {
+        if (tag == 13) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &base_)));
+          set_has_base();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(21)) goto parse_scale;
+        break;
+      }
+
+      // optional float scale = 2 [default = 1];
+      case 2: {
+        if (tag == 21) {
+         parse_scale:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &scale_)));
+          set_has_scale();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(29)) goto parse_shift;
+        break;
+      }
+
+      // optional float shift = 3 [default = 0];
+      case 3: {
+        if (tag == 29) {
+         parse_shift:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &shift_)));
+          set_has_shift();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:caffe.ExpParameter)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:caffe.ExpParameter)
+  return false;
+#undef DO_
+}
+
+void ExpParameter::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:caffe.ExpParameter)
+  // optional float base = 1 [default = -1];
+  if (has_base()) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(1, this->base(), output);
+  }
+
+  // optional float scale = 2 [default = 1];
+  if (has_scale()) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(2, this->scale(), output);
+  }
+
+  // optional float shift = 3 [default = 0];
+  if (has_shift()) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(3, this->shift(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:caffe.ExpParameter)
+}
+
+::google::protobuf::uint8* ExpParameter::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:caffe.ExpParameter)
+  // optional float base = 1 [default = -1];
+  if (has_base()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(1, this->base(), target);
+  }
+
+  // optional float scale = 2 [default = 1];
+  if (has_scale()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(2, this->scale(), target);
+  }
+
+  // optional float shift = 3 [default = 0];
+  if (has_shift()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(3, this->shift(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:caffe.ExpParameter)
+  return target;
+}
+
+int ExpParameter::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // optional float base = 1 [default = -1];
+    if (has_base()) {
+      total_size += 1 + 4;
+    }
+
+    // optional float scale = 2 [default = 1];
+    if (has_scale()) {
+      total_size += 1 + 4;
+    }
+
+    // optional float shift = 3 [default = 0];
+    if (has_shift()) {
+      total_size += 1 + 4;
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_
