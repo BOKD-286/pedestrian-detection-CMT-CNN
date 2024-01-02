@@ -11740,4 +11740,398 @@ bool ConcatParameter::MergePartialFromCodedStream(
          parse_axis:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 inp
+                 input, &axis_)));
+          set_has_axis();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:caffe.ConcatParameter)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:caffe.ConcatParameter)
+  return false;
+#undef DO_
+}
+
+void ConcatParameter::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:caffe.ConcatParameter)
+  // optional uint32 concat_dim = 1 [default = 1];
+  if (has_concat_dim()) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32(1, this->concat_dim(), output);
+  }
+
+  // optional int32 axis = 2 [default = 1];
+  if (has_axis()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->axis(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:caffe.ConcatParameter)
+}
+
+::google::protobuf::uint8* ConcatParameter::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:caffe.ConcatParameter)
+  // optional uint32 concat_dim = 1 [default = 1];
+  if (has_concat_dim()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(1, this->concat_dim(), target);
+  }
+
+  // optional int32 axis = 2 [default = 1];
+  if (has_axis()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->axis(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:caffe.ConcatParameter)
+  return target;
+}
+
+int ConcatParameter::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // optional int32 axis = 2 [default = 1];
+    if (has_axis()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->axis());
+    }
+
+    // optional uint32 concat_dim = 1 [default = 1];
+    if (has_concat_dim()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::UInt32Size(
+          this->concat_dim());
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void ConcatParameter::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const ConcatParameter* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const ConcatParameter*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void ConcatParameter::MergeFrom(const ConcatParameter& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_axis()) {
+      set_axis(from.axis());
+    }
+    if (from.has_concat_dim()) {
+      set_concat_dim(from.concat_dim());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void ConcatParameter::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void ConcatParameter::CopyFrom(const ConcatParameter& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool ConcatParameter::IsInitialized() const {
+
+  return true;
+}
+
+void ConcatParameter::Swap(ConcatParameter* other) {
+  if (other != this) {
+    std::swap(axis_, other->axis_);
+    std::swap(concat_dim_, other->concat_dim_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata ConcatParameter::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = ConcatParameter_descriptor_;
+  metadata.reflection = ConcatParameter_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int ContrastiveLossParameter::kMarginFieldNumber;
+const int ContrastiveLossParameter::kLegacyVersionFieldNumber;
+#endif  // !_MSC_VER
+
+ContrastiveLossParameter::ContrastiveLossParameter()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:caffe.ContrastiveLossParameter)
+}
+
+void ContrastiveLossParameter::InitAsDefaultInstance() {
+}
+
+ContrastiveLossParameter::ContrastiveLossParameter(const ContrastiveLossParameter& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:caffe.ContrastiveLossParameter)
+}
+
+void ContrastiveLossParameter::SharedCtor() {
+  _cached_size_ = 0;
+  margin_ = 1;
+  legacy_version_ = false;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+ContrastiveLossParameter::~ContrastiveLossParameter() {
+  // @@protoc_insertion_point(destructor:caffe.ContrastiveLossParameter)
+  SharedDtor();
+}
+
+void ContrastiveLossParameter::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void ContrastiveLossParameter::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* ContrastiveLossParameter::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return ContrastiveLossParameter_descriptor_;
+}
+
+const ContrastiveLossParameter& ContrastiveLossParameter::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_caffe_2eproto();
+  return *default_instance_;
+}
+
+ContrastiveLossParameter* ContrastiveLossParameter::default_instance_ = NULL;
+
+ContrastiveLossParameter* ContrastiveLossParameter::New() const {
+  return new ContrastiveLossParameter;
+}
+
+void ContrastiveLossParameter::Clear() {
+  if (_has_bits_[0 / 32] & 3) {
+    margin_ = 1;
+    legacy_version_ = false;
+  }
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool ContrastiveLossParameter::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:caffe.ContrastiveLossParameter)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional float margin = 1 [default = 1];
+      case 1: {
+        if (tag == 13) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &margin_)));
+          set_has_margin();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(16)) goto parse_legacy_version;
+        break;
+      }
+
+      // optional bool legacy_version = 2 [default = false];
+      case 2: {
+        if (tag == 16) {
+         parse_legacy_version:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &legacy_version_)));
+          set_has_legacy_version();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:caffe.ContrastiveLossParameter)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:caffe.ContrastiveLossParameter)
+  return false;
+#undef DO_
+}
+
+void ContrastiveLossParameter::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:caffe.ContrastiveLossParameter)
+  // optional float margin = 1 [default = 1];
+  if (has_margin()) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(1, this->margin(), output);
+  }
+
+  // optional bool legacy_version = 2 [default = false];
+  if (has_legacy_version()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(2, this->legacy_version(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:caffe.ContrastiveLossParameter)
+}
+
+::google::protobuf::uint8* ContrastiveLossParameter::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:caffe.ContrastiveLossParameter)
+  // optional float margin = 1 [default = 1];
+  if (has_margin()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(1, this->margin(), target);
+  }
+
+  // optional bool legacy_version = 2 [default = false];
+  if (has_legacy_version()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(2, this->legacy_version(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:caffe.ContrastiveLossParameter)
+  return target;
+}
+
+int ContrastiveLossParameter::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // optional float margin = 1 [default = 1];
+    if (has_margin()) {
+      total_size += 1 + 4;
+    }
+
+    // optional bool legacy_version = 2 [default = false];
+    if (has_legacy_version()) {
+      total_size += 1 + 1;
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void ContrastiveLossParameter::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const ContrastiveLossParameter* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const ContrastiveLossParameter*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void ContrastiveLossParameter::MergeFrom(const ContrastiveLossParameter& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_margin()) {
+      set_margin(from.margin());
+    }
+    if (from.has_legacy_version()) {
+      set_legacy_version(from.legacy_version());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void ContrastiveLossParameter::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void ContrastiveLossParameter::CopyFrom(const ContrastiveLossParameter& from) {
+  if (&from == this) return;
+ 
