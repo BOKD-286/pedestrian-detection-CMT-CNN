@@ -15654,4 +15654,401 @@ void HDF5OutputParameter::SerializeWithCachedSizes(
 
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        unknown_fields(), outp
+        unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:caffe.HDF5OutputParameter)
+}
+
+::google::protobuf::uint8* HDF5OutputParameter::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:caffe.HDF5OutputParameter)
+  // optional string file_name = 1;
+  if (has_file_name()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->file_name().data(), this->file_name().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "file_name");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        1, this->file_name(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:caffe.HDF5OutputParameter)
+  return target;
+}
+
+int HDF5OutputParameter::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // optional string file_name = 1;
+    if (has_file_name()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->file_name());
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void HDF5OutputParameter::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const HDF5OutputParameter* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const HDF5OutputParameter*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void HDF5OutputParameter::MergeFrom(const HDF5OutputParameter& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_file_name()) {
+      set_file_name(from.file_name());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void HDF5OutputParameter::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void HDF5OutputParameter::CopyFrom(const HDF5OutputParameter& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool HDF5OutputParameter::IsInitialized() const {
+
+  return true;
+}
+
+void HDF5OutputParameter::Swap(HDF5OutputParameter* other) {
+  if (other != this) {
+    std::swap(file_name_, other->file_name_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata HDF5OutputParameter::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = HDF5OutputParameter_descriptor_;
+  metadata.reflection = HDF5OutputParameter_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+const ::google::protobuf::EnumDescriptor* HingeLossParameter_Norm_descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return HingeLossParameter_Norm_descriptor_;
+}
+bool HingeLossParameter_Norm_IsValid(int value) {
+  switch(value) {
+    case 1:
+    case 2:
+      return true;
+    default:
+      return false;
+  }
+}
+
+#ifndef _MSC_VER
+const HingeLossParameter_Norm HingeLossParameter::L1;
+const HingeLossParameter_Norm HingeLossParameter::L2;
+const HingeLossParameter_Norm HingeLossParameter::Norm_MIN;
+const HingeLossParameter_Norm HingeLossParameter::Norm_MAX;
+const int HingeLossParameter::Norm_ARRAYSIZE;
+#endif  // _MSC_VER
+#ifndef _MSC_VER
+const int HingeLossParameter::kNormFieldNumber;
+#endif  // !_MSC_VER
+
+HingeLossParameter::HingeLossParameter()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:caffe.HingeLossParameter)
+}
+
+void HingeLossParameter::InitAsDefaultInstance() {
+}
+
+HingeLossParameter::HingeLossParameter(const HingeLossParameter& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:caffe.HingeLossParameter)
+}
+
+void HingeLossParameter::SharedCtor() {
+  _cached_size_ = 0;
+  norm_ = 1;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+HingeLossParameter::~HingeLossParameter() {
+  // @@protoc_insertion_point(destructor:caffe.HingeLossParameter)
+  SharedDtor();
+}
+
+void HingeLossParameter::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void HingeLossParameter::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* HingeLossParameter::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return HingeLossParameter_descriptor_;
+}
+
+const HingeLossParameter& HingeLossParameter::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_caffe_2eproto();
+  return *default_instance_;
+}
+
+HingeLossParameter* HingeLossParameter::default_instance_ = NULL;
+
+HingeLossParameter* HingeLossParameter::New() const {
+  return new HingeLossParameter;
+}
+
+void HingeLossParameter::Clear() {
+  norm_ = 1;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool HingeLossParameter::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:caffe.HingeLossParameter)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional .caffe.HingeLossParameter.Norm norm = 1 [default = L1];
+      case 1: {
+        if (tag == 8) {
+          int value;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          if (::caffe::HingeLossParameter_Norm_IsValid(value)) {
+            set_norm(static_cast< ::caffe::HingeLossParameter_Norm >(value));
+          } else {
+            mutable_unknown_fields()->AddVarint(1, value);
+          }
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:caffe.HingeLossParameter)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:caffe.HingeLossParameter)
+  return false;
+#undef DO_
+}
+
+void HingeLossParameter::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:caffe.HingeLossParameter)
+  // optional .caffe.HingeLossParameter.Norm norm = 1 [default = L1];
+  if (has_norm()) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      1, this->norm(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:caffe.HingeLossParameter)
+}
+
+::google::protobuf::uint8* HingeLossParameter::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:caffe.HingeLossParameter)
+  // optional .caffe.HingeLossParameter.Norm norm = 1 [default = L1];
+  if (has_norm()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      1, this->norm(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:caffe.HingeLossParameter)
+  return target;
+}
+
+int HingeLossParameter::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // optional .caffe.HingeLossParameter.Norm norm = 1 [default = L1];
+    if (has_norm()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::EnumSize(this->norm());
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void HingeLossParameter::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const HingeLossParameter* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const HingeLossParameter*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void HingeLossParameter::MergeFrom(const HingeLossParameter& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_norm()) {
+      set_norm(from.norm());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void HingeLossParameter::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void HingeLossParameter::CopyFrom(const HingeLossParameter& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool HingeLossParameter::IsInitialized() const {
+
+  return true;
+}
+
+void HingeLossParameter::Swap(HingeLossParameter* other) {
+  if (other != this) {
+    std::swap(norm_, other->norm_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata HingeLossParameter::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = HingeLossParameter_descriptor_;
+  metadata.reflection = HingeLossParameter_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int ImageDataParameter::kSourceFieldNumber;
+const int ImageDataParameter::kBatchSizeFieldNumber;
+const int ImageDataParameter::kRandSkipFieldNumber;
+const int ImageDataParameter::kShuffleFieldNumber;
+const int ImageDataParameter::kNewHeightFieldNumber;
+const int ImageDataParameter::kNewWidthFieldNumber;
+const int ImageDataParameter::kIsColorFieldNumber;
+const int ImageDataParameter::kScaleFieldNumber;
+const int ImageDataParameter::kMeanFileFieldNumber;
+const int ImageDataParameter::kCropSizeFieldNumber;
+const int ImageDataParameter::kMirrorFieldNumber;
+const int ImageDataParameter::kRootFolderFieldNumber;
+#endif  // !_MSC_VER
+
+ImageDataParameter::ImageDataParameter()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:caffe.ImageDataParameter)
+}
+
+void ImageDataParameter::InitAsDefaultInstance() {
+}
+
+ImageDataParameter::ImageDataParameter(const ImageDataParameter& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:caffe.ImageDataParameter)
+}
+
+void ImageDataParameter::SharedCtor() {
+  ::google::protobuf::internal::GetEmptyString();
+  _cached_size_ = 0;
+  source_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  batch_size_ = 0u;
+  rand_skip_ = 0u;
+  shuffle_ = false;
+  new_height_ = 0u;
+  new_w
