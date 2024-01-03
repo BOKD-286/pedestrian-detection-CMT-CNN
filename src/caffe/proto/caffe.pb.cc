@@ -14852,4 +14852,427 @@ int ExpParameter::ByteSize() const {
   }
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = total_size;
-  GOOGLE_SAFE_
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void ExpParameter::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const ExpParameter* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const ExpParameter*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void ExpParameter::MergeFrom(const ExpParameter& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_base()) {
+      set_base(from.base());
+    }
+    if (from.has_scale()) {
+      set_scale(from.scale());
+    }
+    if (from.has_shift()) {
+      set_shift(from.shift());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void ExpParameter::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void ExpParameter::CopyFrom(const ExpParameter& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool ExpParameter::IsInitialized() const {
+
+  return true;
+}
+
+void ExpParameter::Swap(ExpParameter* other) {
+  if (other != this) {
+    std::swap(base_, other->base_);
+    std::swap(scale_, other->scale_);
+    std::swap(shift_, other->shift_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata ExpParameter::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = ExpParameter_descriptor_;
+  metadata.reflection = ExpParameter_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int FlattenParameter::kAxisFieldNumber;
+const int FlattenParameter::kEndAxisFieldNumber;
+#endif  // !_MSC_VER
+
+FlattenParameter::FlattenParameter()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:caffe.FlattenParameter)
+}
+
+void FlattenParameter::InitAsDefaultInstance() {
+}
+
+FlattenParameter::FlattenParameter(const FlattenParameter& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:caffe.FlattenParameter)
+}
+
+void FlattenParameter::SharedCtor() {
+  _cached_size_ = 0;
+  axis_ = 1;
+  end_axis_ = -1;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+FlattenParameter::~FlattenParameter() {
+  // @@protoc_insertion_point(destructor:caffe.FlattenParameter)
+  SharedDtor();
+}
+
+void FlattenParameter::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void FlattenParameter::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* FlattenParameter::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return FlattenParameter_descriptor_;
+}
+
+const FlattenParameter& FlattenParameter::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_caffe_2eproto();
+  return *default_instance_;
+}
+
+FlattenParameter* FlattenParameter::default_instance_ = NULL;
+
+FlattenParameter* FlattenParameter::New() const {
+  return new FlattenParameter;
+}
+
+void FlattenParameter::Clear() {
+  if (_has_bits_[0 / 32] & 3) {
+    axis_ = 1;
+    end_axis_ = -1;
+  }
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool FlattenParameter::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:caffe.FlattenParameter)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional int32 axis = 1 [default = 1];
+      case 1: {
+        if (tag == 8) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &axis_)));
+          set_has_axis();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(16)) goto parse_end_axis;
+        break;
+      }
+
+      // optional int32 end_axis = 2 [default = -1];
+      case 2: {
+        if (tag == 16) {
+         parse_end_axis:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &end_axis_)));
+          set_has_end_axis();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:caffe.FlattenParameter)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:caffe.FlattenParameter)
+  return false;
+#undef DO_
+}
+
+void FlattenParameter::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:caffe.FlattenParameter)
+  // optional int32 axis = 1 [default = 1];
+  if (has_axis()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->axis(), output);
+  }
+
+  // optional int32 end_axis = 2 [default = -1];
+  if (has_end_axis()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->end_axis(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:caffe.FlattenParameter)
+}
+
+::google::protobuf::uint8* FlattenParameter::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:caffe.FlattenParameter)
+  // optional int32 axis = 1 [default = 1];
+  if (has_axis()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->axis(), target);
+  }
+
+  // optional int32 end_axis = 2 [default = -1];
+  if (has_end_axis()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->end_axis(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:caffe.FlattenParameter)
+  return target;
+}
+
+int FlattenParameter::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // optional int32 axis = 1 [default = 1];
+    if (has_axis()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->axis());
+    }
+
+    // optional int32 end_axis = 2 [default = -1];
+    if (has_end_axis()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->end_axis());
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void FlattenParameter::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const FlattenParameter* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const FlattenParameter*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void FlattenParameter::MergeFrom(const FlattenParameter& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_axis()) {
+      set_axis(from.axis());
+    }
+    if (from.has_end_axis()) {
+      set_end_axis(from.end_axis());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void FlattenParameter::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void FlattenParameter::CopyFrom(const FlattenParameter& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool FlattenParameter::IsInitialized() const {
+
+  return true;
+}
+
+void FlattenParameter::Swap(FlattenParameter* other) {
+  if (other != this) {
+    std::swap(axis_, other->axis_);
+    std::swap(end_axis_, other->end_axis_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata FlattenParameter::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = FlattenParameter_descriptor_;
+  metadata.reflection = FlattenParameter_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int HDF5DataParameter::kSourceFieldNumber;
+const int HDF5DataParameter::kBatchSizeFieldNumber;
+const int HDF5DataParameter::kShuffleFieldNumber;
+#endif  // !_MSC_VER
+
+HDF5DataParameter::HDF5DataParameter()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:caffe.HDF5DataParameter)
+}
+
+void HDF5DataParameter::InitAsDefaultInstance() {
+}
+
+HDF5DataParameter::HDF5DataParameter(const HDF5DataParameter& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:caffe.HDF5DataParameter)
+}
+
+void HDF5DataParameter::SharedCtor() {
+  ::google::protobuf::internal::GetEmptyString();
+  _cached_size_ = 0;
+  source_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  batch_size_ = 0u;
+  shuffle_ = false;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+HDF5DataParameter::~HDF5DataParameter() {
+  // @@protoc_insertion_point(destructor:caffe.HDF5DataParameter)
+  SharedDtor();
+}
+
+void HDF5DataParameter::SharedDtor() {
+  if (source_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete source_;
+  }
+  if (this != default_instance_) {
+  }
+}
+
+void HDF5DataParameter::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* HDF5DataParameter::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return HDF5DataParameter_descriptor_;
+}
+
+const HDF5DataParameter& HDF5DataParameter::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_caffe_2eproto();
+  return *default_instance_;
+}
+
+HDF5DataParameter* HDF5DataParameter::default_instance_ = NULL;
+
+HDF5DataParameter* HDF5DataParameter::New() const {
+  return new HDF5DataParameter;
+}
+
+void HDF5DataParameter::Clear() {
+#define OFFSET_OF_FIELD_(f) (reinterpret_cast<char*>(      \
+  &reinterpret_cast<HDF5DataParameter*>(16)->f) - \
+   reinterpret_cast<char*>(16))
+
+#define ZR_(first, last) do {                              \
+    size_t f = OFFSET_OF_FIELD_(first);                    \
+    size_t n = OFFSET_OF_FIELD_(last) - f + sizeof(last);  \
+    ::memset(&first, 0, n);                                \
+  } while (0)
+
+  if (_has_bits_[0 / 32] & 7) {
+    ZR_(batch_size_, shuffle_);
+    if (has_source()) {
+      if (source_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+        source_->clear();
+      }
+    }
+  }
+
+#undef OFFSET_OF_FIELD_
+#undef ZR_
+
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unkn
