@@ -18839,4 +18839,366 @@ void PoolingParameter::Clear() {
    reinterpret_cast<char*>(16))
 
 #define ZR_(first, last) do {                              \
-    size_t f = OFFSET
+    size_t f = OFFSET_OF_FIELD_(first);                    \
+    size_t n = OFFSET_OF_FIELD_(last) - f + sizeof(last);  \
+    ::memset(&first, 0, n);                                \
+  } while (0)
+
+  if (_has_bits_[0 / 32] & 255) {
+    ZR_(pool_, kernel_w_);
+    stride_ = 1u;
+  }
+  ZR_(stride_h_, global_pooling_);
+
+#undef OFFSET_OF_FIELD_
+#undef ZR_
+
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool PoolingParameter::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:caffe.PoolingParameter)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional .caffe.PoolingParameter.PoolMethod pool = 1 [default = MAX];
+      case 1: {
+        if (tag == 8) {
+          int value;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          if (::caffe::PoolingParameter_PoolMethod_IsValid(value)) {
+            set_pool(static_cast< ::caffe::PoolingParameter_PoolMethod >(value));
+          } else {
+            mutable_unknown_fields()->AddVarint(1, value);
+          }
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(16)) goto parse_kernel_size;
+        break;
+      }
+
+      // optional uint32 kernel_size = 2;
+      case 2: {
+        if (tag == 16) {
+         parse_kernel_size:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &kernel_size_)));
+          set_has_kernel_size();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(24)) goto parse_stride;
+        break;
+      }
+
+      // optional uint32 stride = 3 [default = 1];
+      case 3: {
+        if (tag == 24) {
+         parse_stride:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &stride_)));
+          set_has_stride();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(32)) goto parse_pad;
+        break;
+      }
+
+      // optional uint32 pad = 4 [default = 0];
+      case 4: {
+        if (tag == 32) {
+         parse_pad:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &pad_)));
+          set_has_pad();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(40)) goto parse_kernel_h;
+        break;
+      }
+
+      // optional uint32 kernel_h = 5;
+      case 5: {
+        if (tag == 40) {
+         parse_kernel_h:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &kernel_h_)));
+          set_has_kernel_h();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(48)) goto parse_kernel_w;
+        break;
+      }
+
+      // optional uint32 kernel_w = 6;
+      case 6: {
+        if (tag == 48) {
+         parse_kernel_w:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &kernel_w_)));
+          set_has_kernel_w();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(56)) goto parse_stride_h;
+        break;
+      }
+
+      // optional uint32 stride_h = 7;
+      case 7: {
+        if (tag == 56) {
+         parse_stride_h:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &stride_h_)));
+          set_has_stride_h();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(64)) goto parse_stride_w;
+        break;
+      }
+
+      // optional uint32 stride_w = 8;
+      case 8: {
+        if (tag == 64) {
+         parse_stride_w:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &stride_w_)));
+          set_has_stride_w();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(72)) goto parse_pad_h;
+        break;
+      }
+
+      // optional uint32 pad_h = 9 [default = 0];
+      case 9: {
+        if (tag == 72) {
+         parse_pad_h:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &pad_h_)));
+          set_has_pad_h();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(80)) goto parse_pad_w;
+        break;
+      }
+
+      // optional uint32 pad_w = 10 [default = 0];
+      case 10: {
+        if (tag == 80) {
+         parse_pad_w:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &pad_w_)));
+          set_has_pad_w();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(88)) goto parse_engine;
+        break;
+      }
+
+      // optional .caffe.PoolingParameter.Engine engine = 11 [default = DEFAULT];
+      case 11: {
+        if (tag == 88) {
+         parse_engine:
+          int value;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          if (::caffe::PoolingParameter_Engine_IsValid(value)) {
+            set_engine(static_cast< ::caffe::PoolingParameter_Engine >(value));
+          } else {
+            mutable_unknown_fields()->AddVarint(11, value);
+          }
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(96)) goto parse_global_pooling;
+        break;
+      }
+
+      // optional bool global_pooling = 12 [default = false];
+      case 12: {
+        if (tag == 96) {
+         parse_global_pooling:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &global_pooling_)));
+          set_has_global_pooling();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:caffe.PoolingParameter)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:caffe.PoolingParameter)
+  return false;
+#undef DO_
+}
+
+void PoolingParameter::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:caffe.PoolingParameter)
+  // optional .caffe.PoolingParameter.PoolMethod pool = 1 [default = MAX];
+  if (has_pool()) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      1, this->pool(), output);
+  }
+
+  // optional uint32 kernel_size = 2;
+  if (has_kernel_size()) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32(2, this->kernel_size(), output);
+  }
+
+  // optional uint32 stride = 3 [default = 1];
+  if (has_stride()) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32(3, this->stride(), output);
+  }
+
+  // optional uint32 pad = 4 [default = 0];
+  if (has_pad()) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32(4, this->pad(), output);
+  }
+
+  // optional uint32 kernel_h = 5;
+  if (has_kernel_h()) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32(5, this->kernel_h(), output);
+  }
+
+  // optional uint32 kernel_w = 6;
+  if (has_kernel_w()) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32(6, this->kernel_w(), output);
+  }
+
+  // optional uint32 stride_h = 7;
+  if (has_stride_h()) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32(7, this->stride_h(), output);
+  }
+
+  // optional uint32 stride_w = 8;
+  if (has_stride_w()) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32(8, this->stride_w(), output);
+  }
+
+  // optional uint32 pad_h = 9 [default = 0];
+  if (has_pad_h()) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32(9, this->pad_h(), output);
+  }
+
+  // optional uint32 pad_w = 10 [default = 0];
+  if (has_pad_w()) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32(10, this->pad_w(), output);
+  }
+
+  // optional .caffe.PoolingParameter.Engine engine = 11 [default = DEFAULT];
+  if (has_engine()) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      11, this->engine(), output);
+  }
+
+  // optional bool global_pooling = 12 [default = false];
+  if (has_global_pooling()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(12, this->global_pooling(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:caffe.PoolingParameter)
+}
+
+::google::protobuf::uint8* PoolingParameter::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:caffe.PoolingParameter)
+  // optional .caffe.PoolingParameter.PoolMethod pool = 1 [default = MAX];
+  if (has_pool()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      1, this->pool(), target);
+  }
+
+  // optional uint32 kernel_size = 2;
+  if (has_kernel_size()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(2, this->kernel_size(), target);
+  }
+
+  // optional uint32 stride = 3 [default = 1];
+  if (has_stride()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(3, this->stride(), target);
+  }
+
+  // optional uint32 pad = 4 [default = 0];
+  if (has_pad()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(4, this->pad(), target);
+  }
+
+  // optional uint32 kernel_h = 5;
+  if (has_kernel_h()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(5, this->kernel_h(), target);
+  }
+
+  // optional uint32 kernel_w = 6;
+  if (has_kernel_w()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(6, this->kernel_w(), target);
+  }
+
+  // optional uint32 stride_h = 7;
+  if (has_stride_h()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(7, this->stride_h(), target);
+  }
+
+  // optional uint32 stride_w = 8;
+  if (has_stride_w()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(8, this->stride_w(), target);
+  }
+
+  // optional uint32 pad_h = 9 [default = 0];
+  if (has_pad_h()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(9, this->pad_h(), target);
+  }
+
+  // optional uint32 pad_w = 10 [default = 0];
+  if (has_pad_w()) {
+    target = ::google::protobuf::internal::WireFormatLit
