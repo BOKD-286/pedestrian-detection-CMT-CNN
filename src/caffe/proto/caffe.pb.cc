@@ -18431,3 +18431,412 @@ MVNParameter::MVNParameter(const MVNParameter& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:caffe.MVNParameter)
+}
+
+void MVNParameter::SharedCtor() {
+  _cached_size_ = 0;
+  normalize_variance_ = true;
+  across_channels_ = false;
+  eps_ = 1e-009f;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+MVNParameter::~MVNParameter() {
+  // @@protoc_insertion_point(destructor:caffe.MVNParameter)
+  SharedDtor();
+}
+
+void MVNParameter::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void MVNParameter::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* MVNParameter::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return MVNParameter_descriptor_;
+}
+
+const MVNParameter& MVNParameter::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_caffe_2eproto();
+  return *default_instance_;
+}
+
+MVNParameter* MVNParameter::default_instance_ = NULL;
+
+MVNParameter* MVNParameter::New() const {
+  return new MVNParameter;
+}
+
+void MVNParameter::Clear() {
+  if (_has_bits_[0 / 32] & 7) {
+    normalize_variance_ = true;
+    across_channels_ = false;
+    eps_ = 1e-009f;
+  }
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool MVNParameter::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:caffe.MVNParameter)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional bool normalize_variance = 1 [default = true];
+      case 1: {
+        if (tag == 8) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &normalize_variance_)));
+          set_has_normalize_variance();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(16)) goto parse_across_channels;
+        break;
+      }
+
+      // optional bool across_channels = 2 [default = false];
+      case 2: {
+        if (tag == 16) {
+         parse_across_channels:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &across_channels_)));
+          set_has_across_channels();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(29)) goto parse_eps;
+        break;
+      }
+
+      // optional float eps = 3 [default = 1e-009];
+      case 3: {
+        if (tag == 29) {
+         parse_eps:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &eps_)));
+          set_has_eps();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:caffe.MVNParameter)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:caffe.MVNParameter)
+  return false;
+#undef DO_
+}
+
+void MVNParameter::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:caffe.MVNParameter)
+  // optional bool normalize_variance = 1 [default = true];
+  if (has_normalize_variance()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(1, this->normalize_variance(), output);
+  }
+
+  // optional bool across_channels = 2 [default = false];
+  if (has_across_channels()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(2, this->across_channels(), output);
+  }
+
+  // optional float eps = 3 [default = 1e-009];
+  if (has_eps()) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(3, this->eps(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:caffe.MVNParameter)
+}
+
+::google::protobuf::uint8* MVNParameter::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:caffe.MVNParameter)
+  // optional bool normalize_variance = 1 [default = true];
+  if (has_normalize_variance()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(1, this->normalize_variance(), target);
+  }
+
+  // optional bool across_channels = 2 [default = false];
+  if (has_across_channels()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(2, this->across_channels(), target);
+  }
+
+  // optional float eps = 3 [default = 1e-009];
+  if (has_eps()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(3, this->eps(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:caffe.MVNParameter)
+  return target;
+}
+
+int MVNParameter::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // optional bool normalize_variance = 1 [default = true];
+    if (has_normalize_variance()) {
+      total_size += 1 + 1;
+    }
+
+    // optional bool across_channels = 2 [default = false];
+    if (has_across_channels()) {
+      total_size += 1 + 1;
+    }
+
+    // optional float eps = 3 [default = 1e-009];
+    if (has_eps()) {
+      total_size += 1 + 4;
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void MVNParameter::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const MVNParameter* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const MVNParameter*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void MVNParameter::MergeFrom(const MVNParameter& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_normalize_variance()) {
+      set_normalize_variance(from.normalize_variance());
+    }
+    if (from.has_across_channels()) {
+      set_across_channels(from.across_channels());
+    }
+    if (from.has_eps()) {
+      set_eps(from.eps());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void MVNParameter::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void MVNParameter::CopyFrom(const MVNParameter& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool MVNParameter::IsInitialized() const {
+
+  return true;
+}
+
+void MVNParameter::Swap(MVNParameter* other) {
+  if (other != this) {
+    std::swap(normalize_variance_, other->normalize_variance_);
+    std::swap(across_channels_, other->across_channels_);
+    std::swap(eps_, other->eps_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata MVNParameter::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = MVNParameter_descriptor_;
+  metadata.reflection = MVNParameter_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+const ::google::protobuf::EnumDescriptor* PoolingParameter_PoolMethod_descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return PoolingParameter_PoolMethod_descriptor_;
+}
+bool PoolingParameter_PoolMethod_IsValid(int value) {
+  switch(value) {
+    case 0:
+    case 1:
+    case 2:
+      return true;
+    default:
+      return false;
+  }
+}
+
+#ifndef _MSC_VER
+const PoolingParameter_PoolMethod PoolingParameter::MAX;
+const PoolingParameter_PoolMethod PoolingParameter::AVE;
+const PoolingParameter_PoolMethod PoolingParameter::STOCHASTIC;
+const PoolingParameter_PoolMethod PoolingParameter::PoolMethod_MIN;
+const PoolingParameter_PoolMethod PoolingParameter::PoolMethod_MAX;
+const int PoolingParameter::PoolMethod_ARRAYSIZE;
+#endif  // _MSC_VER
+const ::google::protobuf::EnumDescriptor* PoolingParameter_Engine_descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return PoolingParameter_Engine_descriptor_;
+}
+bool PoolingParameter_Engine_IsValid(int value) {
+  switch(value) {
+    case 0:
+    case 1:
+    case 2:
+      return true;
+    default:
+      return false;
+  }
+}
+
+#ifndef _MSC_VER
+const PoolingParameter_Engine PoolingParameter::DEFAULT;
+const PoolingParameter_Engine PoolingParameter::CAFFE;
+const PoolingParameter_Engine PoolingParameter::CUDNN;
+const PoolingParameter_Engine PoolingParameter::Engine_MIN;
+const PoolingParameter_Engine PoolingParameter::Engine_MAX;
+const int PoolingParameter::Engine_ARRAYSIZE;
+#endif  // _MSC_VER
+#ifndef _MSC_VER
+const int PoolingParameter::kPoolFieldNumber;
+const int PoolingParameter::kPadFieldNumber;
+const int PoolingParameter::kPadHFieldNumber;
+const int PoolingParameter::kPadWFieldNumber;
+const int PoolingParameter::kKernelSizeFieldNumber;
+const int PoolingParameter::kKernelHFieldNumber;
+const int PoolingParameter::kKernelWFieldNumber;
+const int PoolingParameter::kStrideFieldNumber;
+const int PoolingParameter::kStrideHFieldNumber;
+const int PoolingParameter::kStrideWFieldNumber;
+const int PoolingParameter::kEngineFieldNumber;
+const int PoolingParameter::kGlobalPoolingFieldNumber;
+#endif  // !_MSC_VER
+
+PoolingParameter::PoolingParameter()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:caffe.PoolingParameter)
+}
+
+void PoolingParameter::InitAsDefaultInstance() {
+}
+
+PoolingParameter::PoolingParameter(const PoolingParameter& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:caffe.PoolingParameter)
+}
+
+void PoolingParameter::SharedCtor() {
+  _cached_size_ = 0;
+  pool_ = 0;
+  pad_ = 0u;
+  pad_h_ = 0u;
+  pad_w_ = 0u;
+  kernel_size_ = 0u;
+  kernel_h_ = 0u;
+  kernel_w_ = 0u;
+  stride_ = 1u;
+  stride_h_ = 0u;
+  stride_w_ = 0u;
+  engine_ = 0;
+  global_pooling_ = false;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+PoolingParameter::~PoolingParameter() {
+  // @@protoc_insertion_point(destructor:caffe.PoolingParameter)
+  SharedDtor();
+}
+
+void PoolingParameter::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void PoolingParameter::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* PoolingParameter::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return PoolingParameter_descriptor_;
+}
+
+const PoolingParameter& PoolingParameter::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_caffe_2eproto();
+  return *default_instance_;
+}
+
+PoolingParameter* PoolingParameter::default_instance_ = NULL;
+
+PoolingParameter* PoolingParameter::New() const {
+  return new PoolingParameter;
+}
+
+void PoolingParameter::Clear() {
+#define OFFSET_OF_FIELD_(f) (reinterpret_cast<char*>(      \
+  &reinterpret_cast<PoolingParameter*>(16)->f) - \
+   reinterpret_cast<char*>(16))
+
+#define ZR_(first, last) do {                              \
+    size_t f = OFFSET
