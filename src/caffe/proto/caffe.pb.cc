@@ -17602,4 +17602,423 @@ void LogParameter::MergeFrom(const ::google::protobuf::Message& from) {
   if (source == NULL) {
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
-   
+    MergeFrom(*source);
+  }
+}
+
+void LogParameter::MergeFrom(const LogParameter& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_base()) {
+      set_base(from.base());
+    }
+    if (from.has_scale()) {
+      set_scale(from.scale());
+    }
+    if (from.has_shift()) {
+      set_shift(from.shift());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void LogParameter::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void LogParameter::CopyFrom(const LogParameter& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool LogParameter::IsInitialized() const {
+
+  return true;
+}
+
+void LogParameter::Swap(LogParameter* other) {
+  if (other != this) {
+    std::swap(base_, other->base_);
+    std::swap(scale_, other->scale_);
+    std::swap(shift_, other->shift_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata LogParameter::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = LogParameter_descriptor_;
+  metadata.reflection = LogParameter_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+const ::google::protobuf::EnumDescriptor* LRNParameter_NormRegion_descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return LRNParameter_NormRegion_descriptor_;
+}
+bool LRNParameter_NormRegion_IsValid(int value) {
+  switch(value) {
+    case 0:
+    case 1:
+      return true;
+    default:
+      return false;
+  }
+}
+
+#ifndef _MSC_VER
+const LRNParameter_NormRegion LRNParameter::ACROSS_CHANNELS;
+const LRNParameter_NormRegion LRNParameter::WITHIN_CHANNEL;
+const LRNParameter_NormRegion LRNParameter::NormRegion_MIN;
+const LRNParameter_NormRegion LRNParameter::NormRegion_MAX;
+const int LRNParameter::NormRegion_ARRAYSIZE;
+#endif  // _MSC_VER
+#ifndef _MSC_VER
+const int LRNParameter::kLocalSizeFieldNumber;
+const int LRNParameter::kAlphaFieldNumber;
+const int LRNParameter::kBetaFieldNumber;
+const int LRNParameter::kNormRegionFieldNumber;
+const int LRNParameter::kKFieldNumber;
+#endif  // !_MSC_VER
+
+LRNParameter::LRNParameter()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:caffe.LRNParameter)
+}
+
+void LRNParameter::InitAsDefaultInstance() {
+}
+
+LRNParameter::LRNParameter(const LRNParameter& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:caffe.LRNParameter)
+}
+
+void LRNParameter::SharedCtor() {
+  _cached_size_ = 0;
+  local_size_ = 5u;
+  alpha_ = 1;
+  beta_ = 0.75f;
+  norm_region_ = 0;
+  k_ = 1;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+LRNParameter::~LRNParameter() {
+  // @@protoc_insertion_point(destructor:caffe.LRNParameter)
+  SharedDtor();
+}
+
+void LRNParameter::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void LRNParameter::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* LRNParameter::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return LRNParameter_descriptor_;
+}
+
+const LRNParameter& LRNParameter::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_caffe_2eproto();
+  return *default_instance_;
+}
+
+LRNParameter* LRNParameter::default_instance_ = NULL;
+
+LRNParameter* LRNParameter::New() const {
+  return new LRNParameter;
+}
+
+void LRNParameter::Clear() {
+  if (_has_bits_[0 / 32] & 31) {
+    local_size_ = 5u;
+    alpha_ = 1;
+    beta_ = 0.75f;
+    norm_region_ = 0;
+    k_ = 1;
+  }
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool LRNParameter::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:caffe.LRNParameter)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional uint32 local_size = 1 [default = 5];
+      case 1: {
+        if (tag == 8) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &local_size_)));
+          set_has_local_size();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(21)) goto parse_alpha;
+        break;
+      }
+
+      // optional float alpha = 2 [default = 1];
+      case 2: {
+        if (tag == 21) {
+         parse_alpha:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &alpha_)));
+          set_has_alpha();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(29)) goto parse_beta;
+        break;
+      }
+
+      // optional float beta = 3 [default = 0.75];
+      case 3: {
+        if (tag == 29) {
+         parse_beta:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &beta_)));
+          set_has_beta();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(32)) goto parse_norm_region;
+        break;
+      }
+
+      // optional .caffe.LRNParameter.NormRegion norm_region = 4 [default = ACROSS_CHANNELS];
+      case 4: {
+        if (tag == 32) {
+         parse_norm_region:
+          int value;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          if (::caffe::LRNParameter_NormRegion_IsValid(value)) {
+            set_norm_region(static_cast< ::caffe::LRNParameter_NormRegion >(value));
+          } else {
+            mutable_unknown_fields()->AddVarint(4, value);
+          }
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(45)) goto parse_k;
+        break;
+      }
+
+      // optional float k = 5 [default = 1];
+      case 5: {
+        if (tag == 45) {
+         parse_k:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &k_)));
+          set_has_k();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:caffe.LRNParameter)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:caffe.LRNParameter)
+  return false;
+#undef DO_
+}
+
+void LRNParameter::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:caffe.LRNParameter)
+  // optional uint32 local_size = 1 [default = 5];
+  if (has_local_size()) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32(1, this->local_size(), output);
+  }
+
+  // optional float alpha = 2 [default = 1];
+  if (has_alpha()) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(2, this->alpha(), output);
+  }
+
+  // optional float beta = 3 [default = 0.75];
+  if (has_beta()) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(3, this->beta(), output);
+  }
+
+  // optional .caffe.LRNParameter.NormRegion norm_region = 4 [default = ACROSS_CHANNELS];
+  if (has_norm_region()) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      4, this->norm_region(), output);
+  }
+
+  // optional float k = 5 [default = 1];
+  if (has_k()) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(5, this->k(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:caffe.LRNParameter)
+}
+
+::google::protobuf::uint8* LRNParameter::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:caffe.LRNParameter)
+  // optional uint32 local_size = 1 [default = 5];
+  if (has_local_size()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(1, this->local_size(), target);
+  }
+
+  // optional float alpha = 2 [default = 1];
+  if (has_alpha()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(2, this->alpha(), target);
+  }
+
+  // optional float beta = 3 [default = 0.75];
+  if (has_beta()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(3, this->beta(), target);
+  }
+
+  // optional .caffe.LRNParameter.NormRegion norm_region = 4 [default = ACROSS_CHANNELS];
+  if (has_norm_region()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      4, this->norm_region(), target);
+  }
+
+  // optional float k = 5 [default = 1];
+  if (has_k()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(5, this->k(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:caffe.LRNParameter)
+  return target;
+}
+
+int LRNParameter::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // optional uint32 local_size = 1 [default = 5];
+    if (has_local_size()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::UInt32Size(
+          this->local_size());
+    }
+
+    // optional float alpha = 2 [default = 1];
+    if (has_alpha()) {
+      total_size += 1 + 4;
+    }
+
+    // optional float beta = 3 [default = 0.75];
+    if (has_beta()) {
+      total_size += 1 + 4;
+    }
+
+    // optional .caffe.LRNParameter.NormRegion norm_region = 4 [default = ACROSS_CHANNELS];
+    if (has_norm_region()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::EnumSize(this->norm_region());
+    }
+
+    // optional float k = 5 [default = 1];
+    if (has_k()) {
+      total_size += 1 + 4;
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void LRNParameter::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const LRNParameter* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const LRNParameter*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void LRNParameter::MergeFrom(const LRNParameter& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_local_size()) {
+      set_local_size(from.local_size());
+    }
+    if (from.has_alpha()) {
+      set_alpha(from.alpha());
+    }
+    if (from.has_beta()) {
+      set_beta(from.beta());
+    }
+    if (from.has_norm_region()) {
+      set_norm_region(from.norm_region());
+    }
+    if (from.has_k()) {
+      set_k(from.k());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+vo
