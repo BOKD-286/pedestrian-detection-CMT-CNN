@@ -19618,4 +19618,410 @@ void PowerParameter::SerializeWithCachedSizes(
 
   if (!unknown_fields().empty()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        unknown
+        unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:caffe.PowerParameter)
+  return target;
+}
+
+int PowerParameter::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // optional float power = 1 [default = 1];
+    if (has_power()) {
+      total_size += 1 + 4;
+    }
+
+    // optional float scale = 2 [default = 1];
+    if (has_scale()) {
+      total_size += 1 + 4;
+    }
+
+    // optional float shift = 3 [default = 0];
+    if (has_shift()) {
+      total_size += 1 + 4;
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void PowerParameter::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const PowerParameter* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const PowerParameter*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void PowerParameter::MergeFrom(const PowerParameter& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_power()) {
+      set_power(from.power());
+    }
+    if (from.has_scale()) {
+      set_scale(from.scale());
+    }
+    if (from.has_shift()) {
+      set_shift(from.shift());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void PowerParameter::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void PowerParameter::CopyFrom(const PowerParameter& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool PowerParameter::IsInitialized() const {
+
+  return true;
+}
+
+void PowerParameter::Swap(PowerParameter* other) {
+  if (other != this) {
+    std::swap(power_, other->power_);
+    std::swap(scale_, other->scale_);
+    std::swap(shift_, other->shift_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata PowerParameter::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = PowerParameter_descriptor_;
+  metadata.reflection = PowerParameter_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int PythonParameter::kModuleFieldNumber;
+const int PythonParameter::kLayerFieldNumber;
+#endif  // !_MSC_VER
+
+PythonParameter::PythonParameter()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:caffe.PythonParameter)
+}
+
+void PythonParameter::InitAsDefaultInstance() {
+}
+
+PythonParameter::PythonParameter(const PythonParameter& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:caffe.PythonParameter)
+}
+
+void PythonParameter::SharedCtor() {
+  ::google::protobuf::internal::GetEmptyString();
+  _cached_size_ = 0;
+  module_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  layer_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+PythonParameter::~PythonParameter() {
+  // @@protoc_insertion_point(destructor:caffe.PythonParameter)
+  SharedDtor();
+}
+
+void PythonParameter::SharedDtor() {
+  if (module_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete module_;
+  }
+  if (layer_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete layer_;
+  }
+  if (this != default_instance_) {
+  }
+}
+
+void PythonParameter::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* PythonParameter::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return PythonParameter_descriptor_;
+}
+
+const PythonParameter& PythonParameter::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_caffe_2eproto();
+  return *default_instance_;
+}
+
+PythonParameter* PythonParameter::default_instance_ = NULL;
+
+PythonParameter* PythonParameter::New() const {
+  return new PythonParameter;
+}
+
+void PythonParameter::Clear() {
+  if (_has_bits_[0 / 32] & 3) {
+    if (has_module()) {
+      if (module_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+        module_->clear();
+      }
+    }
+    if (has_layer()) {
+      if (layer_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+        layer_->clear();
+      }
+    }
+  }
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool PythonParameter::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:caffe.PythonParameter)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional string module = 1;
+      case 1: {
+        if (tag == 10) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_module()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->module().data(), this->module().length(),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "module");
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(18)) goto parse_layer;
+        break;
+      }
+
+      // optional string layer = 2;
+      case 2: {
+        if (tag == 18) {
+         parse_layer:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_layer()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->layer().data(), this->layer().length(),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "layer");
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:caffe.PythonParameter)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:caffe.PythonParameter)
+  return false;
+#undef DO_
+}
+
+void PythonParameter::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:caffe.PythonParameter)
+  // optional string module = 1;
+  if (has_module()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->module().data(), this->module().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "module");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      1, this->module(), output);
+  }
+
+  // optional string layer = 2;
+  if (has_layer()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->layer().data(), this->layer().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "layer");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      2, this->layer(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:caffe.PythonParameter)
+}
+
+::google::protobuf::uint8* PythonParameter::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:caffe.PythonParameter)
+  // optional string module = 1;
+  if (has_module()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->module().data(), this->module().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "module");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        1, this->module(), target);
+  }
+
+  // optional string layer = 2;
+  if (has_layer()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->layer().data(), this->layer().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "layer");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        2, this->layer(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:caffe.PythonParameter)
+  return target;
+}
+
+int PythonParameter::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // optional string module = 1;
+    if (has_module()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->module());
+    }
+
+    // optional string layer = 2;
+    if (has_layer()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->layer());
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void PythonParameter::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const PythonParameter* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const PythonParameter*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void PythonParameter::MergeFrom(const PythonParameter& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_module()) {
+      set_module(from.module());
+    }
+    if (from.has_layer()) {
+      set_layer(from.layer());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void PythonParameter::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void PythonParameter::CopyFrom(const PythonParameter& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool PythonParameter::IsInitialized() const {
+
+  return true;
+}
+
+void PythonParameter::Swap(PythonParameter* other) {
+  if (other != this) {
+    std::swap(module_, other->module_);
+    std::swap(layer_, other->layer_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata PythonParameter::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = PythonParameter_descriptor_;
+  metadata.reflection = PythonParameter_reflection_;
+  return metadata;
+}
+
+
+// ============================================================
