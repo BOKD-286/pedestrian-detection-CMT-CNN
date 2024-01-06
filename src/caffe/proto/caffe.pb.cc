@@ -20436,4 +20436,398 @@ const ReLUParameter& ReLUParameter::default_instance() {
 ReLUParameter* ReLUParameter::default_instance_ = NULL;
 
 ReLUParameter* ReLUParameter::New() const {
-  return new ReL
+  return new ReLUParameter;
+}
+
+void ReLUParameter::Clear() {
+#define OFFSET_OF_FIELD_(f) (reinterpret_cast<char*>(      \
+  &reinterpret_cast<ReLUParameter*>(16)->f) - \
+   reinterpret_cast<char*>(16))
+
+#define ZR_(first, last) do {                              \
+    size_t f = OFFSET_OF_FIELD_(first);                    \
+    size_t n = OFFSET_OF_FIELD_(last) - f + sizeof(last);  \
+    ::memset(&first, 0, n);                                \
+  } while (0)
+
+  ZR_(negative_slope_, engine_);
+
+#undef OFFSET_OF_FIELD_
+#undef ZR_
+
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool ReLUParameter::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:caffe.ReLUParameter)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional float negative_slope = 1 [default = 0];
+      case 1: {
+        if (tag == 13) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &negative_slope_)));
+          set_has_negative_slope();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(16)) goto parse_engine;
+        break;
+      }
+
+      // optional .caffe.ReLUParameter.Engine engine = 2 [default = DEFAULT];
+      case 2: {
+        if (tag == 16) {
+         parse_engine:
+          int value;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          if (::caffe::ReLUParameter_Engine_IsValid(value)) {
+            set_engine(static_cast< ::caffe::ReLUParameter_Engine >(value));
+          } else {
+            mutable_unknown_fields()->AddVarint(2, value);
+          }
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:caffe.ReLUParameter)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:caffe.ReLUParameter)
+  return false;
+#undef DO_
+}
+
+void ReLUParameter::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:caffe.ReLUParameter)
+  // optional float negative_slope = 1 [default = 0];
+  if (has_negative_slope()) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(1, this->negative_slope(), output);
+  }
+
+  // optional .caffe.ReLUParameter.Engine engine = 2 [default = DEFAULT];
+  if (has_engine()) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      2, this->engine(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:caffe.ReLUParameter)
+}
+
+::google::protobuf::uint8* ReLUParameter::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:caffe.ReLUParameter)
+  // optional float negative_slope = 1 [default = 0];
+  if (has_negative_slope()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(1, this->negative_slope(), target);
+  }
+
+  // optional .caffe.ReLUParameter.Engine engine = 2 [default = DEFAULT];
+  if (has_engine()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      2, this->engine(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:caffe.ReLUParameter)
+  return target;
+}
+
+int ReLUParameter::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // optional float negative_slope = 1 [default = 0];
+    if (has_negative_slope()) {
+      total_size += 1 + 4;
+    }
+
+    // optional .caffe.ReLUParameter.Engine engine = 2 [default = DEFAULT];
+    if (has_engine()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::EnumSize(this->engine());
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void ReLUParameter::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const ReLUParameter* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const ReLUParameter*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void ReLUParameter::MergeFrom(const ReLUParameter& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_negative_slope()) {
+      set_negative_slope(from.negative_slope());
+    }
+    if (from.has_engine()) {
+      set_engine(from.engine());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void ReLUParameter::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void ReLUParameter::CopyFrom(const ReLUParameter& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool ReLUParameter::IsInitialized() const {
+
+  return true;
+}
+
+void ReLUParameter::Swap(ReLUParameter* other) {
+  if (other != this) {
+    std::swap(negative_slope_, other->negative_slope_);
+    std::swap(engine_, other->engine_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata ReLUParameter::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = ReLUParameter_descriptor_;
+  metadata.reflection = ReLUParameter_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int ReshapeParameter::kShapeFieldNumber;
+const int ReshapeParameter::kAxisFieldNumber;
+const int ReshapeParameter::kNumAxesFieldNumber;
+#endif  // !_MSC_VER
+
+ReshapeParameter::ReshapeParameter()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:caffe.ReshapeParameter)
+}
+
+void ReshapeParameter::InitAsDefaultInstance() {
+  shape_ = const_cast< ::caffe::BlobShape*>(&::caffe::BlobShape::default_instance());
+}
+
+ReshapeParameter::ReshapeParameter(const ReshapeParameter& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:caffe.ReshapeParameter)
+}
+
+void ReshapeParameter::SharedCtor() {
+  _cached_size_ = 0;
+  shape_ = NULL;
+  axis_ = 0;
+  num_axes_ = -1;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+ReshapeParameter::~ReshapeParameter() {
+  // @@protoc_insertion_point(destructor:caffe.ReshapeParameter)
+  SharedDtor();
+}
+
+void ReshapeParameter::SharedDtor() {
+  if (this != default_instance_) {
+    delete shape_;
+  }
+}
+
+void ReshapeParameter::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* ReshapeParameter::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return ReshapeParameter_descriptor_;
+}
+
+const ReshapeParameter& ReshapeParameter::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_caffe_2eproto();
+  return *default_instance_;
+}
+
+ReshapeParameter* ReshapeParameter::default_instance_ = NULL;
+
+ReshapeParameter* ReshapeParameter::New() const {
+  return new ReshapeParameter;
+}
+
+void ReshapeParameter::Clear() {
+  if (_has_bits_[0 / 32] & 7) {
+    if (has_shape()) {
+      if (shape_ != NULL) shape_->::caffe::BlobShape::Clear();
+    }
+    axis_ = 0;
+    num_axes_ = -1;
+  }
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool ReshapeParameter::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:caffe.ReshapeParameter)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional .caffe.BlobShape shape = 1;
+      case 1: {
+        if (tag == 10) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_shape()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(16)) goto parse_axis;
+        break;
+      }
+
+      // optional int32 axis = 2 [default = 0];
+      case 2: {
+        if (tag == 16) {
+         parse_axis:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &axis_)));
+          set_has_axis();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(24)) goto parse_num_axes;
+        break;
+      }
+
+      // optional int32 num_axes = 3 [default = -1];
+      case 3: {
+        if (tag == 24) {
+         parse_num_axes:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &num_axes_)));
+          set_has_num_axes();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:caffe.ReshapeParameter)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:caffe.ReshapeParameter)
+  return false;
+#undef DO_
+}
+
+void ReshapeParameter::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:caffe.ReshapeParameter)
+  // optional .caffe.BlobShape shape = 1;
+  if (has_shape()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      1, this->shape(), output);
+  }
+
+  // optional int32 axis = 2 [default = 0];
+  if (has_axis()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->axis(), output);
+  }
+
+  // optional int32 num_axes = 3 [default = -1];
+  if (has_num_axes()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->num_axes(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:caffe.
