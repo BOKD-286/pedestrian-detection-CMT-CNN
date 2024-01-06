@@ -23163,4 +23163,417 @@ void WindowDataParameter::SerializeWithCachedSizes(
       "root_folder");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        13, this->root
+        13, this->root_folder(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:caffe.WindowDataParameter)
+  return target;
+}
+
+int WindowDataParameter::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // optional string source = 1;
+    if (has_source()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->source());
+    }
+
+    // optional float scale = 2 [default = 1];
+    if (has_scale()) {
+      total_size += 1 + 4;
+    }
+
+    // optional string mean_file = 3;
+    if (has_mean_file()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->mean_file());
+    }
+
+    // optional uint32 batch_size = 4;
+    if (has_batch_size()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::UInt32Size(
+          this->batch_size());
+    }
+
+    // optional uint32 crop_size = 5 [default = 0];
+    if (has_crop_size()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::UInt32Size(
+          this->crop_size());
+    }
+
+    // optional bool mirror = 6 [default = false];
+    if (has_mirror()) {
+      total_size += 1 + 1;
+    }
+
+    // optional float fg_threshold = 7 [default = 0.5];
+    if (has_fg_threshold()) {
+      total_size += 1 + 4;
+    }
+
+    // optional float bg_threshold = 8 [default = 0.5];
+    if (has_bg_threshold()) {
+      total_size += 1 + 4;
+    }
+
+  }
+  if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
+    // optional float fg_fraction = 9 [default = 0.25];
+    if (has_fg_fraction()) {
+      total_size += 1 + 4;
+    }
+
+    // optional uint32 context_pad = 10 [default = 0];
+    if (has_context_pad()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::UInt32Size(
+          this->context_pad());
+    }
+
+    // optional string crop_mode = 11 [default = "warp"];
+    if (has_crop_mode()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->crop_mode());
+    }
+
+    // optional bool cache_images = 12 [default = false];
+    if (has_cache_images()) {
+      total_size += 1 + 1;
+    }
+
+    // optional string root_folder = 13 [default = ""];
+    if (has_root_folder()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->root_folder());
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void WindowDataParameter::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const WindowDataParameter* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const WindowDataParameter*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void WindowDataParameter::MergeFrom(const WindowDataParameter& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_source()) {
+      set_source(from.source());
+    }
+    if (from.has_scale()) {
+      set_scale(from.scale());
+    }
+    if (from.has_mean_file()) {
+      set_mean_file(from.mean_file());
+    }
+    if (from.has_batch_size()) {
+      set_batch_size(from.batch_size());
+    }
+    if (from.has_crop_size()) {
+      set_crop_size(from.crop_size());
+    }
+    if (from.has_mirror()) {
+      set_mirror(from.mirror());
+    }
+    if (from.has_fg_threshold()) {
+      set_fg_threshold(from.fg_threshold());
+    }
+    if (from.has_bg_threshold()) {
+      set_bg_threshold(from.bg_threshold());
+    }
+  }
+  if (from._has_bits_[8 / 32] & (0xffu << (8 % 32))) {
+    if (from.has_fg_fraction()) {
+      set_fg_fraction(from.fg_fraction());
+    }
+    if (from.has_context_pad()) {
+      set_context_pad(from.context_pad());
+    }
+    if (from.has_crop_mode()) {
+      set_crop_mode(from.crop_mode());
+    }
+    if (from.has_cache_images()) {
+      set_cache_images(from.cache_images());
+    }
+    if (from.has_root_folder()) {
+      set_root_folder(from.root_folder());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void WindowDataParameter::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void WindowDataParameter::CopyFrom(const WindowDataParameter& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool WindowDataParameter::IsInitialized() const {
+
+  return true;
+}
+
+void WindowDataParameter::Swap(WindowDataParameter* other) {
+  if (other != this) {
+    std::swap(source_, other->source_);
+    std::swap(scale_, other->scale_);
+    std::swap(mean_file_, other->mean_file_);
+    std::swap(batch_size_, other->batch_size_);
+    std::swap(crop_size_, other->crop_size_);
+    std::swap(mirror_, other->mirror_);
+    std::swap(fg_threshold_, other->fg_threshold_);
+    std::swap(bg_threshold_, other->bg_threshold_);
+    std::swap(fg_fraction_, other->fg_fraction_);
+    std::swap(context_pad_, other->context_pad_);
+    std::swap(crop_mode_, other->crop_mode_);
+    std::swap(cache_images_, other->cache_images_);
+    std::swap(root_folder_, other->root_folder_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata WindowDataParameter::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = WindowDataParameter_descriptor_;
+  metadata.reflection = WindowDataParameter_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+const ::google::protobuf::EnumDescriptor* SPPParameter_PoolMethod_descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return SPPParameter_PoolMethod_descriptor_;
+}
+bool SPPParameter_PoolMethod_IsValid(int value) {
+  switch(value) {
+    case 0:
+    case 1:
+    case 2:
+      return true;
+    default:
+      return false;
+  }
+}
+
+#ifndef _MSC_VER
+const SPPParameter_PoolMethod SPPParameter::MAX;
+const SPPParameter_PoolMethod SPPParameter::AVE;
+const SPPParameter_PoolMethod SPPParameter::STOCHASTIC;
+const SPPParameter_PoolMethod SPPParameter::PoolMethod_MIN;
+const SPPParameter_PoolMethod SPPParameter::PoolMethod_MAX;
+const int SPPParameter::PoolMethod_ARRAYSIZE;
+#endif  // _MSC_VER
+const ::google::protobuf::EnumDescriptor* SPPParameter_Engine_descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return SPPParameter_Engine_descriptor_;
+}
+bool SPPParameter_Engine_IsValid(int value) {
+  switch(value) {
+    case 0:
+    case 1:
+    case 2:
+      return true;
+    default:
+      return false;
+  }
+}
+
+#ifndef _MSC_VER
+const SPPParameter_Engine SPPParameter::DEFAULT;
+const SPPParameter_Engine SPPParameter::CAFFE;
+const SPPParameter_Engine SPPParameter::CUDNN;
+const SPPParameter_Engine SPPParameter::Engine_MIN;
+const SPPParameter_Engine SPPParameter::Engine_MAX;
+const int SPPParameter::Engine_ARRAYSIZE;
+#endif  // _MSC_VER
+#ifndef _MSC_VER
+const int SPPParameter::kPyramidHeightFieldNumber;
+const int SPPParameter::kPoolFieldNumber;
+const int SPPParameter::kEngineFieldNumber;
+#endif  // !_MSC_VER
+
+SPPParameter::SPPParameter()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:caffe.SPPParameter)
+}
+
+void SPPParameter::InitAsDefaultInstance() {
+}
+
+SPPParameter::SPPParameter(const SPPParameter& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:caffe.SPPParameter)
+}
+
+void SPPParameter::SharedCtor() {
+  _cached_size_ = 0;
+  pyramid_height_ = 0u;
+  pool_ = 0;
+  engine_ = 0;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+SPPParameter::~SPPParameter() {
+  // @@protoc_insertion_point(destructor:caffe.SPPParameter)
+  SharedDtor();
+}
+
+void SPPParameter::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void SPPParameter::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* SPPParameter::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return SPPParameter_descriptor_;
+}
+
+const SPPParameter& SPPParameter::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_caffe_2eproto();
+  return *default_instance_;
+}
+
+SPPParameter* SPPParameter::default_instance_ = NULL;
+
+SPPParameter* SPPParameter::New() const {
+  return new SPPParameter;
+}
+
+void SPPParameter::Clear() {
+#define OFFSET_OF_FIELD_(f) (reinterpret_cast<char*>(      \
+  &reinterpret_cast<SPPParameter*>(16)->f) - \
+   reinterpret_cast<char*>(16))
+
+#define ZR_(first, last) do {                              \
+    size_t f = OFFSET_OF_FIELD_(first);                    \
+    size_t n = OFFSET_OF_FIELD_(last) - f + sizeof(last);  \
+    ::memset(&first, 0, n);                                \
+  } while (0)
+
+  ZR_(pyramid_height_, engine_);
+
+#undef OFFSET_OF_FIELD_
+#undef ZR_
+
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool SPPParameter::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:caffe.SPPParameter)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional uint32 pyramid_height = 1;
+      case 1: {
+        if (tag == 8) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &pyramid_height_)));
+          set_has_pyramid_height();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(16)) goto parse_pool;
+        break;
+      }
+
+      // optional .caffe.SPPParameter.PoolMethod pool = 2 [default = MAX];
+      case 2: {
+        if (tag == 16) {
+         parse_pool:
+          int value;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          if (::caffe::SPPParameter_PoolMethod_IsValid(value)) {
+            set_pool(static_cast< ::caffe::SPPParameter_PoolMethod >(value));
+          } else {
+            mutable_unknown_fields()->AddVarint(2, value);
+          }
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(48)) goto parse_engine;
+        break;
+      }
+
+      // optional .caffe.SPPParameter.Engine engine = 6 [default = DEFAULT];
+      case 6: {
+        if (tag == 48) {
+         parse_engine:
+          int value;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          if (::caffe::SPPParameter_Engine_IsValid(value)) {
+            set_engine(static_cast< ::caffe::SPPParameter_Engine >(value));
+          } else {
+            mutable_unknown_fields()->AddVarint(6, value);
+          }
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          got
