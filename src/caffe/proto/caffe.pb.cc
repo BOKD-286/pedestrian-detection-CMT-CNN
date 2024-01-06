@@ -21627,4 +21627,398 @@ bool SliceParameter::MergePartialFromCodedStream(
       case 2: {
         if (tag == 16) {
          parse_slice_point:
-          DO_((::google:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 1, 16, input, this->mutable_slice_point())));
+        } else if (tag == 18) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPackedPrimitiveNoInline<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, this->mutable_slice_point())));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(16)) goto parse_slice_point;
+        if (input->ExpectTag(24)) goto parse_axis;
+        break;
+      }
+
+      // optional int32 axis = 3 [default = 1];
+      case 3: {
+        if (tag == 24) {
+         parse_axis:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &axis_)));
+          set_has_axis();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:caffe.SliceParameter)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:caffe.SliceParameter)
+  return false;
+#undef DO_
+}
+
+void SliceParameter::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:caffe.SliceParameter)
+  // optional uint32 slice_dim = 1 [default = 1];
+  if (has_slice_dim()) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32(1, this->slice_dim(), output);
+  }
+
+  // repeated uint32 slice_point = 2;
+  for (int i = 0; i < this->slice_point_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32(
+      2, this->slice_point(i), output);
+  }
+
+  // optional int32 axis = 3 [default = 1];
+  if (has_axis()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->axis(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:caffe.SliceParameter)
+}
+
+::google::protobuf::uint8* SliceParameter::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:caffe.SliceParameter)
+  // optional uint32 slice_dim = 1 [default = 1];
+  if (has_slice_dim()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(1, this->slice_dim(), target);
+  }
+
+  // repeated uint32 slice_point = 2;
+  for (int i = 0; i < this->slice_point_size(); i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteUInt32ToArray(2, this->slice_point(i), target);
+  }
+
+  // optional int32 axis = 3 [default = 1];
+  if (has_axis()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->axis(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:caffe.SliceParameter)
+  return target;
+}
+
+int SliceParameter::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // optional int32 axis = 3 [default = 1];
+    if (has_axis()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->axis());
+    }
+
+    // optional uint32 slice_dim = 1 [default = 1];
+    if (has_slice_dim()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::UInt32Size(
+          this->slice_dim());
+    }
+
+  }
+  // repeated uint32 slice_point = 2;
+  {
+    int data_size = 0;
+    for (int i = 0; i < this->slice_point_size(); i++) {
+      data_size += ::google::protobuf::internal::WireFormatLite::
+        UInt32Size(this->slice_point(i));
+    }
+    total_size += 1 * this->slice_point_size() + data_size;
+  }
+
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void SliceParameter::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const SliceParameter* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const SliceParameter*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void SliceParameter::MergeFrom(const SliceParameter& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  slice_point_.MergeFrom(from.slice_point_);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_axis()) {
+      set_axis(from.axis());
+    }
+    if (from.has_slice_dim()) {
+      set_slice_dim(from.slice_dim());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void SliceParameter::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void SliceParameter::CopyFrom(const SliceParameter& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool SliceParameter::IsInitialized() const {
+
+  return true;
+}
+
+void SliceParameter::Swap(SliceParameter* other) {
+  if (other != this) {
+    std::swap(axis_, other->axis_);
+    slice_point_.Swap(&other->slice_point_);
+    std::swap(slice_dim_, other->slice_dim_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata SliceParameter::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = SliceParameter_descriptor_;
+  metadata.reflection = SliceParameter_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+const ::google::protobuf::EnumDescriptor* SoftmaxParameter_Engine_descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return SoftmaxParameter_Engine_descriptor_;
+}
+bool SoftmaxParameter_Engine_IsValid(int value) {
+  switch(value) {
+    case 0:
+    case 1:
+    case 2:
+      return true;
+    default:
+      return false;
+  }
+}
+
+#ifndef _MSC_VER
+const SoftmaxParameter_Engine SoftmaxParameter::DEFAULT;
+const SoftmaxParameter_Engine SoftmaxParameter::CAFFE;
+const SoftmaxParameter_Engine SoftmaxParameter::CUDNN;
+const SoftmaxParameter_Engine SoftmaxParameter::Engine_MIN;
+const SoftmaxParameter_Engine SoftmaxParameter::Engine_MAX;
+const int SoftmaxParameter::Engine_ARRAYSIZE;
+#endif  // _MSC_VER
+#ifndef _MSC_VER
+const int SoftmaxParameter::kEngineFieldNumber;
+const int SoftmaxParameter::kAxisFieldNumber;
+#endif  // !_MSC_VER
+
+SoftmaxParameter::SoftmaxParameter()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:caffe.SoftmaxParameter)
+}
+
+void SoftmaxParameter::InitAsDefaultInstance() {
+}
+
+SoftmaxParameter::SoftmaxParameter(const SoftmaxParameter& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:caffe.SoftmaxParameter)
+}
+
+void SoftmaxParameter::SharedCtor() {
+  _cached_size_ = 0;
+  engine_ = 0;
+  axis_ = 1;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+SoftmaxParameter::~SoftmaxParameter() {
+  // @@protoc_insertion_point(destructor:caffe.SoftmaxParameter)
+  SharedDtor();
+}
+
+void SoftmaxParameter::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void SoftmaxParameter::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* SoftmaxParameter::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return SoftmaxParameter_descriptor_;
+}
+
+const SoftmaxParameter& SoftmaxParameter::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_caffe_2eproto();
+  return *default_instance_;
+}
+
+SoftmaxParameter* SoftmaxParameter::default_instance_ = NULL;
+
+SoftmaxParameter* SoftmaxParameter::New() const {
+  return new SoftmaxParameter;
+}
+
+void SoftmaxParameter::Clear() {
+  if (_has_bits_[0 / 32] & 3) {
+    engine_ = 0;
+    axis_ = 1;
+  }
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool SoftmaxParameter::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:caffe.SoftmaxParameter)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional .caffe.SoftmaxParameter.Engine engine = 1 [default = DEFAULT];
+      case 1: {
+        if (tag == 8) {
+          int value;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          if (::caffe::SoftmaxParameter_Engine_IsValid(value)) {
+            set_engine(static_cast< ::caffe::SoftmaxParameter_Engine >(value));
+          } else {
+            mutable_unknown_fields()->AddVarint(1, value);
+          }
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(16)) goto parse_axis;
+        break;
+      }
+
+      // optional int32 axis = 2 [default = 1];
+      case 2: {
+        if (tag == 16) {
+         parse_axis:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &axis_)));
+          set_has_axis();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:caffe.SoftmaxParameter)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:caffe.SoftmaxParameter)
+  return false;
+#undef DO_
+}
+
+void SoftmaxParameter::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:caffe.SoftmaxParameter)
+  // optional .caffe.SoftmaxParameter.Engine engine = 1 [default = DEFAULT];
+  if (has_engine()) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      1, this->engine(), output);
+  }
+
+  // optional int32 axis = 2 [default = 1];
+  if (has_axis()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->axis(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:caffe.SoftmaxParameter)
+}
+
+::google::protobuf::uint8* SoftmaxParameter::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:caffe.SoftmaxParameter)
+  // optional .caffe.SoftmaxParameter.Engine engine = 1 [default = DEFAULT];
+  if (has_engine()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      1
