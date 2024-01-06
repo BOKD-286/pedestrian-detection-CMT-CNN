@@ -22449,4 +22449,377 @@ bool ThresholdParameter::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:caffe.ThresholdParameter)
   for (;;) {
-    ::std::pair
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional float threshold = 1 [default = 0];
+      case 1: {
+        if (tag == 13) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &threshold_)));
+          set_has_threshold();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:caffe.ThresholdParameter)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:caffe.ThresholdParameter)
+  return false;
+#undef DO_
+}
+
+void ThresholdParameter::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:caffe.ThresholdParameter)
+  // optional float threshold = 1 [default = 0];
+  if (has_threshold()) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(1, this->threshold(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:caffe.ThresholdParameter)
+}
+
+::google::protobuf::uint8* ThresholdParameter::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:caffe.ThresholdParameter)
+  // optional float threshold = 1 [default = 0];
+  if (has_threshold()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(1, this->threshold(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:caffe.ThresholdParameter)
+  return target;
+}
+
+int ThresholdParameter::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // optional float threshold = 1 [default = 0];
+    if (has_threshold()) {
+      total_size += 1 + 4;
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void ThresholdParameter::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const ThresholdParameter* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const ThresholdParameter*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void ThresholdParameter::MergeFrom(const ThresholdParameter& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_threshold()) {
+      set_threshold(from.threshold());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void ThresholdParameter::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void ThresholdParameter::CopyFrom(const ThresholdParameter& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool ThresholdParameter::IsInitialized() const {
+
+  return true;
+}
+
+void ThresholdParameter::Swap(ThresholdParameter* other) {
+  if (other != this) {
+    std::swap(threshold_, other->threshold_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata ThresholdParameter::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = ThresholdParameter_descriptor_;
+  metadata.reflection = ThresholdParameter_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+::std::string* WindowDataParameter::_default_crop_mode_ = NULL;
+#ifndef _MSC_VER
+const int WindowDataParameter::kSourceFieldNumber;
+const int WindowDataParameter::kScaleFieldNumber;
+const int WindowDataParameter::kMeanFileFieldNumber;
+const int WindowDataParameter::kBatchSizeFieldNumber;
+const int WindowDataParameter::kCropSizeFieldNumber;
+const int WindowDataParameter::kMirrorFieldNumber;
+const int WindowDataParameter::kFgThresholdFieldNumber;
+const int WindowDataParameter::kBgThresholdFieldNumber;
+const int WindowDataParameter::kFgFractionFieldNumber;
+const int WindowDataParameter::kContextPadFieldNumber;
+const int WindowDataParameter::kCropModeFieldNumber;
+const int WindowDataParameter::kCacheImagesFieldNumber;
+const int WindowDataParameter::kRootFolderFieldNumber;
+#endif  // !_MSC_VER
+
+WindowDataParameter::WindowDataParameter()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:caffe.WindowDataParameter)
+}
+
+void WindowDataParameter::InitAsDefaultInstance() {
+}
+
+WindowDataParameter::WindowDataParameter(const WindowDataParameter& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:caffe.WindowDataParameter)
+}
+
+void WindowDataParameter::SharedCtor() {
+  ::google::protobuf::internal::GetEmptyString();
+  _cached_size_ = 0;
+  source_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  scale_ = 1;
+  mean_file_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  batch_size_ = 0u;
+  crop_size_ = 0u;
+  mirror_ = false;
+  fg_threshold_ = 0.5f;
+  bg_threshold_ = 0.5f;
+  fg_fraction_ = 0.25f;
+  context_pad_ = 0u;
+  crop_mode_ = const_cast< ::std::string*>(_default_crop_mode_);
+  cache_images_ = false;
+  root_folder_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+WindowDataParameter::~WindowDataParameter() {
+  // @@protoc_insertion_point(destructor:caffe.WindowDataParameter)
+  SharedDtor();
+}
+
+void WindowDataParameter::SharedDtor() {
+  if (source_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete source_;
+  }
+  if (mean_file_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete mean_file_;
+  }
+  if (crop_mode_ != _default_crop_mode_) {
+    delete crop_mode_;
+  }
+  if (root_folder_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete root_folder_;
+  }
+  if (this != default_instance_) {
+  }
+}
+
+void WindowDataParameter::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* WindowDataParameter::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return WindowDataParameter_descriptor_;
+}
+
+const WindowDataParameter& WindowDataParameter::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_caffe_2eproto();
+  return *default_instance_;
+}
+
+WindowDataParameter* WindowDataParameter::default_instance_ = NULL;
+
+WindowDataParameter* WindowDataParameter::New() const {
+  return new WindowDataParameter;
+}
+
+void WindowDataParameter::Clear() {
+#define OFFSET_OF_FIELD_(f) (reinterpret_cast<char*>(      \
+  &reinterpret_cast<WindowDataParameter*>(16)->f) - \
+   reinterpret_cast<char*>(16))
+
+#define ZR_(first, last) do {                              \
+    size_t f = OFFSET_OF_FIELD_(first);                    \
+    size_t n = OFFSET_OF_FIELD_(last) - f + sizeof(last);  \
+    ::memset(&first, 0, n);                                \
+  } while (0)
+
+  if (_has_bits_[0 / 32] & 255) {
+    ZR_(batch_size_, crop_size_);
+    if (has_source()) {
+      if (source_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+        source_->clear();
+      }
+    }
+    scale_ = 1;
+    if (has_mean_file()) {
+      if (mean_file_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+        mean_file_->clear();
+      }
+    }
+    mirror_ = false;
+    fg_threshold_ = 0.5f;
+    bg_threshold_ = 0.5f;
+  }
+  if (_has_bits_[8 / 32] & 7936) {
+    ZR_(cache_images_, context_pad_);
+    fg_fraction_ = 0.25f;
+    if (has_crop_mode()) {
+      if (crop_mode_ != _default_crop_mode_) {
+        crop_mode_->assign(*_default_crop_mode_);
+      }
+    }
+    if (has_root_folder()) {
+      if (root_folder_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+        root_folder_->clear();
+      }
+    }
+  }
+
+#undef OFFSET_OF_FIELD_
+#undef ZR_
+
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool WindowDataParameter::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:caffe.WindowDataParameter)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional string source = 1;
+      case 1: {
+        if (tag == 10) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_source()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->source().data(), this->source().length(),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "source");
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(21)) goto parse_scale;
+        break;
+      }
+
+      // optional float scale = 2 [default = 1];
+      case 2: {
+        if (tag == 21) {
+         parse_scale:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &scale_)));
+          set_has_scale();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(26)) goto parse_mean_file;
+        break;
+      }
+
+      // optional string mean_file = 3;
+      case 3: {
+        if (tag == 26) {
+         parse_mean_file:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_mean_file()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->mean_file().data(), this->mean_file().length(),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "mean_file");
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(32)) goto parse_batch_size;
+        break;
+      }
+
+      // optional uint32 batch_size = 4;
+      case 4: {
+        if (tag == 32) {
+         parse_batch_size:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &batch_size_)));
+          set_has_batch_size();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(40)) goto parse_crop_size;
+        break;
+      }
+
+      // optional uint32 crop_size = 5 [default = 0];
+      case 5: {
+        if (tag == 40) {
+         parse_crop_size:
+          DO_((::
