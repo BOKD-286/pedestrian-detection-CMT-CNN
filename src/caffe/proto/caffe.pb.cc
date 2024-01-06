@@ -22822,4 +22822,345 @@ bool WindowDataParameter::MergePartialFromCodedStream(
       case 5: {
         if (tag == 40) {
          parse_crop_size:
-          DO_((::
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &crop_size_)));
+          set_has_crop_size();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(48)) goto parse_mirror;
+        break;
+      }
+
+      // optional bool mirror = 6 [default = false];
+      case 6: {
+        if (tag == 48) {
+         parse_mirror:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &mirror_)));
+          set_has_mirror();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(61)) goto parse_fg_threshold;
+        break;
+      }
+
+      // optional float fg_threshold = 7 [default = 0.5];
+      case 7: {
+        if (tag == 61) {
+         parse_fg_threshold:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &fg_threshold_)));
+          set_has_fg_threshold();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(69)) goto parse_bg_threshold;
+        break;
+      }
+
+      // optional float bg_threshold = 8 [default = 0.5];
+      case 8: {
+        if (tag == 69) {
+         parse_bg_threshold:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &bg_threshold_)));
+          set_has_bg_threshold();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(77)) goto parse_fg_fraction;
+        break;
+      }
+
+      // optional float fg_fraction = 9 [default = 0.25];
+      case 9: {
+        if (tag == 77) {
+         parse_fg_fraction:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &fg_fraction_)));
+          set_has_fg_fraction();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(80)) goto parse_context_pad;
+        break;
+      }
+
+      // optional uint32 context_pad = 10 [default = 0];
+      case 10: {
+        if (tag == 80) {
+         parse_context_pad:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &context_pad_)));
+          set_has_context_pad();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(90)) goto parse_crop_mode;
+        break;
+      }
+
+      // optional string crop_mode = 11 [default = "warp"];
+      case 11: {
+        if (tag == 90) {
+         parse_crop_mode:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_crop_mode()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->crop_mode().data(), this->crop_mode().length(),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "crop_mode");
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(96)) goto parse_cache_images;
+        break;
+      }
+
+      // optional bool cache_images = 12 [default = false];
+      case 12: {
+        if (tag == 96) {
+         parse_cache_images:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &cache_images_)));
+          set_has_cache_images();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(106)) goto parse_root_folder;
+        break;
+      }
+
+      // optional string root_folder = 13 [default = ""];
+      case 13: {
+        if (tag == 106) {
+         parse_root_folder:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_root_folder()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->root_folder().data(), this->root_folder().length(),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "root_folder");
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:caffe.WindowDataParameter)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:caffe.WindowDataParameter)
+  return false;
+#undef DO_
+}
+
+void WindowDataParameter::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:caffe.WindowDataParameter)
+  // optional string source = 1;
+  if (has_source()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->source().data(), this->source().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "source");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      1, this->source(), output);
+  }
+
+  // optional float scale = 2 [default = 1];
+  if (has_scale()) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(2, this->scale(), output);
+  }
+
+  // optional string mean_file = 3;
+  if (has_mean_file()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->mean_file().data(), this->mean_file().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "mean_file");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      3, this->mean_file(), output);
+  }
+
+  // optional uint32 batch_size = 4;
+  if (has_batch_size()) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32(4, this->batch_size(), output);
+  }
+
+  // optional uint32 crop_size = 5 [default = 0];
+  if (has_crop_size()) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32(5, this->crop_size(), output);
+  }
+
+  // optional bool mirror = 6 [default = false];
+  if (has_mirror()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(6, this->mirror(), output);
+  }
+
+  // optional float fg_threshold = 7 [default = 0.5];
+  if (has_fg_threshold()) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(7, this->fg_threshold(), output);
+  }
+
+  // optional float bg_threshold = 8 [default = 0.5];
+  if (has_bg_threshold()) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(8, this->bg_threshold(), output);
+  }
+
+  // optional float fg_fraction = 9 [default = 0.25];
+  if (has_fg_fraction()) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(9, this->fg_fraction(), output);
+  }
+
+  // optional uint32 context_pad = 10 [default = 0];
+  if (has_context_pad()) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32(10, this->context_pad(), output);
+  }
+
+  // optional string crop_mode = 11 [default = "warp"];
+  if (has_crop_mode()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->crop_mode().data(), this->crop_mode().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "crop_mode");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      11, this->crop_mode(), output);
+  }
+
+  // optional bool cache_images = 12 [default = false];
+  if (has_cache_images()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(12, this->cache_images(), output);
+  }
+
+  // optional string root_folder = 13 [default = ""];
+  if (has_root_folder()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->root_folder().data(), this->root_folder().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "root_folder");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      13, this->root_folder(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:caffe.WindowDataParameter)
+}
+
+::google::protobuf::uint8* WindowDataParameter::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:caffe.WindowDataParameter)
+  // optional string source = 1;
+  if (has_source()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->source().data(), this->source().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "source");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        1, this->source(), target);
+  }
+
+  // optional float scale = 2 [default = 1];
+  if (has_scale()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(2, this->scale(), target);
+  }
+
+  // optional string mean_file = 3;
+  if (has_mean_file()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->mean_file().data(), this->mean_file().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "mean_file");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        3, this->mean_file(), target);
+  }
+
+  // optional uint32 batch_size = 4;
+  if (has_batch_size()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(4, this->batch_size(), target);
+  }
+
+  // optional uint32 crop_size = 5 [default = 0];
+  if (has_crop_size()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(5, this->crop_size(), target);
+  }
+
+  // optional bool mirror = 6 [default = false];
+  if (has_mirror()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(6, this->mirror(), target);
+  }
+
+  // optional float fg_threshold = 7 [default = 0.5];
+  if (has_fg_threshold()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(7, this->fg_threshold(), target);
+  }
+
+  // optional float bg_threshold = 8 [default = 0.5];
+  if (has_bg_threshold()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(8, this->bg_threshold(), target);
+  }
+
+  // optional float fg_fraction = 9 [default = 0.25];
+  if (has_fg_fraction()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(9, this->fg_fraction(), target);
+  }
+
+  // optional uint32 context_pad = 10 [default = 0];
+  if (has_context_pad()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(10, this->context_pad(), target);
+  }
+
+  // optional string crop_mode = 11 [default = "warp"];
+  if (has_crop_mode()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->crop_mode().data(), this->crop_mode().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "crop_mode");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        11, this->crop_mode(), target);
+  }
+
+  // optional bool cache_images = 12 [default = false];
+  if (has_cache_images()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(12, this->cache_images(), target);
+  }
+
+  // optional string root_folder = 13 [default = ""];
+  if (has_root_folder()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->root_folder().data(), this->root_folder().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "root_folder");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        13, this->root
