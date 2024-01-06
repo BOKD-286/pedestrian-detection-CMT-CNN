@@ -21219,4 +21219,412 @@ void ROIPoolingParameter::MergeFrom(const ::google::protobuf::Message& from) {
   if (source == NULL) {
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
-    Merg
+    MergeFrom(*source);
+  }
+}
+
+void ROIPoolingParameter::MergeFrom(const ROIPoolingParameter& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_pooled_h()) {
+      set_pooled_h(from.pooled_h());
+    }
+    if (from.has_pooled_w()) {
+      set_pooled_w(from.pooled_w());
+    }
+    if (from.has_spatial_scale()) {
+      set_spatial_scale(from.spatial_scale());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void ROIPoolingParameter::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void ROIPoolingParameter::CopyFrom(const ROIPoolingParameter& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool ROIPoolingParameter::IsInitialized() const {
+
+  return true;
+}
+
+void ROIPoolingParameter::Swap(ROIPoolingParameter* other) {
+  if (other != this) {
+    std::swap(pooled_h_, other->pooled_h_);
+    std::swap(pooled_w_, other->pooled_w_);
+    std::swap(spatial_scale_, other->spatial_scale_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata ROIPoolingParameter::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = ROIPoolingParameter_descriptor_;
+  metadata.reflection = ROIPoolingParameter_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+const ::google::protobuf::EnumDescriptor* SigmoidParameter_Engine_descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return SigmoidParameter_Engine_descriptor_;
+}
+bool SigmoidParameter_Engine_IsValid(int value) {
+  switch(value) {
+    case 0:
+    case 1:
+    case 2:
+      return true;
+    default:
+      return false;
+  }
+}
+
+#ifndef _MSC_VER
+const SigmoidParameter_Engine SigmoidParameter::DEFAULT;
+const SigmoidParameter_Engine SigmoidParameter::CAFFE;
+const SigmoidParameter_Engine SigmoidParameter::CUDNN;
+const SigmoidParameter_Engine SigmoidParameter::Engine_MIN;
+const SigmoidParameter_Engine SigmoidParameter::Engine_MAX;
+const int SigmoidParameter::Engine_ARRAYSIZE;
+#endif  // _MSC_VER
+#ifndef _MSC_VER
+const int SigmoidParameter::kEngineFieldNumber;
+#endif  // !_MSC_VER
+
+SigmoidParameter::SigmoidParameter()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:caffe.SigmoidParameter)
+}
+
+void SigmoidParameter::InitAsDefaultInstance() {
+}
+
+SigmoidParameter::SigmoidParameter(const SigmoidParameter& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:caffe.SigmoidParameter)
+}
+
+void SigmoidParameter::SharedCtor() {
+  _cached_size_ = 0;
+  engine_ = 0;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+SigmoidParameter::~SigmoidParameter() {
+  // @@protoc_insertion_point(destructor:caffe.SigmoidParameter)
+  SharedDtor();
+}
+
+void SigmoidParameter::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void SigmoidParameter::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* SigmoidParameter::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return SigmoidParameter_descriptor_;
+}
+
+const SigmoidParameter& SigmoidParameter::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_caffe_2eproto();
+  return *default_instance_;
+}
+
+SigmoidParameter* SigmoidParameter::default_instance_ = NULL;
+
+SigmoidParameter* SigmoidParameter::New() const {
+  return new SigmoidParameter;
+}
+
+void SigmoidParameter::Clear() {
+  engine_ = 0;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool SigmoidParameter::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:caffe.SigmoidParameter)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional .caffe.SigmoidParameter.Engine engine = 1 [default = DEFAULT];
+      case 1: {
+        if (tag == 8) {
+          int value;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          if (::caffe::SigmoidParameter_Engine_IsValid(value)) {
+            set_engine(static_cast< ::caffe::SigmoidParameter_Engine >(value));
+          } else {
+            mutable_unknown_fields()->AddVarint(1, value);
+          }
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:caffe.SigmoidParameter)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:caffe.SigmoidParameter)
+  return false;
+#undef DO_
+}
+
+void SigmoidParameter::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:caffe.SigmoidParameter)
+  // optional .caffe.SigmoidParameter.Engine engine = 1 [default = DEFAULT];
+  if (has_engine()) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      1, this->engine(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:caffe.SigmoidParameter)
+}
+
+::google::protobuf::uint8* SigmoidParameter::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:caffe.SigmoidParameter)
+  // optional .caffe.SigmoidParameter.Engine engine = 1 [default = DEFAULT];
+  if (has_engine()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      1, this->engine(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:caffe.SigmoidParameter)
+  return target;
+}
+
+int SigmoidParameter::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // optional .caffe.SigmoidParameter.Engine engine = 1 [default = DEFAULT];
+    if (has_engine()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::EnumSize(this->engine());
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void SigmoidParameter::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const SigmoidParameter* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const SigmoidParameter*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void SigmoidParameter::MergeFrom(const SigmoidParameter& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_engine()) {
+      set_engine(from.engine());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void SigmoidParameter::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void SigmoidParameter::CopyFrom(const SigmoidParameter& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool SigmoidParameter::IsInitialized() const {
+
+  return true;
+}
+
+void SigmoidParameter::Swap(SigmoidParameter* other) {
+  if (other != this) {
+    std::swap(engine_, other->engine_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata SigmoidParameter::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = SigmoidParameter_descriptor_;
+  metadata.reflection = SigmoidParameter_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int SliceParameter::kAxisFieldNumber;
+const int SliceParameter::kSlicePointFieldNumber;
+const int SliceParameter::kSliceDimFieldNumber;
+#endif  // !_MSC_VER
+
+SliceParameter::SliceParameter()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:caffe.SliceParameter)
+}
+
+void SliceParameter::InitAsDefaultInstance() {
+}
+
+SliceParameter::SliceParameter(const SliceParameter& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:caffe.SliceParameter)
+}
+
+void SliceParameter::SharedCtor() {
+  _cached_size_ = 0;
+  axis_ = 1;
+  slice_dim_ = 1u;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+SliceParameter::~SliceParameter() {
+  // @@protoc_insertion_point(destructor:caffe.SliceParameter)
+  SharedDtor();
+}
+
+void SliceParameter::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void SliceParameter::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* SliceParameter::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return SliceParameter_descriptor_;
+}
+
+const SliceParameter& SliceParameter::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_caffe_2eproto();
+  return *default_instance_;
+}
+
+SliceParameter* SliceParameter::default_instance_ = NULL;
+
+SliceParameter* SliceParameter::New() const {
+  return new SliceParameter;
+}
+
+void SliceParameter::Clear() {
+  if (_has_bits_[0 / 32] & 5) {
+    axis_ = 1;
+    slice_dim_ = 1u;
+  }
+  slice_point_.Clear();
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool SliceParameter::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:caffe.SliceParameter)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional uint32 slice_dim = 1 [default = 1];
+      case 1: {
+        if (tag == 8) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &slice_dim_)));
+          set_has_slice_dim();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(16)) goto parse_slice_point;
+        break;
+      }
+
+      // repeated uint32 slice_point = 2;
+      case 2: {
+        if (tag == 16) {
+         parse_slice_point:
+          DO_((::google:
