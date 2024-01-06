@@ -22021,4 +22021,432 @@ void SoftmaxParameter::SerializeWithCachedSizes(
   // optional .caffe.SoftmaxParameter.Engine engine = 1 [default = DEFAULT];
   if (has_engine()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
-      1
+      1, this->engine(), target);
+  }
+
+  // optional int32 axis = 2 [default = 1];
+  if (has_axis()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->axis(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:caffe.SoftmaxParameter)
+  return target;
+}
+
+int SoftmaxParameter::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // optional .caffe.SoftmaxParameter.Engine engine = 1 [default = DEFAULT];
+    if (has_engine()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::EnumSize(this->engine());
+    }
+
+    // optional int32 axis = 2 [default = 1];
+    if (has_axis()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->axis());
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void SoftmaxParameter::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const SoftmaxParameter* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const SoftmaxParameter*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void SoftmaxParameter::MergeFrom(const SoftmaxParameter& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_engine()) {
+      set_engine(from.engine());
+    }
+    if (from.has_axis()) {
+      set_axis(from.axis());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void SoftmaxParameter::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void SoftmaxParameter::CopyFrom(const SoftmaxParameter& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool SoftmaxParameter::IsInitialized() const {
+
+  return true;
+}
+
+void SoftmaxParameter::Swap(SoftmaxParameter* other) {
+  if (other != this) {
+    std::swap(engine_, other->engine_);
+    std::swap(axis_, other->axis_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata SoftmaxParameter::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = SoftmaxParameter_descriptor_;
+  metadata.reflection = SoftmaxParameter_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+const ::google::protobuf::EnumDescriptor* TanHParameter_Engine_descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return TanHParameter_Engine_descriptor_;
+}
+bool TanHParameter_Engine_IsValid(int value) {
+  switch(value) {
+    case 0:
+    case 1:
+    case 2:
+      return true;
+    default:
+      return false;
+  }
+}
+
+#ifndef _MSC_VER
+const TanHParameter_Engine TanHParameter::DEFAULT;
+const TanHParameter_Engine TanHParameter::CAFFE;
+const TanHParameter_Engine TanHParameter::CUDNN;
+const TanHParameter_Engine TanHParameter::Engine_MIN;
+const TanHParameter_Engine TanHParameter::Engine_MAX;
+const int TanHParameter::Engine_ARRAYSIZE;
+#endif  // _MSC_VER
+#ifndef _MSC_VER
+const int TanHParameter::kEngineFieldNumber;
+#endif  // !_MSC_VER
+
+TanHParameter::TanHParameter()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:caffe.TanHParameter)
+}
+
+void TanHParameter::InitAsDefaultInstance() {
+}
+
+TanHParameter::TanHParameter(const TanHParameter& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:caffe.TanHParameter)
+}
+
+void TanHParameter::SharedCtor() {
+  _cached_size_ = 0;
+  engine_ = 0;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+TanHParameter::~TanHParameter() {
+  // @@protoc_insertion_point(destructor:caffe.TanHParameter)
+  SharedDtor();
+}
+
+void TanHParameter::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void TanHParameter::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* TanHParameter::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return TanHParameter_descriptor_;
+}
+
+const TanHParameter& TanHParameter::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_caffe_2eproto();
+  return *default_instance_;
+}
+
+TanHParameter* TanHParameter::default_instance_ = NULL;
+
+TanHParameter* TanHParameter::New() const {
+  return new TanHParameter;
+}
+
+void TanHParameter::Clear() {
+  engine_ = 0;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool TanHParameter::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:caffe.TanHParameter)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional .caffe.TanHParameter.Engine engine = 1 [default = DEFAULT];
+      case 1: {
+        if (tag == 8) {
+          int value;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          if (::caffe::TanHParameter_Engine_IsValid(value)) {
+            set_engine(static_cast< ::caffe::TanHParameter_Engine >(value));
+          } else {
+            mutable_unknown_fields()->AddVarint(1, value);
+          }
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:caffe.TanHParameter)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:caffe.TanHParameter)
+  return false;
+#undef DO_
+}
+
+void TanHParameter::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:caffe.TanHParameter)
+  // optional .caffe.TanHParameter.Engine engine = 1 [default = DEFAULT];
+  if (has_engine()) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      1, this->engine(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:caffe.TanHParameter)
+}
+
+::google::protobuf::uint8* TanHParameter::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:caffe.TanHParameter)
+  // optional .caffe.TanHParameter.Engine engine = 1 [default = DEFAULT];
+  if (has_engine()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      1, this->engine(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:caffe.TanHParameter)
+  return target;
+}
+
+int TanHParameter::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // optional .caffe.TanHParameter.Engine engine = 1 [default = DEFAULT];
+    if (has_engine()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::EnumSize(this->engine());
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void TanHParameter::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const TanHParameter* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const TanHParameter*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void TanHParameter::MergeFrom(const TanHParameter& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_engine()) {
+      set_engine(from.engine());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void TanHParameter::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void TanHParameter::CopyFrom(const TanHParameter& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool TanHParameter::IsInitialized() const {
+
+  return true;
+}
+
+void TanHParameter::Swap(TanHParameter* other) {
+  if (other != this) {
+    std::swap(engine_, other->engine_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata TanHParameter::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = TanHParameter_descriptor_;
+  metadata.reflection = TanHParameter_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int ThresholdParameter::kThresholdFieldNumber;
+#endif  // !_MSC_VER
+
+ThresholdParameter::ThresholdParameter()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:caffe.ThresholdParameter)
+}
+
+void ThresholdParameter::InitAsDefaultInstance() {
+}
+
+ThresholdParameter::ThresholdParameter(const ThresholdParameter& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:caffe.ThresholdParameter)
+}
+
+void ThresholdParameter::SharedCtor() {
+  _cached_size_ = 0;
+  threshold_ = 0;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+ThresholdParameter::~ThresholdParameter() {
+  // @@protoc_insertion_point(destructor:caffe.ThresholdParameter)
+  SharedDtor();
+}
+
+void ThresholdParameter::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void ThresholdParameter::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* ThresholdParameter::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return ThresholdParameter_descriptor_;
+}
+
+const ThresholdParameter& ThresholdParameter::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_caffe_2eproto();
+  return *default_instance_;
+}
+
+ThresholdParameter* ThresholdParameter::default_instance_ = NULL;
+
+ThresholdParameter* ThresholdParameter::New() const {
+  return new ThresholdParameter;
+}
+
+void ThresholdParameter::Clear() {
+  threshold_ = 0;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool ThresholdParameter::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:caffe.ThresholdParameter)
+  for (;;) {
+    ::std::pair
