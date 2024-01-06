@@ -20024,4 +20024,416 @@ void PythonParameter::Swap(PythonParameter* other) {
 }
 
 
-// ============================================================
+// ===================================================================
+
+const ::google::protobuf::EnumDescriptor* ReductionParameter_ReductionOp_descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return ReductionParameter_ReductionOp_descriptor_;
+}
+bool ReductionParameter_ReductionOp_IsValid(int value) {
+  switch(value) {
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+      return true;
+    default:
+      return false;
+  }
+}
+
+#ifndef _MSC_VER
+const ReductionParameter_ReductionOp ReductionParameter::SUM;
+const ReductionParameter_ReductionOp ReductionParameter::ASUM;
+const ReductionParameter_ReductionOp ReductionParameter::SUMSQ;
+const ReductionParameter_ReductionOp ReductionParameter::MEAN;
+const ReductionParameter_ReductionOp ReductionParameter::ReductionOp_MIN;
+const ReductionParameter_ReductionOp ReductionParameter::ReductionOp_MAX;
+const int ReductionParameter::ReductionOp_ARRAYSIZE;
+#endif  // _MSC_VER
+#ifndef _MSC_VER
+const int ReductionParameter::kOperationFieldNumber;
+const int ReductionParameter::kAxisFieldNumber;
+const int ReductionParameter::kCoeffFieldNumber;
+#endif  // !_MSC_VER
+
+ReductionParameter::ReductionParameter()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:caffe.ReductionParameter)
+}
+
+void ReductionParameter::InitAsDefaultInstance() {
+}
+
+ReductionParameter::ReductionParameter(const ReductionParameter& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:caffe.ReductionParameter)
+}
+
+void ReductionParameter::SharedCtor() {
+  _cached_size_ = 0;
+  operation_ = 1;
+  axis_ = 0;
+  coeff_ = 1;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+ReductionParameter::~ReductionParameter() {
+  // @@protoc_insertion_point(destructor:caffe.ReductionParameter)
+  SharedDtor();
+}
+
+void ReductionParameter::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void ReductionParameter::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* ReductionParameter::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return ReductionParameter_descriptor_;
+}
+
+const ReductionParameter& ReductionParameter::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_caffe_2eproto();
+  return *default_instance_;
+}
+
+ReductionParameter* ReductionParameter::default_instance_ = NULL;
+
+ReductionParameter* ReductionParameter::New() const {
+  return new ReductionParameter;
+}
+
+void ReductionParameter::Clear() {
+  if (_has_bits_[0 / 32] & 7) {
+    operation_ = 1;
+    axis_ = 0;
+    coeff_ = 1;
+  }
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool ReductionParameter::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:caffe.ReductionParameter)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional .caffe.ReductionParameter.ReductionOp operation = 1 [default = SUM];
+      case 1: {
+        if (tag == 8) {
+          int value;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          if (::caffe::ReductionParameter_ReductionOp_IsValid(value)) {
+            set_operation(static_cast< ::caffe::ReductionParameter_ReductionOp >(value));
+          } else {
+            mutable_unknown_fields()->AddVarint(1, value);
+          }
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(16)) goto parse_axis;
+        break;
+      }
+
+      // optional int32 axis = 2 [default = 0];
+      case 2: {
+        if (tag == 16) {
+         parse_axis:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &axis_)));
+          set_has_axis();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(29)) goto parse_coeff;
+        break;
+      }
+
+      // optional float coeff = 3 [default = 1];
+      case 3: {
+        if (tag == 29) {
+         parse_coeff:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &coeff_)));
+          set_has_coeff();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:caffe.ReductionParameter)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:caffe.ReductionParameter)
+  return false;
+#undef DO_
+}
+
+void ReductionParameter::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:caffe.ReductionParameter)
+  // optional .caffe.ReductionParameter.ReductionOp operation = 1 [default = SUM];
+  if (has_operation()) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      1, this->operation(), output);
+  }
+
+  // optional int32 axis = 2 [default = 0];
+  if (has_axis()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->axis(), output);
+  }
+
+  // optional float coeff = 3 [default = 1];
+  if (has_coeff()) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(3, this->coeff(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:caffe.ReductionParameter)
+}
+
+::google::protobuf::uint8* ReductionParameter::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:caffe.ReductionParameter)
+  // optional .caffe.ReductionParameter.ReductionOp operation = 1 [default = SUM];
+  if (has_operation()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      1, this->operation(), target);
+  }
+
+  // optional int32 axis = 2 [default = 0];
+  if (has_axis()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->axis(), target);
+  }
+
+  // optional float coeff = 3 [default = 1];
+  if (has_coeff()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(3, this->coeff(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:caffe.ReductionParameter)
+  return target;
+}
+
+int ReductionParameter::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // optional .caffe.ReductionParameter.ReductionOp operation = 1 [default = SUM];
+    if (has_operation()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::EnumSize(this->operation());
+    }
+
+    // optional int32 axis = 2 [default = 0];
+    if (has_axis()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->axis());
+    }
+
+    // optional float coeff = 3 [default = 1];
+    if (has_coeff()) {
+      total_size += 1 + 4;
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void ReductionParameter::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const ReductionParameter* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const ReductionParameter*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void ReductionParameter::MergeFrom(const ReductionParameter& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_operation()) {
+      set_operation(from.operation());
+    }
+    if (from.has_axis()) {
+      set_axis(from.axis());
+    }
+    if (from.has_coeff()) {
+      set_coeff(from.coeff());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void ReductionParameter::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void ReductionParameter::CopyFrom(const ReductionParameter& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool ReductionParameter::IsInitialized() const {
+
+  return true;
+}
+
+void ReductionParameter::Swap(ReductionParameter* other) {
+  if (other != this) {
+    std::swap(operation_, other->operation_);
+    std::swap(axis_, other->axis_);
+    std::swap(coeff_, other->coeff_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata ReductionParameter::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = ReductionParameter_descriptor_;
+  metadata.reflection = ReductionParameter_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+const ::google::protobuf::EnumDescriptor* ReLUParameter_Engine_descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return ReLUParameter_Engine_descriptor_;
+}
+bool ReLUParameter_Engine_IsValid(int value) {
+  switch(value) {
+    case 0:
+    case 1:
+    case 2:
+      return true;
+    default:
+      return false;
+  }
+}
+
+#ifndef _MSC_VER
+const ReLUParameter_Engine ReLUParameter::DEFAULT;
+const ReLUParameter_Engine ReLUParameter::CAFFE;
+const ReLUParameter_Engine ReLUParameter::CUDNN;
+const ReLUParameter_Engine ReLUParameter::Engine_MIN;
+const ReLUParameter_Engine ReLUParameter::Engine_MAX;
+const int ReLUParameter::Engine_ARRAYSIZE;
+#endif  // _MSC_VER
+#ifndef _MSC_VER
+const int ReLUParameter::kNegativeSlopeFieldNumber;
+const int ReLUParameter::kEngineFieldNumber;
+#endif  // !_MSC_VER
+
+ReLUParameter::ReLUParameter()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:caffe.ReLUParameter)
+}
+
+void ReLUParameter::InitAsDefaultInstance() {
+}
+
+ReLUParameter::ReLUParameter(const ReLUParameter& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:caffe.ReLUParameter)
+}
+
+void ReLUParameter::SharedCtor() {
+  _cached_size_ = 0;
+  negative_slope_ = 0;
+  engine_ = 0;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+ReLUParameter::~ReLUParameter() {
+  // @@protoc_insertion_point(destructor:caffe.ReLUParameter)
+  SharedDtor();
+}
+
+void ReLUParameter::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void ReLUParameter::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* ReLUParameter::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return ReLUParameter_descriptor_;
+}
+
+const ReLUParameter& ReLUParameter::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_caffe_2eproto();
+  return *default_instance_;
+}
+
+ReLUParameter* ReLUParameter::default_instance_ = NULL;
+
+ReLUParameter* ReLUParameter::New() const {
+  return new ReL
