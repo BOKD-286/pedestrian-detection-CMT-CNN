@@ -23576,4 +23576,358 @@ bool SPPParameter::MergePartialFromCodedStream(
         if (tag == 0 ||
             ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          got
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:caffe.SPPParameter)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:caffe.SPPParameter)
+  return false;
+#undef DO_
+}
+
+void SPPParameter::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:caffe.SPPParameter)
+  // optional uint32 pyramid_height = 1;
+  if (has_pyramid_height()) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32(1, this->pyramid_height(), output);
+  }
+
+  // optional .caffe.SPPParameter.PoolMethod pool = 2 [default = MAX];
+  if (has_pool()) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      2, this->pool(), output);
+  }
+
+  // optional .caffe.SPPParameter.Engine engine = 6 [default = DEFAULT];
+  if (has_engine()) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      6, this->engine(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:caffe.SPPParameter)
+}
+
+::google::protobuf::uint8* SPPParameter::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:caffe.SPPParameter)
+  // optional uint32 pyramid_height = 1;
+  if (has_pyramid_height()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(1, this->pyramid_height(), target);
+  }
+
+  // optional .caffe.SPPParameter.PoolMethod pool = 2 [default = MAX];
+  if (has_pool()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      2, this->pool(), target);
+  }
+
+  // optional .caffe.SPPParameter.Engine engine = 6 [default = DEFAULT];
+  if (has_engine()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      6, this->engine(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:caffe.SPPParameter)
+  return target;
+}
+
+int SPPParameter::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // optional uint32 pyramid_height = 1;
+    if (has_pyramid_height()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::UInt32Size(
+          this->pyramid_height());
+    }
+
+    // optional .caffe.SPPParameter.PoolMethod pool = 2 [default = MAX];
+    if (has_pool()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::EnumSize(this->pool());
+    }
+
+    // optional .caffe.SPPParameter.Engine engine = 6 [default = DEFAULT];
+    if (has_engine()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::EnumSize(this->engine());
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void SPPParameter::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const SPPParameter* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const SPPParameter*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void SPPParameter::MergeFrom(const SPPParameter& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_pyramid_height()) {
+      set_pyramid_height(from.pyramid_height());
+    }
+    if (from.has_pool()) {
+      set_pool(from.pool());
+    }
+    if (from.has_engine()) {
+      set_engine(from.engine());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void SPPParameter::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void SPPParameter::CopyFrom(const SPPParameter& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool SPPParameter::IsInitialized() const {
+
+  return true;
+}
+
+void SPPParameter::Swap(SPPParameter* other) {
+  if (other != this) {
+    std::swap(pyramid_height_, other->pyramid_height_);
+    std::swap(pool_, other->pool_);
+    std::swap(engine_, other->engine_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata SPPParameter::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = SPPParameter_descriptor_;
+  metadata.reflection = SPPParameter_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+const ::google::protobuf::EnumDescriptor* V1LayerParameter_LayerType_descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return V1LayerParameter_LayerType_descriptor_;
+}
+bool V1LayerParameter_LayerType_IsValid(int value) {
+  switch(value) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+    case 6:
+    case 7:
+    case 8:
+    case 9:
+    case 10:
+    case 11:
+    case 12:
+    case 13:
+    case 14:
+    case 15:
+    case 16:
+    case 17:
+    case 18:
+    case 19:
+    case 20:
+    case 21:
+    case 22:
+    case 23:
+    case 24:
+    case 25:
+    case 26:
+    case 27:
+    case 28:
+    case 29:
+    case 30:
+    case 31:
+    case 32:
+    case 33:
+    case 34:
+    case 35:
+    case 36:
+    case 37:
+    case 38:
+    case 39:
+    case 40:
+    case 41:
+    case 42:
+      return true;
+    default:
+      return false;
+  }
+}
+
+#ifndef _MSC_VER
+const V1LayerParameter_LayerType V1LayerParameter::NONE;
+const V1LayerParameter_LayerType V1LayerParameter::ABSVAL;
+const V1LayerParameter_LayerType V1LayerParameter::ACCURACY;
+const V1LayerParameter_LayerType V1LayerParameter::ARGMAX;
+const V1LayerParameter_LayerType V1LayerParameter::BNLL;
+const V1LayerParameter_LayerType V1LayerParameter::CONCAT;
+const V1LayerParameter_LayerType V1LayerParameter::CONTRASTIVE_LOSS;
+const V1LayerParameter_LayerType V1LayerParameter::CONVOLUTION;
+const V1LayerParameter_LayerType V1LayerParameter::DATA;
+const V1LayerParameter_LayerType V1LayerParameter::DECONVOLUTION;
+const V1LayerParameter_LayerType V1LayerParameter::DROPOUT;
+const V1LayerParameter_LayerType V1LayerParameter::DUMMY_DATA;
+const V1LayerParameter_LayerType V1LayerParameter::EUCLIDEAN_LOSS;
+const V1LayerParameter_LayerType V1LayerParameter::ELTWISE;
+const V1LayerParameter_LayerType V1LayerParameter::EXP;
+const V1LayerParameter_LayerType V1LayerParameter::FLATTEN;
+const V1LayerParameter_LayerType V1LayerParameter::HDF5_DATA;
+const V1LayerParameter_LayerType V1LayerParameter::HDF5_OUTPUT;
+const V1LayerParameter_LayerType V1LayerParameter::HINGE_LOSS;
+const V1LayerParameter_LayerType V1LayerParameter::IM2COL;
+const V1LayerParameter_LayerType V1LayerParameter::IMAGE_DATA;
+const V1LayerParameter_LayerType V1LayerParameter::INFOGAIN_LOSS;
+const V1LayerParameter_LayerType V1LayerParameter::INNER_PRODUCT;
+const V1LayerParameter_LayerType V1LayerParameter::LRN;
+const V1LayerParameter_LayerType V1LayerParameter::MEMORY_DATA;
+const V1LayerParameter_LayerType V1LayerParameter::MULTINOMIAL_LOGISTIC_LOSS;
+const V1LayerParameter_LayerType V1LayerParameter::MVN;
+const V1LayerParameter_LayerType V1LayerParameter::POOLING;
+const V1LayerParameter_LayerType V1LayerParameter::POWER;
+const V1LayerParameter_LayerType V1LayerParameter::RELU;
+const V1LayerParameter_LayerType V1LayerParameter::RESHAPE;
+const V1LayerParameter_LayerType V1LayerParameter::ROIPOOLING;
+const V1LayerParameter_LayerType V1LayerParameter::SIGMOID;
+const V1LayerParameter_LayerType V1LayerParameter::SIGMOID_CROSS_ENTROPY_LOSS;
+const V1LayerParameter_LayerType V1LayerParameter::SILENCE;
+const V1LayerParameter_LayerType V1LayerParameter::SMOOTH_L1_LOSS;
+const V1LayerParameter_LayerType V1LayerParameter::SOFTMAX;
+const V1LayerParameter_LayerType V1LayerParameter::SOFTMAX_LOSS;
+const V1LayerParameter_LayerType V1LayerParameter::SPLIT;
+const V1LayerParameter_LayerType V1LayerParameter::SLICE;
+const V1LayerParameter_LayerType V1LayerParameter::TANH;
+const V1LayerParameter_LayerType V1LayerParameter::WINDOW_DATA;
+const V1LayerParameter_LayerType V1LayerParameter::THRESHOLD;
+const V1LayerParameter_LayerType V1LayerParameter::LayerType_MIN;
+const V1LayerParameter_LayerType V1LayerParameter::LayerType_MAX;
+const int V1LayerParameter::LayerType_ARRAYSIZE;
+#endif  // _MSC_VER
+const ::google::protobuf::EnumDescriptor* V1LayerParameter_DimCheckMode_descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return V1LayerParameter_DimCheckMode_descriptor_;
+}
+bool V1LayerParameter_DimCheckMode_IsValid(int value) {
+  switch(value) {
+    case 0:
+    case 1:
+      return true;
+    default:
+      return false;
+  }
+}
+
+#ifndef _MSC_VER
+const V1LayerParameter_DimCheckMode V1LayerParameter::STRICT;
+const V1LayerParameter_DimCheckMode V1LayerParameter::PERMISSIVE;
+const V1LayerParameter_DimCheckMode V1LayerParameter::DimCheckMode_MIN;
+const V1LayerParameter_DimCheckMode V1LayerParameter::DimCheckMode_MAX;
+const int V1LayerParameter::DimCheckMode_ARRAYSIZE;
+#endif  // _MSC_VER
+#ifndef _MSC_VER
+const int V1LayerParameter::kBottomFieldNumber;
+const int V1LayerParameter::kTopFieldNumber;
+const int V1LayerParameter::kNameFieldNumber;
+const int V1LayerParameter::kIncludeFieldNumber;
+const int V1LayerParameter::kExcludeFieldNumber;
+const int V1LayerParameter::kTypeFieldNumber;
+const int V1LayerParameter::kBlobsFieldNumber;
+const int V1LayerParameter::kParamFieldNumber;
+const int V1LayerParameter::kBlobShareModeFieldNumber;
+const int V1LayerParameter::kBlobsLrFieldNumber;
+const int V1LayerParameter::kWeightDecayFieldNumber;
+const int V1LayerParameter::kLossWeightFieldNumber;
+const int V1LayerParameter::kAccuracyParamFieldNumber;
+const int V1LayerParameter::kArgmaxParamFieldNumber;
+const int V1LayerParameter::kConcatParamFieldNumber;
+const int V1LayerParameter::kContrastiveLossParamFieldNumber;
+const int V1LayerParameter::kConvolutionParamFieldNumber;
+const int V1LayerParameter::kDataParamFieldNumber;
+const int V1LayerParameter::kDropoutParamFieldNumber;
+const int V1LayerParameter::kDummyDataParamFieldNumber;
+const int V1LayerParameter::kEltwiseParamFieldNumber;
+const int V1LayerParameter::kExpParamFieldNumber;
+const int V1LayerParameter::kHdf5DataParamFieldNumber;
+const int V1LayerParameter::kHdf5OutputParamFieldNumber;
+const int V1LayerParameter::kHingeLossParamFieldNumber;
+const int V1LayerParameter::kImageDataParamFieldNumber;
+const int V1LayerParameter::kInfogainLossParamFieldNumber;
+const int V1LayerParameter::kInnerProductParamFieldNumber;
+const int V1LayerParameter::kLrnParamFieldNumber;
+const int V1LayerParameter::kMemoryDataParamFieldNumber;
+const int V1LayerParameter::kMvnParamFieldNumber;
+const int V1LayerParameter::kPoolingParamFieldNumber;
+const int V1LayerParameter::kPowerParamFieldNumber;
+const int V1LayerParameter::kReluParamFieldNumber;
+const int V1LayerParameter::kReshapeParamFieldNumber;
+const int V1LayerParameter::kRoiPoolingParamFieldNumber;
+const int V1LayerParameter::kSigmoidParamFieldNumber;
+const int V1LayerParameter::kSoftmaxParamFieldNumber;
+const int V1LayerParameter::kSliceParamFieldNumber;
+const int V1LayerParameter::kTanhParamFieldNumber;
+const int V1LayerParameter::kThresholdParamFieldNumber;
+const int V1LayerParameter::kWindowDataParamFieldNumber;
+const int V1LayerParameter::kTransformParamFieldNumber;
+const int V1LayerParameter::kLossParamFieldNumber;
+const int V1LayerParameter::kLayerFieldNumber;
+#endif  // !_MSC_VER
+
+V1LayerParameter::V1LayerParameter()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:caffe.V1LayerParameter)
+}
+
+void V1LayerParameter::InitAsDefaultInstance() {
+  accuracy_param_ = const_cast< ::caffe::AccuracyParameter*>(&::caffe::AccuracyParameter::default_instance());
+  argmax_par
