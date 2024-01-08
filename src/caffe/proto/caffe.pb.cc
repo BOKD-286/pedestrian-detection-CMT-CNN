@@ -24594,4 +24594,370 @@ bool V1LayerParameter::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .caffe.AccuracyParameter accuracy_
+      // optional .caffe.AccuracyParameter accuracy_param = 27;
+      case 27: {
+        if (tag == 218) {
+         parse_accuracy_param:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_accuracy_param()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(234)) goto parse_hinge_loss_param;
+        break;
+      }
+
+      // optional .caffe.HingeLossParameter hinge_loss_param = 29;
+      case 29: {
+        if (tag == 234) {
+         parse_hinge_loss_param:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_hinge_loss_param()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(242)) goto parse_relu_param;
+        break;
+      }
+
+      // optional .caffe.ReLUParameter relu_param = 30;
+      case 30: {
+        if (tag == 242) {
+         parse_relu_param:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_relu_param()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(250)) goto parse_slice_param;
+        break;
+      }
+
+      // optional .caffe.SliceParameter slice_param = 31;
+      case 31: {
+        if (tag == 250) {
+         parse_slice_param:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_slice_param()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(258)) goto parse_include;
+        break;
+      }
+
+      // repeated .caffe.NetStateRule include = 32;
+      case 32: {
+        if (tag == 258) {
+         parse_include:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+                input, add_include()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(258)) goto parse_include;
+        if (input->ExpectTag(266)) goto parse_exclude;
+        break;
+      }
+
+      // repeated .caffe.NetStateRule exclude = 33;
+      case 33: {
+        if (tag == 266) {
+         parse_exclude:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+                input, add_exclude()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(266)) goto parse_exclude;
+        if (input->ExpectTag(274)) goto parse_mvn_param;
+        break;
+      }
+
+      // optional .caffe.MVNParameter mvn_param = 34;
+      case 34: {
+        if (tag == 274) {
+         parse_mvn_param:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_mvn_param()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(285)) goto parse_loss_weight;
+        break;
+      }
+
+      // repeated float loss_weight = 35;
+      case 35: {
+        if (tag == 285) {
+         parse_loss_weight:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 2, 285, input, this->mutable_loss_weight())));
+        } else if (tag == 282) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPackedPrimitiveNoInline<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, this->mutable_loss_weight())));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(285)) goto parse_loss_weight;
+        if (input->ExpectTag(290)) goto parse_transform_param;
+        break;
+      }
+
+      // optional .caffe.TransformationParameter transform_param = 36;
+      case 36: {
+        if (tag == 290) {
+         parse_transform_param:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_transform_param()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(298)) goto parse_tanh_param;
+        break;
+      }
+
+      // optional .caffe.TanHParameter tanh_param = 37;
+      case 37: {
+        if (tag == 298) {
+         parse_tanh_param:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_tanh_param()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(306)) goto parse_sigmoid_param;
+        break;
+      }
+
+      // optional .caffe.SigmoidParameter sigmoid_param = 38;
+      case 38: {
+        if (tag == 306) {
+         parse_sigmoid_param:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_sigmoid_param()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(314)) goto parse_softmax_param;
+        break;
+      }
+
+      // optional .caffe.SoftmaxParameter softmax_param = 39;
+      case 39: {
+        if (tag == 314) {
+         parse_softmax_param:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_softmax_param()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(322)) goto parse_contrastive_loss_param;
+        break;
+      }
+
+      // optional .caffe.ContrastiveLossParameter contrastive_loss_param = 40;
+      case 40: {
+        if (tag == 322) {
+         parse_contrastive_loss_param:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_contrastive_loss_param()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(330)) goto parse_exp_param;
+        break;
+      }
+
+      // optional .caffe.ExpParameter exp_param = 41;
+      case 41: {
+        if (tag == 330) {
+         parse_exp_param:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_exp_param()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(338)) goto parse_loss_param;
+        break;
+      }
+
+      // optional .caffe.LossParameter loss_param = 42;
+      case 42: {
+        if (tag == 338) {
+         parse_loss_param:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_loss_param()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(346)) goto parse_roi_pooling_param;
+        break;
+      }
+
+      // optional .caffe.ROIPoolingParameter roi_pooling_param = 43;
+      case 43: {
+        if (tag == 346) {
+         parse_roi_pooling_param:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_roi_pooling_param()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(354)) goto parse_reshape_param;
+        break;
+      }
+
+      // optional .caffe.ReshapeParameter reshape_param = 44;
+      case 44: {
+        if (tag == 354) {
+         parse_reshape_param:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_reshape_param()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(8010)) goto parse_param;
+        break;
+      }
+
+      // repeated string param = 1001;
+      case 1001: {
+        if (tag == 8010) {
+         parse_param:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->add_param()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->param(this->param_size() - 1).data(),
+            this->param(this->param_size() - 1).length(),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "param");
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(8010)) goto parse_param;
+        if (input->ExpectTag(8016)) goto parse_blob_share_mode;
+        break;
+      }
+
+      // repeated .caffe.V1LayerParameter.DimCheckMode blob_share_mode = 1002;
+      case 1002: {
+        if (tag == 8016) {
+         parse_blob_share_mode:
+          int value;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          if (::caffe::V1LayerParameter_DimCheckMode_IsValid(value)) {
+            add_blob_share_mode(static_cast< ::caffe::V1LayerParameter_DimCheckMode >(value));
+          } else {
+            mutable_unknown_fields()->AddVarint(1002, value);
+          }
+        } else if (tag == 8018) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPackedEnumNoInline(
+                 input,
+                 &::caffe::V1LayerParameter_DimCheckMode_IsValid,
+                 this->mutable_blob_share_mode())));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(8016)) goto parse_blob_share_mode;
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:caffe.V1LayerParameter)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:caffe.V1LayerParameter)
+  return false;
+#undef DO_
+}
+
+void V1LayerParameter::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:caffe.V1LayerParameter)
+  // optional .caffe.V0LayerParameter layer = 1;
+  if (has_layer()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      1, this->layer(), output);
+  }
+
+  // repeated string bottom = 2;
+  for (int i = 0; i < this->bottom_size(); i++) {
+  ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+    this->bottom(i).data(), this->bottom(i).length(),
+    ::google::protobuf::internal::WireFormat::SERIALIZE,
+    "bottom");
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      2, this->bottom(i), output);
+  }
+
+  // repeated string top = 3;
+  for (int i = 0; i < this->top_size(); i++) {
+  ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+    this->top(i).data(), this->top(i).length(),
+    ::google::protobuf::internal::WireFormat::SERIALIZE,
+    "top");
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      3, this->top(i), output);
+  }
+
+  // optional string name = 4;
+  if (has_name()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->name().data(), this->name().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "name");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      4, this->name(), output);
+  }
+
+  // optional .caffe.V1LayerParameter.LayerType type = 5;
+  if (has_type()) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      5, this->type(), output);
+  }
+
+  // repeated .caffe.BlobProto blobs = 6;
+  for (int i = 0; i < this->blobs_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      6, this->blobs(i), output);
+  }
+
+  // repeated float blobs_lr = 7;
+  for (int i = 0; i < this->blobs_lr_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(
+      7, this->blobs_lr(i), output);
+  }
+
+  // repeated float weight_decay = 8;
+  for (int i = 0; i < this->weight_decay_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(
+      8, this->weight_decay(i), output);
+  }
+
+  // optional .caffe.ConcatParameter concat_param = 9;
+  if (has_concat_param()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      9, this->concat_param(), output);
+  }
+
+  // optional .caffe.ConvolutionParameter convolution_param = 10;
+  if (has_convo
