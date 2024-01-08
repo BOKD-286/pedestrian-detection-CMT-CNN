@@ -25670,4 +25670,350 @@ int V1LayerParameter::ByteSize() const {
     }
 
     // optional .caffe.MVNParameter mvn_param = 34;
-    if (ha
+    if (has_mvn_param()) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->mvn_param());
+    }
+
+    // optional .caffe.PoolingParameter pooling_param = 19;
+    if (has_pooling_param()) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->pooling_param());
+    }
+
+  }
+  if (_has_bits_[32 / 32] & (0xffu << (32 % 32))) {
+    // optional .caffe.PowerParameter power_param = 21;
+    if (has_power_param()) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->power_param());
+    }
+
+    // optional .caffe.ReLUParameter relu_param = 30;
+    if (has_relu_param()) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->relu_param());
+    }
+
+    // optional .caffe.ReshapeParameter reshape_param = 44;
+    if (has_reshape_param()) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->reshape_param());
+    }
+
+    // optional .caffe.ROIPoolingParameter roi_pooling_param = 43;
+    if (has_roi_pooling_param()) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->roi_pooling_param());
+    }
+
+    // optional .caffe.SigmoidParameter sigmoid_param = 38;
+    if (has_sigmoid_param()) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->sigmoid_param());
+    }
+
+    // optional .caffe.SoftmaxParameter softmax_param = 39;
+    if (has_softmax_param()) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->softmax_param());
+    }
+
+    // optional .caffe.SliceParameter slice_param = 31;
+    if (has_slice_param()) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->slice_param());
+    }
+
+    // optional .caffe.TanHParameter tanh_param = 37;
+    if (has_tanh_param()) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->tanh_param());
+    }
+
+  }
+  if (_has_bits_[40 / 32] & (0xffu << (40 % 32))) {
+    // optional .caffe.ThresholdParameter threshold_param = 25;
+    if (has_threshold_param()) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->threshold_param());
+    }
+
+    // optional .caffe.WindowDataParameter window_data_param = 20;
+    if (has_window_data_param()) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->window_data_param());
+    }
+
+    // optional .caffe.TransformationParameter transform_param = 36;
+    if (has_transform_param()) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->transform_param());
+    }
+
+    // optional .caffe.LossParameter loss_param = 42;
+    if (has_loss_param()) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->loss_param());
+    }
+
+    // optional .caffe.V0LayerParameter layer = 1;
+    if (has_layer()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->layer());
+    }
+
+  }
+  // repeated string bottom = 2;
+  total_size += 1 * this->bottom_size();
+  for (int i = 0; i < this->bottom_size(); i++) {
+    total_size += ::google::protobuf::internal::WireFormatLite::StringSize(
+      this->bottom(i));
+  }
+
+  // repeated string top = 3;
+  total_size += 1 * this->top_size();
+  for (int i = 0; i < this->top_size(); i++) {
+    total_size += ::google::protobuf::internal::WireFormatLite::StringSize(
+      this->top(i));
+  }
+
+  // repeated .caffe.NetStateRule include = 32;
+  total_size += 2 * this->include_size();
+  for (int i = 0; i < this->include_size(); i++) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        this->include(i));
+  }
+
+  // repeated .caffe.NetStateRule exclude = 33;
+  total_size += 2 * this->exclude_size();
+  for (int i = 0; i < this->exclude_size(); i++) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        this->exclude(i));
+  }
+
+  // repeated .caffe.BlobProto blobs = 6;
+  total_size += 1 * this->blobs_size();
+  for (int i = 0; i < this->blobs_size(); i++) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        this->blobs(i));
+  }
+
+  // repeated string param = 1001;
+  total_size += 2 * this->param_size();
+  for (int i = 0; i < this->param_size(); i++) {
+    total_size += ::google::protobuf::internal::WireFormatLite::StringSize(
+      this->param(i));
+  }
+
+  // repeated .caffe.V1LayerParameter.DimCheckMode blob_share_mode = 1002;
+  {
+    int data_size = 0;
+    for (int i = 0; i < this->blob_share_mode_size(); i++) {
+      data_size += ::google::protobuf::internal::WireFormatLite::EnumSize(
+        this->blob_share_mode(i));
+    }
+    total_size += 2 * this->blob_share_mode_size() + data_size;
+  }
+
+  // repeated float blobs_lr = 7;
+  {
+    int data_size = 0;
+    data_size = 4 * this->blobs_lr_size();
+    total_size += 1 * this->blobs_lr_size() + data_size;
+  }
+
+  // repeated float weight_decay = 8;
+  {
+    int data_size = 0;
+    data_size = 4 * this->weight_decay_size();
+    total_size += 1 * this->weight_decay_size() + data_size;
+  }
+
+  // repeated float loss_weight = 35;
+  {
+    int data_size = 0;
+    data_size = 4 * this->loss_weight_size();
+    total_size += 2 * this->loss_weight_size() + data_size;
+  }
+
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void V1LayerParameter::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const V1LayerParameter* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const V1LayerParameter*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void V1LayerParameter::MergeFrom(const V1LayerParameter& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  bottom_.MergeFrom(from.bottom_);
+  top_.MergeFrom(from.top_);
+  include_.MergeFrom(from.include_);
+  exclude_.MergeFrom(from.exclude_);
+  blobs_.MergeFrom(from.blobs_);
+  param_.MergeFrom(from.param_);
+  blob_share_mode_.MergeFrom(from.blob_share_mode_);
+  blobs_lr_.MergeFrom(from.blobs_lr_);
+  weight_decay_.MergeFrom(from.weight_decay_);
+  loss_weight_.MergeFrom(from.loss_weight_);
+  if (from._has_bits_[2 / 32] & (0xffu << (2 % 32))) {
+    if (from.has_name()) {
+      set_name(from.name());
+    }
+    if (from.has_type()) {
+      set_type(from.type());
+    }
+  }
+  if (from._has_bits_[12 / 32] & (0xffu << (12 % 32))) {
+    if (from.has_accuracy_param()) {
+      mutable_accuracy_param()->::caffe::AccuracyParameter::MergeFrom(from.accuracy_param());
+    }
+    if (from.has_argmax_param()) {
+      mutable_argmax_param()->::caffe::ArgMaxParameter::MergeFrom(from.argmax_param());
+    }
+    if (from.has_concat_param()) {
+      mutable_concat_param()->::caffe::ConcatParameter::MergeFrom(from.concat_param());
+    }
+    if (from.has_contrastive_loss_param()) {
+      mutable_contrastive_loss_param()->::caffe::ContrastiveLossParameter::MergeFrom(from.contrastive_loss_param());
+    }
+  }
+  if (from._has_bits_[16 / 32] & (0xffu << (16 % 32))) {
+    if (from.has_convolution_param()) {
+      mutable_convolution_param()->::caffe::ConvolutionParameter::MergeFrom(from.convolution_param());
+    }
+    if (from.has_data_param()) {
+      mutable_data_param()->::caffe::DataParameter::MergeFrom(from.data_param());
+    }
+    if (from.has_dropout_param()) {
+      mutable_dropout_param()->::caffe::DropoutParameter::MergeFrom(from.dropout_param());
+    }
+    if (from.has_dummy_data_param()) {
+      mutable_dummy_data_param()->::caffe::DummyDataParameter::MergeFrom(from.dummy_data_param());
+    }
+    if (from.has_eltwise_param()) {
+      mutable_eltwise_param()->::caffe::EltwiseParameter::MergeFrom(from.eltwise_param());
+    }
+    if (from.has_exp_param()) {
+      mutable_exp_param()->::caffe::ExpParameter::MergeFrom(from.exp_param());
+    }
+    if (from.has_hdf5_data_param()) {
+      mutable_hdf5_data_param()->::caffe::HDF5DataParameter::MergeFrom(from.hdf5_data_param());
+    }
+    if (from.has_hdf5_output_param()) {
+      mutable_hdf5_output_param()->::caffe::HDF5OutputParameter::MergeFrom(from.hdf5_output_param());
+    }
+  }
+  if (from._has_bits_[24 / 32] & (0xffu << (24 % 32))) {
+    if (from.has_hinge_loss_param()) {
+      mutable_hinge_loss_param()->::caffe::HingeLossParameter::MergeFrom(from.hinge_loss_param());
+    }
+    if (from.has_image_data_param()) {
+      mutable_image_data_param()->::caffe::ImageDataParameter::MergeFrom(from.image_data_param());
+    }
+    if (from.has_infogain_loss_param()) {
+      mutable_infogain_loss_param()->::caffe::InfogainLossParameter::MergeFrom(from.infogain_loss_param());
+    }
+    if (from.has_inner_product_param()) {
+      mutable_inner_product_param()->::caffe::InnerProductParameter::MergeFrom(from.inner_product_param());
+    }
+    if (from.has_lrn_param()) {
+      mutable_lrn_param()->::caffe::LRNParameter::MergeFrom(from.lrn_param());
+    }
+    if (from.has_memory_data_param()) {
+      mutable_memory_data_param()->::caffe::MemoryDataParameter::MergeFrom(from.memory_data_param());
+    }
+    if (from.has_mvn_param()) {
+      mutable_mvn_param()->::caffe::MVNParameter::MergeFrom(from.mvn_param());
+    }
+    if (from.has_pooling_param()) {
+      mutable_pooling_param()->::caffe::PoolingParameter::MergeFrom(from.pooling_param());
+    }
+  }
+  if (from._has_bits_[32 / 32] & (0xffu << (32 % 32))) {
+    if (from.has_power_param()) {
+      mutable_power_param()->::caffe::PowerParameter::MergeFrom(from.power_param());
+    }
+    if (from.has_relu_param()) {
+      mutable_relu_param()->::caffe::ReLUParameter::MergeFrom(from.relu_param());
+    }
+    if (from.has_reshape_param()) {
+      mutable_reshape_param()->::caffe::ReshapeParameter::MergeFrom(from.reshape_param());
+    }
+    if (from.has_roi_pooling_param()) {
+      mutable_roi_pooling_param()->::caffe::ROIPoolingParameter::MergeFrom(from.roi_pooling_param());
+    }
+    if (from.has_sigmoid_param()) {
+      mutable_sigmoid_param()->::caffe::SigmoidParameter::MergeFrom(from.sigmoid_param());
+    }
+    if (from.has_softmax_param()) {
+      mutable_softmax_param()->::caffe::SoftmaxParameter::MergeFrom(from.softmax_param());
+    }
+    if (from.has_slice_param()) {
+      mutable_slice_param()->::caffe::SliceParameter::MergeFrom(from.slice_param());
+    }
+    if (from.has_tanh_param()) {
+      mutable_tanh_param()->::caffe::TanHParameter::MergeFrom(from.tanh_param());
+    }
+  }
+  if (from._has_bits_[40 / 32] & (0xffu << (40 % 32))) {
+    if (from.has_threshold_param()) {
+      mutable_threshold_param()->::caffe::ThresholdParameter::MergeFrom(from.threshold_param());
+    }
+    if (from.has_window_data_param()) {
+      mutable_window_data_param()->::caffe::WindowDataParameter::MergeFrom(from.window_data_param());
+    }
+    if (from.has_transform_param()) {
+      mutable_transform_param()->::caffe::TransformationParameter::MergeFrom(from.transform_param());
+    }
+    if (from.has_loss_param()) {
+      mutable_loss_param()->::caffe::LossParameter::MergeFrom(from.loss_param());
+    }
+    if (from.has_layer()) {
+      mutable_layer()->::caffe::V0LayerParameter::MergeFrom(from.layer());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void V1LayerParameter::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void V1LayerParameter::CopyFrom(const V1Layer
