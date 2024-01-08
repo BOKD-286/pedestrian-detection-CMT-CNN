@@ -26016,4 +26016,357 @@ void V1LayerParameter::CopyFrom(const ::google::protobuf::Message& from) {
   MergeFrom(from);
 }
 
-void V1LayerParameter::CopyFrom(const V1Layer
+void V1LayerParameter::CopyFrom(const V1LayerParameter& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool V1LayerParameter::IsInitialized() const {
+
+  return true;
+}
+
+void V1LayerParameter::Swap(V1LayerParameter* other) {
+  if (other != this) {
+    bottom_.Swap(&other->bottom_);
+    top_.Swap(&other->top_);
+    std::swap(name_, other->name_);
+    include_.Swap(&other->include_);
+    exclude_.Swap(&other->exclude_);
+    std::swap(type_, other->type_);
+    blobs_.Swap(&other->blobs_);
+    param_.Swap(&other->param_);
+    blob_share_mode_.Swap(&other->blob_share_mode_);
+    blobs_lr_.Swap(&other->blobs_lr_);
+    weight_decay_.Swap(&other->weight_decay_);
+    loss_weight_.Swap(&other->loss_weight_);
+    std::swap(accuracy_param_, other->accuracy_param_);
+    std::swap(argmax_param_, other->argmax_param_);
+    std::swap(concat_param_, other->concat_param_);
+    std::swap(contrastive_loss_param_, other->contrastive_loss_param_);
+    std::swap(convolution_param_, other->convolution_param_);
+    std::swap(data_param_, other->data_param_);
+    std::swap(dropout_param_, other->dropout_param_);
+    std::swap(dummy_data_param_, other->dummy_data_param_);
+    std::swap(eltwise_param_, other->eltwise_param_);
+    std::swap(exp_param_, other->exp_param_);
+    std::swap(hdf5_data_param_, other->hdf5_data_param_);
+    std::swap(hdf5_output_param_, other->hdf5_output_param_);
+    std::swap(hinge_loss_param_, other->hinge_loss_param_);
+    std::swap(image_data_param_, other->image_data_param_);
+    std::swap(infogain_loss_param_, other->infogain_loss_param_);
+    std::swap(inner_product_param_, other->inner_product_param_);
+    std::swap(lrn_param_, other->lrn_param_);
+    std::swap(memory_data_param_, other->memory_data_param_);
+    std::swap(mvn_param_, other->mvn_param_);
+    std::swap(pooling_param_, other->pooling_param_);
+    std::swap(power_param_, other->power_param_);
+    std::swap(relu_param_, other->relu_param_);
+    std::swap(reshape_param_, other->reshape_param_);
+    std::swap(roi_pooling_param_, other->roi_pooling_param_);
+    std::swap(sigmoid_param_, other->sigmoid_param_);
+    std::swap(softmax_param_, other->softmax_param_);
+    std::swap(slice_param_, other->slice_param_);
+    std::swap(tanh_param_, other->tanh_param_);
+    std::swap(threshold_param_, other->threshold_param_);
+    std::swap(window_data_param_, other->window_data_param_);
+    std::swap(transform_param_, other->transform_param_);
+    std::swap(loss_param_, other->loss_param_);
+    std::swap(layer_, other->layer_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    std::swap(_has_bits_[1], other->_has_bits_[1]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata V1LayerParameter::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = V1LayerParameter_descriptor_;
+  metadata.reflection = V1LayerParameter_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+const ::google::protobuf::EnumDescriptor* V0LayerParameter_PoolMethod_descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return V0LayerParameter_PoolMethod_descriptor_;
+}
+bool V0LayerParameter_PoolMethod_IsValid(int value) {
+  switch(value) {
+    case 0:
+    case 1:
+    case 2:
+      return true;
+    default:
+      return false;
+  }
+}
+
+#ifndef _MSC_VER
+const V0LayerParameter_PoolMethod V0LayerParameter::MAX;
+const V0LayerParameter_PoolMethod V0LayerParameter::AVE;
+const V0LayerParameter_PoolMethod V0LayerParameter::STOCHASTIC;
+const V0LayerParameter_PoolMethod V0LayerParameter::PoolMethod_MIN;
+const V0LayerParameter_PoolMethod V0LayerParameter::PoolMethod_MAX;
+const int V0LayerParameter::PoolMethod_ARRAYSIZE;
+#endif  // _MSC_VER
+::std::string* V0LayerParameter::_default_det_crop_mode_ = NULL;
+#ifndef _MSC_VER
+const int V0LayerParameter::kNameFieldNumber;
+const int V0LayerParameter::kTypeFieldNumber;
+const int V0LayerParameter::kNumOutputFieldNumber;
+const int V0LayerParameter::kBiastermFieldNumber;
+const int V0LayerParameter::kWeightFillerFieldNumber;
+const int V0LayerParameter::kBiasFillerFieldNumber;
+const int V0LayerParameter::kPadFieldNumber;
+const int V0LayerParameter::kKernelsizeFieldNumber;
+const int V0LayerParameter::kGroupFieldNumber;
+const int V0LayerParameter::kStrideFieldNumber;
+const int V0LayerParameter::kPoolFieldNumber;
+const int V0LayerParameter::kDropoutRatioFieldNumber;
+const int V0LayerParameter::kLocalSizeFieldNumber;
+const int V0LayerParameter::kAlphaFieldNumber;
+const int V0LayerParameter::kBetaFieldNumber;
+const int V0LayerParameter::kKFieldNumber;
+const int V0LayerParameter::kSourceFieldNumber;
+const int V0LayerParameter::kScaleFieldNumber;
+const int V0LayerParameter::kMeanfileFieldNumber;
+const int V0LayerParameter::kBatchsizeFieldNumber;
+const int V0LayerParameter::kCropsizeFieldNumber;
+const int V0LayerParameter::kMirrorFieldNumber;
+const int V0LayerParameter::kBlobsFieldNumber;
+const int V0LayerParameter::kBlobsLrFieldNumber;
+const int V0LayerParameter::kWeightDecayFieldNumber;
+const int V0LayerParameter::kRandSkipFieldNumber;
+const int V0LayerParameter::kDetFgThresholdFieldNumber;
+const int V0LayerParameter::kDetBgThresholdFieldNumber;
+const int V0LayerParameter::kDetFgFractionFieldNumber;
+const int V0LayerParameter::kDetContextPadFieldNumber;
+const int V0LayerParameter::kDetCropModeFieldNumber;
+const int V0LayerParameter::kNewNumFieldNumber;
+const int V0LayerParameter::kNewChannelsFieldNumber;
+const int V0LayerParameter::kNewHeightFieldNumber;
+const int V0LayerParameter::kNewWidthFieldNumber;
+const int V0LayerParameter::kShuffleImagesFieldNumber;
+const int V0LayerParameter::kConcatDimFieldNumber;
+const int V0LayerParameter::kHdf5OutputParamFieldNumber;
+#endif  // !_MSC_VER
+
+V0LayerParameter::V0LayerParameter()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:caffe.V0LayerParameter)
+}
+
+void V0LayerParameter::InitAsDefaultInstance() {
+  weight_filler_ = const_cast< ::caffe::FillerParameter*>(&::caffe::FillerParameter::default_instance());
+  bias_filler_ = const_cast< ::caffe::FillerParameter*>(&::caffe::FillerParameter::default_instance());
+  hdf5_output_param_ = const_cast< ::caffe::HDF5OutputParameter*>(&::caffe::HDF5OutputParameter::default_instance());
+}
+
+V0LayerParameter::V0LayerParameter(const V0LayerParameter& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:caffe.V0LayerParameter)
+}
+
+void V0LayerParameter::SharedCtor() {
+  ::google::protobuf::internal::GetEmptyString();
+  _cached_size_ = 0;
+  name_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  type_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  num_output_ = 0u;
+  biasterm_ = true;
+  weight_filler_ = NULL;
+  bias_filler_ = NULL;
+  pad_ = 0u;
+  kernelsize_ = 0u;
+  group_ = 1u;
+  stride_ = 1u;
+  pool_ = 0;
+  dropout_ratio_ = 0.5f;
+  local_size_ = 5u;
+  alpha_ = 1;
+  beta_ = 0.75f;
+  k_ = 1;
+  source_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  scale_ = 1;
+  meanfile_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  batchsize_ = 0u;
+  cropsize_ = 0u;
+  mirror_ = false;
+  rand_skip_ = 0u;
+  det_fg_threshold_ = 0.5f;
+  det_bg_threshold_ = 0.5f;
+  det_fg_fraction_ = 0.25f;
+  det_context_pad_ = 0u;
+  det_crop_mode_ = const_cast< ::std::string*>(_default_det_crop_mode_);
+  new_num_ = 0;
+  new_channels_ = 0;
+  new_height_ = 0;
+  new_width_ = 0;
+  shuffle_images_ = false;
+  concat_dim_ = 1u;
+  hdf5_output_param_ = NULL;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+V0LayerParameter::~V0LayerParameter() {
+  // @@protoc_insertion_point(destructor:caffe.V0LayerParameter)
+  SharedDtor();
+}
+
+void V0LayerParameter::SharedDtor() {
+  if (name_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete name_;
+  }
+  if (type_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete type_;
+  }
+  if (source_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete source_;
+  }
+  if (meanfile_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete meanfile_;
+  }
+  if (det_crop_mode_ != _default_det_crop_mode_) {
+    delete det_crop_mode_;
+  }
+  if (this != default_instance_) {
+    delete weight_filler_;
+    delete bias_filler_;
+    delete hdf5_output_param_;
+  }
+}
+
+void V0LayerParameter::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* V0LayerParameter::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return V0LayerParameter_descriptor_;
+}
+
+const V0LayerParameter& V0LayerParameter::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_caffe_2eproto();
+  return *default_instance_;
+}
+
+V0LayerParameter* V0LayerParameter::default_instance_ = NULL;
+
+V0LayerParameter* V0LayerParameter::New() const {
+  return new V0LayerParameter;
+}
+
+void V0LayerParameter::Clear() {
+#define OFFSET_OF_FIELD_(f) (reinterpret_cast<char*>(      \
+  &reinterpret_cast<V0LayerParameter*>(16)->f) - \
+   reinterpret_cast<char*>(16))
+
+#define ZR_(first, last) do {                              \
+    size_t f = OFFSET_OF_FIELD_(first);                    \
+    size_t n = OFFSET_OF_FIELD_(last) - f + sizeof(last);  \
+    ::memset(&first, 0, n);                                \
+  } while (0)
+
+  if (_has_bits_[0 / 32] & 255) {
+    ZR_(num_output_, pad_);
+    if (has_name()) {
+      if (name_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+        name_->clear();
+      }
+    }
+    if (has_type()) {
+      if (type_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+        type_->clear();
+      }
+    }
+    biasterm_ = true;
+    if (has_weight_filler()) {
+      if (weight_filler_ != NULL) weight_filler_->::caffe::FillerParameter::Clear();
+    }
+    if (has_bias_filler()) {
+      if (bias_filler_ != NULL) bias_filler_->::caffe::FillerParameter::Clear();
+    }
+    kernelsize_ = 0u;
+  }
+  if (_has_bits_[8 / 32] & 65280) {
+    group_ = 1u;
+    stride_ = 1u;
+    pool_ = 0;
+    dropout_ratio_ = 0.5f;
+    local_size_ = 5u;
+    alpha_ = 1;
+    beta_ = 0.75f;
+    k_ = 1;
+  }
+  if (_has_bits_[16 / 32] & 4128768) {
+    if (has_source()) {
+      if (source_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+        source_->clear();
+      }
+    }
+    scale_ = 1;
+    if (has_meanfile()) {
+      if (meanfile_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+        meanfile_->clear();
+      }
+    }
+    batchsize_ = 0u;
+    cropsize_ = 0u;
+    mirror_ = false;
+  }
+  if (_has_bits_[24 / 32] & 4261412864) {
+    rand_skip_ = 0u;
+    det_fg_threshold_ = 0.5f;
+    det_bg_threshold_ = 0.5f;
+    det_fg_fraction_ = 0.25f;
+    det_context_pad_ = 0u;
+    if (has_det_crop_mode()) {
+      if (det_crop_mode_ != _default_det_crop_mode_) {
+        det_crop_mode_->assign(*_default_det_crop_mode_);
+      }
+    }
+    new_num_ = 0;
+  }
+  if (_has_bits_[32 / 32] & 63) {
+    ZR_(new_channels_, new_width_);
+    shuffle_images_ = false;
+    concat_dim_ = 1u;
+    if (has_hdf5_output_param()) {
+      if (hdf5_output_param_ != NULL) hdf5_output_param_->::caffe::HDF5OutputParameter::Clear();
+    }
+  }
+
+#undef OFFSET_OF_FIELD_
+#undef ZR_
+
+  blobs_.Clear();
+  blobs_lr_.Clear();
+  weight_decay_.Clear();
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool V0LayerParameter::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:caffe.V0LayerParameter)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(16383);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional string name = 1;
+      case 1: {
+        if (tag == 10) {
+          DO_(::google::protobuf::internal::WireFormat
