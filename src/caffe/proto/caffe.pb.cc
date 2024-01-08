@@ -24960,4 +24960,347 @@ void V1LayerParameter::SerializeWithCachedSizes(
   }
 
   // optional .caffe.ConvolutionParameter convolution_param = 10;
-  if (has_convo
+  if (has_convolution_param()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      10, this->convolution_param(), output);
+  }
+
+  // optional .caffe.DataParameter data_param = 11;
+  if (has_data_param()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      11, this->data_param(), output);
+  }
+
+  // optional .caffe.DropoutParameter dropout_param = 12;
+  if (has_dropout_param()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      12, this->dropout_param(), output);
+  }
+
+  // optional .caffe.HDF5DataParameter hdf5_data_param = 13;
+  if (has_hdf5_data_param()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      13, this->hdf5_data_param(), output);
+  }
+
+  // optional .caffe.HDF5OutputParameter hdf5_output_param = 14;
+  if (has_hdf5_output_param()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      14, this->hdf5_output_param(), output);
+  }
+
+  // optional .caffe.ImageDataParameter image_data_param = 15;
+  if (has_image_data_param()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      15, this->image_data_param(), output);
+  }
+
+  // optional .caffe.InfogainLossParameter infogain_loss_param = 16;
+  if (has_infogain_loss_param()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      16, this->infogain_loss_param(), output);
+  }
+
+  // optional .caffe.InnerProductParameter inner_product_param = 17;
+  if (has_inner_product_param()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      17, this->inner_product_param(), output);
+  }
+
+  // optional .caffe.LRNParameter lrn_param = 18;
+  if (has_lrn_param()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      18, this->lrn_param(), output);
+  }
+
+  // optional .caffe.PoolingParameter pooling_param = 19;
+  if (has_pooling_param()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      19, this->pooling_param(), output);
+  }
+
+  // optional .caffe.WindowDataParameter window_data_param = 20;
+  if (has_window_data_param()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      20, this->window_data_param(), output);
+  }
+
+  // optional .caffe.PowerParameter power_param = 21;
+  if (has_power_param()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      21, this->power_param(), output);
+  }
+
+  // optional .caffe.MemoryDataParameter memory_data_param = 22;
+  if (has_memory_data_param()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      22, this->memory_data_param(), output);
+  }
+
+  // optional .caffe.ArgMaxParameter argmax_param = 23;
+  if (has_argmax_param()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      23, this->argmax_param(), output);
+  }
+
+  // optional .caffe.EltwiseParameter eltwise_param = 24;
+  if (has_eltwise_param()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      24, this->eltwise_param(), output);
+  }
+
+  // optional .caffe.ThresholdParameter threshold_param = 25;
+  if (has_threshold_param()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      25, this->threshold_param(), output);
+  }
+
+  // optional .caffe.DummyDataParameter dummy_data_param = 26;
+  if (has_dummy_data_param()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      26, this->dummy_data_param(), output);
+  }
+
+  // optional .caffe.AccuracyParameter accuracy_param = 27;
+  if (has_accuracy_param()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      27, this->accuracy_param(), output);
+  }
+
+  // optional .caffe.HingeLossParameter hinge_loss_param = 29;
+  if (has_hinge_loss_param()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      29, this->hinge_loss_param(), output);
+  }
+
+  // optional .caffe.ReLUParameter relu_param = 30;
+  if (has_relu_param()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      30, this->relu_param(), output);
+  }
+
+  // optional .caffe.SliceParameter slice_param = 31;
+  if (has_slice_param()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      31, this->slice_param(), output);
+  }
+
+  // repeated .caffe.NetStateRule include = 32;
+  for (int i = 0; i < this->include_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      32, this->include(i), output);
+  }
+
+  // repeated .caffe.NetStateRule exclude = 33;
+  for (int i = 0; i < this->exclude_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      33, this->exclude(i), output);
+  }
+
+  // optional .caffe.MVNParameter mvn_param = 34;
+  if (has_mvn_param()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      34, this->mvn_param(), output);
+  }
+
+  // repeated float loss_weight = 35;
+  for (int i = 0; i < this->loss_weight_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(
+      35, this->loss_weight(i), output);
+  }
+
+  // optional .caffe.TransformationParameter transform_param = 36;
+  if (has_transform_param()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      36, this->transform_param(), output);
+  }
+
+  // optional .caffe.TanHParameter tanh_param = 37;
+  if (has_tanh_param()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      37, this->tanh_param(), output);
+  }
+
+  // optional .caffe.SigmoidParameter sigmoid_param = 38;
+  if (has_sigmoid_param()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      38, this->sigmoid_param(), output);
+  }
+
+  // optional .caffe.SoftmaxParameter softmax_param = 39;
+  if (has_softmax_param()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      39, this->softmax_param(), output);
+  }
+
+  // optional .caffe.ContrastiveLossParameter contrastive_loss_param = 40;
+  if (has_contrastive_loss_param()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      40, this->contrastive_loss_param(), output);
+  }
+
+  // optional .caffe.ExpParameter exp_param = 41;
+  if (has_exp_param()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      41, this->exp_param(), output);
+  }
+
+  // optional .caffe.LossParameter loss_param = 42;
+  if (has_loss_param()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      42, this->loss_param(), output);
+  }
+
+  // optional .caffe.ROIPoolingParameter roi_pooling_param = 43;
+  if (has_roi_pooling_param()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      43, this->roi_pooling_param(), output);
+  }
+
+  // optional .caffe.ReshapeParameter reshape_param = 44;
+  if (has_reshape_param()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      44, this->reshape_param(), output);
+  }
+
+  // repeated string param = 1001;
+  for (int i = 0; i < this->param_size(); i++) {
+  ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+    this->param(i).data(), this->param(i).length(),
+    ::google::protobuf::internal::WireFormat::SERIALIZE,
+    "param");
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      1001, this->param(i), output);
+  }
+
+  // repeated .caffe.V1LayerParameter.DimCheckMode blob_share_mode = 1002;
+  for (int i = 0; i < this->blob_share_mode_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      1002, this->blob_share_mode(i), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:caffe.V1LayerParameter)
+}
+
+::google::protobuf::uint8* V1LayerParameter::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:caffe.V1LayerParameter)
+  // optional .caffe.V0LayerParameter layer = 1;
+  if (has_layer()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        1, this->layer(), target);
+  }
+
+  // repeated string bottom = 2;
+  for (int i = 0; i < this->bottom_size(); i++) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->bottom(i).data(), this->bottom(i).length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "bottom");
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteStringToArray(2, this->bottom(i), target);
+  }
+
+  // repeated string top = 3;
+  for (int i = 0; i < this->top_size(); i++) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->top(i).data(), this->top(i).length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "top");
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteStringToArray(3, this->top(i), target);
+  }
+
+  // optional string name = 4;
+  if (has_name()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->name().data(), this->name().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "name");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        4, this->name(), target);
+  }
+
+  // optional .caffe.V1LayerParameter.LayerType type = 5;
+  if (has_type()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      5, this->type(), target);
+  }
+
+  // repeated .caffe.BlobProto blobs = 6;
+  for (int i = 0; i < this->blobs_size(); i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        6, this->blobs(i), target);
+  }
+
+  // repeated float blobs_lr = 7;
+  for (int i = 0; i < this->blobs_lr_size(); i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteFloatToArray(7, this->blobs_lr(i), target);
+  }
+
+  // repeated float weight_decay = 8;
+  for (int i = 0; i < this->weight_decay_size(); i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteFloatToArray(8, this->weight_decay(i), target);
+  }
+
+  // optional .caffe.ConcatParameter concat_param = 9;
+  if (has_concat_param()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        9, this->concat_param(), target);
+  }
+
+  // optional .caffe.ConvolutionParameter convolution_param = 10;
+  if (has_convolution_param()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        10, this->convolution_param(), target);
+  }
+
+  // optional .caffe.DataParameter data_param = 11;
+  if (has_data_param()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        11, this->data_param(), target);
+  }
+
+  // optional .caffe.DropoutParameter dropout_param = 12;
+  if (has_dropout_param()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        12, this->dropout_param(), target);
+  }
+
+  // optional .caffe.HDF5DataParameter hdf5_data_param = 13;
+  if (has_hdf5_data_param()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        13, this->hdf5_data_param(), target);
+  }
+
+  // optional .caffe.HDF5OutputParameter hdf5_output_param = 14;
+  if (has_hdf5_output_param()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        14, this->hdf5_output_param(), target);
+  }
+
+  // optional .caffe.ImageDataParameter image_data_param = 15;
+  if (has_image_data_param()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        15, this->image_data_param(), target);
+  }
+
+  // optional .caffe.InfogainLossParameter infogain_loss_param = 16;
+  if (has_infogain_loss_param()) {
+    target = ::google::protobuf::internal:
