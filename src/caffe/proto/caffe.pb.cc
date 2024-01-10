@@ -27850,4 +27850,347 @@ void V0LayerParameter::MergeFrom(const V0LayerParameter& from) {
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
 
-void V0LayerParameter::CopyFrom(const
+void V0LayerParameter::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void V0LayerParameter::CopyFrom(const V0LayerParameter& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool V0LayerParameter::IsInitialized() const {
+
+  return true;
+}
+
+void V0LayerParameter::Swap(V0LayerParameter* other) {
+  if (other != this) {
+    std::swap(name_, other->name_);
+    std::swap(type_, other->type_);
+    std::swap(num_output_, other->num_output_);
+    std::swap(biasterm_, other->biasterm_);
+    std::swap(weight_filler_, other->weight_filler_);
+    std::swap(bias_filler_, other->bias_filler_);
+    std::swap(pad_, other->pad_);
+    std::swap(kernelsize_, other->kernelsize_);
+    std::swap(group_, other->group_);
+    std::swap(stride_, other->stride_);
+    std::swap(pool_, other->pool_);
+    std::swap(dropout_ratio_, other->dropout_ratio_);
+    std::swap(local_size_, other->local_size_);
+    std::swap(alpha_, other->alpha_);
+    std::swap(beta_, other->beta_);
+    std::swap(k_, other->k_);
+    std::swap(source_, other->source_);
+    std::swap(scale_, other->scale_);
+    std::swap(meanfile_, other->meanfile_);
+    std::swap(batchsize_, other->batchsize_);
+    std::swap(cropsize_, other->cropsize_);
+    std::swap(mirror_, other->mirror_);
+    blobs_.Swap(&other->blobs_);
+    blobs_lr_.Swap(&other->blobs_lr_);
+    weight_decay_.Swap(&other->weight_decay_);
+    std::swap(rand_skip_, other->rand_skip_);
+    std::swap(det_fg_threshold_, other->det_fg_threshold_);
+    std::swap(det_bg_threshold_, other->det_bg_threshold_);
+    std::swap(det_fg_fraction_, other->det_fg_fraction_);
+    std::swap(det_context_pad_, other->det_context_pad_);
+    std::swap(det_crop_mode_, other->det_crop_mode_);
+    std::swap(new_num_, other->new_num_);
+    std::swap(new_channels_, other->new_channels_);
+    std::swap(new_height_, other->new_height_);
+    std::swap(new_width_, other->new_width_);
+    std::swap(shuffle_images_, other->shuffle_images_);
+    std::swap(concat_dim_, other->concat_dim_);
+    std::swap(hdf5_output_param_, other->hdf5_output_param_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    std::swap(_has_bits_[1], other->_has_bits_[1]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata V0LayerParameter::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = V0LayerParameter_descriptor_;
+  metadata.reflection = V0LayerParameter_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int PReLUParameter::kFillerFieldNumber;
+const int PReLUParameter::kChannelSharedFieldNumber;
+#endif  // !_MSC_VER
+
+PReLUParameter::PReLUParameter()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:caffe.PReLUParameter)
+}
+
+void PReLUParameter::InitAsDefaultInstance() {
+  filler_ = const_cast< ::caffe::FillerParameter*>(&::caffe::FillerParameter::default_instance());
+}
+
+PReLUParameter::PReLUParameter(const PReLUParameter& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:caffe.PReLUParameter)
+}
+
+void PReLUParameter::SharedCtor() {
+  _cached_size_ = 0;
+  filler_ = NULL;
+  channel_shared_ = false;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+PReLUParameter::~PReLUParameter() {
+  // @@protoc_insertion_point(destructor:caffe.PReLUParameter)
+  SharedDtor();
+}
+
+void PReLUParameter::SharedDtor() {
+  if (this != default_instance_) {
+    delete filler_;
+  }
+}
+
+void PReLUParameter::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* PReLUParameter::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return PReLUParameter_descriptor_;
+}
+
+const PReLUParameter& PReLUParameter::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_caffe_2eproto();
+  return *default_instance_;
+}
+
+PReLUParameter* PReLUParameter::default_instance_ = NULL;
+
+PReLUParameter* PReLUParameter::New() const {
+  return new PReLUParameter;
+}
+
+void PReLUParameter::Clear() {
+  if (_has_bits_[0 / 32] & 3) {
+    if (has_filler()) {
+      if (filler_ != NULL) filler_->::caffe::FillerParameter::Clear();
+    }
+    channel_shared_ = false;
+  }
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool PReLUParameter::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:caffe.PReLUParameter)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional .caffe.FillerParameter filler = 1;
+      case 1: {
+        if (tag == 10) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_filler()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(16)) goto parse_channel_shared;
+        break;
+      }
+
+      // optional bool channel_shared = 2 [default = false];
+      case 2: {
+        if (tag == 16) {
+         parse_channel_shared:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &channel_shared_)));
+          set_has_channel_shared();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:caffe.PReLUParameter)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:caffe.PReLUParameter)
+  return false;
+#undef DO_
+}
+
+void PReLUParameter::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:caffe.PReLUParameter)
+  // optional .caffe.FillerParameter filler = 1;
+  if (has_filler()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      1, this->filler(), output);
+  }
+
+  // optional bool channel_shared = 2 [default = false];
+  if (has_channel_shared()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(2, this->channel_shared(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:caffe.PReLUParameter)
+}
+
+::google::protobuf::uint8* PReLUParameter::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:caffe.PReLUParameter)
+  // optional .caffe.FillerParameter filler = 1;
+  if (has_filler()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        1, this->filler(), target);
+  }
+
+  // optional bool channel_shared = 2 [default = false];
+  if (has_channel_shared()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(2, this->channel_shared(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:caffe.PReLUParameter)
+  return target;
+}
+
+int PReLUParameter::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // optional .caffe.FillerParameter filler = 1;
+    if (has_filler()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->filler());
+    }
+
+    // optional bool channel_shared = 2 [default = false];
+    if (has_channel_shared()) {
+      total_size += 1 + 1;
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void PReLUParameter::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const PReLUParameter* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const PReLUParameter*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void PReLUParameter::MergeFrom(const PReLUParameter& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_filler()) {
+      mutable_filler()->::caffe::FillerParameter::MergeFrom(from.filler());
+    }
+    if (from.has_channel_shared()) {
+      set_channel_shared(from.channel_shared());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void PReLUParameter::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void PReLUParameter::CopyFrom(const PReLUParameter& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool PReLUParameter::IsInitialized() const {
+
+  return true;
+}
+
+void PReLUParameter::Swap(PReLUParameter* other) {
+  if (other != this) {
+    std::swap(filler_, other->filler_);
+    std::swap(channel_shared_, other->channel_shared_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata PReLUParameter::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = PReLUParameter_descriptor_;
+  metadata.reflection = PReLUParameter_reflection_;
+  return metadata;
+}
+
+
+// @@protoc_insertion_point(namespace_scope)
+
+}  // namespace caffe
+
+// @@protoc_insertion_point(global_scope)
