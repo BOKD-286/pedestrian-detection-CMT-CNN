@@ -27419,4 +27419,435 @@ void V0LayerParameter::SerializeWithCachedSizes(
 
   // optional int32 new_width = 63 [default = 0];
   if (has_new_width()) {
-    target = ::google::protobuf::internal::WireFormatLite
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(63, this->new_width(), target);
+  }
+
+  // optional bool shuffle_images = 64 [default = false];
+  if (has_shuffle_images()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(64, this->shuffle_images(), target);
+  }
+
+  // optional uint32 concat_dim = 65 [default = 1];
+  if (has_concat_dim()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(65, this->concat_dim(), target);
+  }
+
+  // optional .caffe.HDF5OutputParameter hdf5_output_param = 1001;
+  if (has_hdf5_output_param()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        1001, this->hdf5_output_param(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:caffe.V0LayerParameter)
+  return target;
+}
+
+int V0LayerParameter::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // optional string name = 1;
+    if (has_name()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->name());
+    }
+
+    // optional string type = 2;
+    if (has_type()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->type());
+    }
+
+    // optional uint32 num_output = 3;
+    if (has_num_output()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::UInt32Size(
+          this->num_output());
+    }
+
+    // optional bool biasterm = 4 [default = true];
+    if (has_biasterm()) {
+      total_size += 1 + 1;
+    }
+
+    // optional .caffe.FillerParameter weight_filler = 5;
+    if (has_weight_filler()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->weight_filler());
+    }
+
+    // optional .caffe.FillerParameter bias_filler = 6;
+    if (has_bias_filler()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->bias_filler());
+    }
+
+    // optional uint32 pad = 7 [default = 0];
+    if (has_pad()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::UInt32Size(
+          this->pad());
+    }
+
+    // optional uint32 kernelsize = 8;
+    if (has_kernelsize()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::UInt32Size(
+          this->kernelsize());
+    }
+
+  }
+  if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
+    // optional uint32 group = 9 [default = 1];
+    if (has_group()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::UInt32Size(
+          this->group());
+    }
+
+    // optional uint32 stride = 10 [default = 1];
+    if (has_stride()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::UInt32Size(
+          this->stride());
+    }
+
+    // optional .caffe.V0LayerParameter.PoolMethod pool = 11 [default = MAX];
+    if (has_pool()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::EnumSize(this->pool());
+    }
+
+    // optional float dropout_ratio = 12 [default = 0.5];
+    if (has_dropout_ratio()) {
+      total_size += 1 + 4;
+    }
+
+    // optional uint32 local_size = 13 [default = 5];
+    if (has_local_size()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::UInt32Size(
+          this->local_size());
+    }
+
+    // optional float alpha = 14 [default = 1];
+    if (has_alpha()) {
+      total_size += 1 + 4;
+    }
+
+    // optional float beta = 15 [default = 0.75];
+    if (has_beta()) {
+      total_size += 1 + 4;
+    }
+
+    // optional float k = 22 [default = 1];
+    if (has_k()) {
+      total_size += 2 + 4;
+    }
+
+  }
+  if (_has_bits_[16 / 32] & (0xffu << (16 % 32))) {
+    // optional string source = 16;
+    if (has_source()) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->source());
+    }
+
+    // optional float scale = 17 [default = 1];
+    if (has_scale()) {
+      total_size += 2 + 4;
+    }
+
+    // optional string meanfile = 18;
+    if (has_meanfile()) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->meanfile());
+    }
+
+    // optional uint32 batchsize = 19;
+    if (has_batchsize()) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::UInt32Size(
+          this->batchsize());
+    }
+
+    // optional uint32 cropsize = 20 [default = 0];
+    if (has_cropsize()) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::UInt32Size(
+          this->cropsize());
+    }
+
+    // optional bool mirror = 21 [default = false];
+    if (has_mirror()) {
+      total_size += 2 + 1;
+    }
+
+  }
+  if (_has_bits_[25 / 32] & (0xffu << (25 % 32))) {
+    // optional uint32 rand_skip = 53 [default = 0];
+    if (has_rand_skip()) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::UInt32Size(
+          this->rand_skip());
+    }
+
+    // optional float det_fg_threshold = 54 [default = 0.5];
+    if (has_det_fg_threshold()) {
+      total_size += 2 + 4;
+    }
+
+    // optional float det_bg_threshold = 55 [default = 0.5];
+    if (has_det_bg_threshold()) {
+      total_size += 2 + 4;
+    }
+
+    // optional float det_fg_fraction = 56 [default = 0.25];
+    if (has_det_fg_fraction()) {
+      total_size += 2 + 4;
+    }
+
+    // optional uint32 det_context_pad = 58 [default = 0];
+    if (has_det_context_pad()) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::UInt32Size(
+          this->det_context_pad());
+    }
+
+    // optional string det_crop_mode = 59 [default = "warp"];
+    if (has_det_crop_mode()) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->det_crop_mode());
+    }
+
+    // optional int32 new_num = 60 [default = 0];
+    if (has_new_num()) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->new_num());
+    }
+
+  }
+  if (_has_bits_[32 / 32] & (0xffu << (32 % 32))) {
+    // optional int32 new_channels = 61 [default = 0];
+    if (has_new_channels()) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->new_channels());
+    }
+
+    // optional int32 new_height = 62 [default = 0];
+    if (has_new_height()) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->new_height());
+    }
+
+    // optional int32 new_width = 63 [default = 0];
+    if (has_new_width()) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->new_width());
+    }
+
+    // optional bool shuffle_images = 64 [default = false];
+    if (has_shuffle_images()) {
+      total_size += 2 + 1;
+    }
+
+    // optional uint32 concat_dim = 65 [default = 1];
+    if (has_concat_dim()) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::UInt32Size(
+          this->concat_dim());
+    }
+
+    // optional .caffe.HDF5OutputParameter hdf5_output_param = 1001;
+    if (has_hdf5_output_param()) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->hdf5_output_param());
+    }
+
+  }
+  // repeated .caffe.BlobProto blobs = 50;
+  total_size += 2 * this->blobs_size();
+  for (int i = 0; i < this->blobs_size(); i++) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        this->blobs(i));
+  }
+
+  // repeated float blobs_lr = 51;
+  {
+    int data_size = 0;
+    data_size = 4 * this->blobs_lr_size();
+    total_size += 2 * this->blobs_lr_size() + data_size;
+  }
+
+  // repeated float weight_decay = 52;
+  {
+    int data_size = 0;
+    data_size = 4 * this->weight_decay_size();
+    total_size += 2 * this->weight_decay_size() + data_size;
+  }
+
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void V0LayerParameter::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const V0LayerParameter* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const V0LayerParameter*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void V0LayerParameter::MergeFrom(const V0LayerParameter& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  blobs_.MergeFrom(from.blobs_);
+  blobs_lr_.MergeFrom(from.blobs_lr_);
+  weight_decay_.MergeFrom(from.weight_decay_);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_name()) {
+      set_name(from.name());
+    }
+    if (from.has_type()) {
+      set_type(from.type());
+    }
+    if (from.has_num_output()) {
+      set_num_output(from.num_output());
+    }
+    if (from.has_biasterm()) {
+      set_biasterm(from.biasterm());
+    }
+    if (from.has_weight_filler()) {
+      mutable_weight_filler()->::caffe::FillerParameter::MergeFrom(from.weight_filler());
+    }
+    if (from.has_bias_filler()) {
+      mutable_bias_filler()->::caffe::FillerParameter::MergeFrom(from.bias_filler());
+    }
+    if (from.has_pad()) {
+      set_pad(from.pad());
+    }
+    if (from.has_kernelsize()) {
+      set_kernelsize(from.kernelsize());
+    }
+  }
+  if (from._has_bits_[8 / 32] & (0xffu << (8 % 32))) {
+    if (from.has_group()) {
+      set_group(from.group());
+    }
+    if (from.has_stride()) {
+      set_stride(from.stride());
+    }
+    if (from.has_pool()) {
+      set_pool(from.pool());
+    }
+    if (from.has_dropout_ratio()) {
+      set_dropout_ratio(from.dropout_ratio());
+    }
+    if (from.has_local_size()) {
+      set_local_size(from.local_size());
+    }
+    if (from.has_alpha()) {
+      set_alpha(from.alpha());
+    }
+    if (from.has_beta()) {
+      set_beta(from.beta());
+    }
+    if (from.has_k()) {
+      set_k(from.k());
+    }
+  }
+  if (from._has_bits_[16 / 32] & (0xffu << (16 % 32))) {
+    if (from.has_source()) {
+      set_source(from.source());
+    }
+    if (from.has_scale()) {
+      set_scale(from.scale());
+    }
+    if (from.has_meanfile()) {
+      set_meanfile(from.meanfile());
+    }
+    if (from.has_batchsize()) {
+      set_batchsize(from.batchsize());
+    }
+    if (from.has_cropsize()) {
+      set_cropsize(from.cropsize());
+    }
+    if (from.has_mirror()) {
+      set_mirror(from.mirror());
+    }
+  }
+  if (from._has_bits_[25 / 32] & (0xffu << (25 % 32))) {
+    if (from.has_rand_skip()) {
+      set_rand_skip(from.rand_skip());
+    }
+    if (from.has_det_fg_threshold()) {
+      set_det_fg_threshold(from.det_fg_threshold());
+    }
+    if (from.has_det_bg_threshold()) {
+      set_det_bg_threshold(from.det_bg_threshold());
+    }
+    if (from.has_det_fg_fraction()) {
+      set_det_fg_fraction(from.det_fg_fraction());
+    }
+    if (from.has_det_context_pad()) {
+      set_det_context_pad(from.det_context_pad());
+    }
+    if (from.has_det_crop_mode()) {
+      set_det_crop_mode(from.det_crop_mode());
+    }
+    if (from.has_new_num()) {
+      set_new_num(from.new_num());
+    }
+  }
+  if (from._has_bits_[32 / 32] & (0xffu << (32 % 32))) {
+    if (from.has_new_channels()) {
+      set_new_channels(from.new_channels());
+    }
+    if (from.has_new_height()) {
+      set_new_height(from.new_height());
+    }
+    if (from.has_new_width()) {
+      set_new_width(from.new_width());
+    }
+    if (from.has_shuffle_images()) {
+      set_shuffle_images(from.shuffle_images());
+    }
+    if (from.has_concat_dim()) {
+      set_concat_dim(from.concat_dim());
+    }
+    if (from.has_hdf5_output_param()) {
+      mutable_hdf5_output_param()->::caffe::HDF5OutputParameter::MergeFrom(from.hdf5_output_param());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void V0LayerParameter::CopyFrom(const
