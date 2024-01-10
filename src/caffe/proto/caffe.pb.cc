@@ -26369,4 +26369,365 @@ bool V0LayerParameter::MergePartialFromCodedStream(
       // optional string name = 1;
       case 1: {
         if (tag == 10) {
-          DO_(::google::protobuf::internal::WireFormat
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_name()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->name().data(), this->name().length(),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "name");
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(18)) goto parse_type;
+        break;
+      }
+
+      // optional string type = 2;
+      case 2: {
+        if (tag == 18) {
+         parse_type:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_type()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->type().data(), this->type().length(),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "type");
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(24)) goto parse_num_output;
+        break;
+      }
+
+      // optional uint32 num_output = 3;
+      case 3: {
+        if (tag == 24) {
+         parse_num_output:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &num_output_)));
+          set_has_num_output();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(32)) goto parse_biasterm;
+        break;
+      }
+
+      // optional bool biasterm = 4 [default = true];
+      case 4: {
+        if (tag == 32) {
+         parse_biasterm:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &biasterm_)));
+          set_has_biasterm();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(42)) goto parse_weight_filler;
+        break;
+      }
+
+      // optional .caffe.FillerParameter weight_filler = 5;
+      case 5: {
+        if (tag == 42) {
+         parse_weight_filler:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_weight_filler()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(50)) goto parse_bias_filler;
+        break;
+      }
+
+      // optional .caffe.FillerParameter bias_filler = 6;
+      case 6: {
+        if (tag == 50) {
+         parse_bias_filler:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_bias_filler()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(56)) goto parse_pad;
+        break;
+      }
+
+      // optional uint32 pad = 7 [default = 0];
+      case 7: {
+        if (tag == 56) {
+         parse_pad:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &pad_)));
+          set_has_pad();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(64)) goto parse_kernelsize;
+        break;
+      }
+
+      // optional uint32 kernelsize = 8;
+      case 8: {
+        if (tag == 64) {
+         parse_kernelsize:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &kernelsize_)));
+          set_has_kernelsize();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(72)) goto parse_group;
+        break;
+      }
+
+      // optional uint32 group = 9 [default = 1];
+      case 9: {
+        if (tag == 72) {
+         parse_group:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &group_)));
+          set_has_group();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(80)) goto parse_stride;
+        break;
+      }
+
+      // optional uint32 stride = 10 [default = 1];
+      case 10: {
+        if (tag == 80) {
+         parse_stride:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &stride_)));
+          set_has_stride();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(88)) goto parse_pool;
+        break;
+      }
+
+      // optional .caffe.V0LayerParameter.PoolMethod pool = 11 [default = MAX];
+      case 11: {
+        if (tag == 88) {
+         parse_pool:
+          int value;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          if (::caffe::V0LayerParameter_PoolMethod_IsValid(value)) {
+            set_pool(static_cast< ::caffe::V0LayerParameter_PoolMethod >(value));
+          } else {
+            mutable_unknown_fields()->AddVarint(11, value);
+          }
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(101)) goto parse_dropout_ratio;
+        break;
+      }
+
+      // optional float dropout_ratio = 12 [default = 0.5];
+      case 12: {
+        if (tag == 101) {
+         parse_dropout_ratio:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &dropout_ratio_)));
+          set_has_dropout_ratio();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(104)) goto parse_local_size;
+        break;
+      }
+
+      // optional uint32 local_size = 13 [default = 5];
+      case 13: {
+        if (tag == 104) {
+         parse_local_size:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &local_size_)));
+          set_has_local_size();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(117)) goto parse_alpha;
+        break;
+      }
+
+      // optional float alpha = 14 [default = 1];
+      case 14: {
+        if (tag == 117) {
+         parse_alpha:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &alpha_)));
+          set_has_alpha();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(125)) goto parse_beta;
+        break;
+      }
+
+      // optional float beta = 15 [default = 0.75];
+      case 15: {
+        if (tag == 125) {
+         parse_beta:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &beta_)));
+          set_has_beta();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(130)) goto parse_source;
+        break;
+      }
+
+      // optional string source = 16;
+      case 16: {
+        if (tag == 130) {
+         parse_source:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_source()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->source().data(), this->source().length(),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "source");
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(141)) goto parse_scale;
+        break;
+      }
+
+      // optional float scale = 17 [default = 1];
+      case 17: {
+        if (tag == 141) {
+         parse_scale:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &scale_)));
+          set_has_scale();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(146)) goto parse_meanfile;
+        break;
+      }
+
+      // optional string meanfile = 18;
+      case 18: {
+        if (tag == 146) {
+         parse_meanfile:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_meanfile()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->meanfile().data(), this->meanfile().length(),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "meanfile");
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(152)) goto parse_batchsize;
+        break;
+      }
+
+      // optional uint32 batchsize = 19;
+      case 19: {
+        if (tag == 152) {
+         parse_batchsize:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &batchsize_)));
+          set_has_batchsize();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(160)) goto parse_cropsize;
+        break;
+      }
+
+      // optional uint32 cropsize = 20 [default = 0];
+      case 20: {
+        if (tag == 160) {
+         parse_cropsize:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &cropsize_)));
+          set_has_cropsize();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(168)) goto parse_mirror;
+        break;
+      }
+
+      // optional bool mirror = 21 [default = false];
+      case 21: {
+        if (tag == 168) {
+         parse_mirror:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &mirror_)));
+          set_has_mirror();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(181)) goto parse_k;
+        break;
+      }
+
+      // optional float k = 22 [default = 1];
+      case 22: {
+        if (tag == 181) {
+         parse_k:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &k_)));
+          set_has_k();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(402)) goto parse_blobs;
+        break;
+      }
+
+      // repeated .caffe.BlobProto blobs = 50;
+      case 50: {
+        if (tag == 402) {
+         parse_blobs:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+                input, add_blobs()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(402)) goto parse_blobs;
+        if (input->ExpectTag(413)) goto parse_blobs_lr;
+        break;
+      }
+
+      // repeated float blobs_lr = 51;
+      case 51: {
+        if (tag == 413) {
+         parse_blobs_lr:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 2, 413, input, this->mutable_blobs_lr())));
+        } else if (tag == 410) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPackedPrimitiveNoInline<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, this->mutable_blobs_lr())));
+        } else {
+          goto handle_unusual
