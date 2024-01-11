@@ -349,4 +349,348 @@ void Solver<Dtype>::Test(const int test_net_id) {
 template <typename Dtype>
 void Solver<Dtype>::Snapshot() {
   NetParameter net_param;
-  // For intermediate results, we will also dum
+  // For intermediate results, we will also dump the gradient values.
+  net_->ToProto(&net_param, param_.snapshot_diff());
+  string filename(param_.snapshot_prefix());
+  string model_filename, snapshot_filename;
+  const int kBufferSize = 20;
+  char iter_str_buffer[kBufferSize];
+  snprintf(iter_str_buffer, kBufferSize, "_iter_%d", iter_);
+  filename += iter_str_buffer;
+  model_filename = filename + ".caffemodel";
+  LOG(INFO) << "Snapshotting to " << model_filename;
+  WriteProtoToBinaryFile(net_param, model_filename.c_str());
+  SolverState state;
+  SnapshotSolverState(&state);
+  state.set_iter(iter_);
+  state.set_learned_net(model_filename);
+  state.set_current_step(current_step_);
+  snapshot_filename = filename + ".solverstate";
+  LOG(INFO) << "Snapshotting solver state to " << snapshot_filename;
+  WriteProtoToBinaryFile(state, snapshot_filename.c_str());
+}
+
+template <typename Dtype>
+void Solver<Dtype>::Restore(const char* state_file) {
+  SolverState state;
+  NetParameter net_param;
+  ReadProtoFromBinaryFile(state_file, &state);
+  if (state.has_learned_net()) {
+    ReadNetParamsFromBinaryFileOrDie(state.learned_net().c_str(), &net_param);
+    net_->CopyTrainedLayersFrom(net_param);
+  }
+  iter_ = state.iter();
+  current_step_ = state.current_step();
+  RestoreSolverState(state);
+}
+
+
+// Return the current learning rate. The currently implemented learning rate
+// policies are as follows:
+//    - fixed: always return base_lr.
+//    - step: return base_lr * gamma ^ (floor(iter / step))
+//    - exp: return base_lr * gamma ^ iter
+//    - inv: return base_lr * (1 + gamma * iter) ^ (- power)
+//    - multistep: similar to step but it allows non uniform steps defined by
+//      stepvalue
+//    - poly: the effective learning rate follows a polynomial decay, to be
+//      zero by the max_iter. return base_lr (1 - iter/max_iter) ^ (power)
+//    - sigmoid: the effective learning rate follows a sigmod decay
+//      return base_lr ( 1/(1 + exp(-gamma * (iter - stepsize))))
+//
+// where base_lr, max_iter, gamma, step, stepvalue and power are defined
+// in the solver parameter protocol buffer, and iter is the current iteration.
+template <typename Dtype>
+Dtype SGDSolver<Dtype>::GetLearningRate() {
+  Dtype rate;
+  const string& lr_policy = this->param_.lr_policy();
+  if (lr_policy == "fixed") {
+    rate = this->param_.base_lr();
+  } else if (lr_policy == "step") {
+    this->current_step_ = this->iter_ / this->param_.stepsize();
+    rate = this->param_.base_lr() *
+        pow(this->param_.gamma(), this->current_step_);
+  } else if (lr_policy == "exp") {
+    rate = this->param_.base_lr() * pow(this->param_.gamma(), this->iter_);
+  } else if (lr_policy == "inv") {
+    rate = this->param_.base_lr() *
+        pow(Dtype(1) + this->param_.gamma() * this->iter_,
+            - this->param_.power());
+  } else if (lr_policy == "multistep") {
+    if (this->current_step_ < this->param_.stepvalue_size() &&
+          this->iter_ >= this->param_.stepvalue(this->current_step_)) {
+      this->current_step_++;
+      LOG(INFO) << "MultiStep Status: Iteration " <<
+      this->iter_ << ", step = " << this->current_step_;
+    }
+    rate = this->param_.base_lr() *
+        pow(this->param_.gamma(), this->current_step_);
+  } else if (lr_policy == "poly") {
+    rate = this->param_.base_lr() * pow(Dtype(1.) -
+        (Dtype(this->iter_) / Dtype(this->param_.max_iter())),
+        this->param_.power());
+  } else if (lr_policy == "sigmoid") {
+    rate = this->param_.base_lr() * (Dtype(1.) /
+        (Dtype(1.) + exp(-this->param_.gamma() * (Dtype(this->iter_) -
+          Dtype(this->param_.stepsize())))));
+  } else {
+    LOG(FATAL) << "Unknown learning rate policy: " << lr_policy;
+  }
+  return rate;
+}
+
+template <typename Dtype>
+void SGDSolver<Dtype>::PreSolve() {
+  // Initialize the history
+  const vector<shared_ptr<Blob<Dtype> > >& net_params = this->net_->params();
+  history_.clear();
+  update_.clear();
+  temp_.clear();
+  for (int i = 0; i < net_params.size(); ++i) {
+    const vector<int>& shape = net_params[i]->shape();
+    history_.push_back(shared_ptr<Blob<Dtype> >(new Blob<Dtype>(shape)));
+    update_.push_back(shared_ptr<Blob<Dtype> >(new Blob<Dtype>(shape)));
+    temp_.push_back(shared_ptr<Blob<Dtype> >(new Blob<Dtype>(shape)));
+  }
+}
+
+template <typename Dtype>
+void SGDSolver<Dtype>::ClipGradients() {
+  const Dtype clip_gradients = this->param_.clip_gradients();
+  if (clip_gradients < 0) { return; }
+  const vector<shared_ptr<Blob<Dtype> > >& net_params = this->net_->params();
+  Dtype sumsq_diff = 0;
+  for (int i = 0; i < net_params.size(); ++i) {
+    if (this->net_->param_owners()[i] < 0) {
+      sumsq_diff += net_params[i]->sumsq_diff();
+    }
+  }
+  const Dtype l2norm_diff = std::sqrt(sumsq_diff);
+  if (l2norm_diff > clip_gradients) {
+    Dtype scale_factor = clip_gradients / l2norm_diff;
+    LOG(INFO) << "Gradient clipping: scaling down gradients (L2 norm "
+        << l2norm_diff << " > " << clip_gradients << ") "
+        << "by scale factor " << scale_factor;
+    for (int i = 0; i < net_params.size(); ++i) {
+      if (this->net_->param_owners()[i] < 0) {
+        net_params[i]->scale_diff(scale_factor);
+      }
+    }
+  }
+}
+
+template <typename Dtype>
+void SGDSolver<Dtype>::ApplyUpdate() {
+  Dtype rate = GetLearningRate();
+  if (this->param_.display() && this->iter_ % this->param_.display() == 0) {
+    LOG(INFO) << "Iteration " << this->iter_ << ", lr = " << rate;
+  }
+  ClipGradients();
+  for (int param_id = 0; param_id < this->net_->params().size(); ++param_id) {
+    Normalize(param_id);
+    Regularize(param_id);
+    ComputeUpdateValue(param_id, rate);
+  }
+  this->net_->Update();
+}
+
+template <typename Dtype>
+void SGDSolver<Dtype>::Normalize(int param_id) {
+  if (this->param_.iter_size() == 1) { return; }
+  // Scale gradient to counterbalance accumulation.
+  const vector<shared_ptr<Blob<Dtype> > >& net_params = this->net_->params();
+  const Dtype accum_normalization = Dtype(1.) / this->param_.iter_size();
+  switch (Caffe::mode()) {
+  case Caffe::CPU: {
+    caffe_scal(net_params[param_id]->count(), accum_normalization,
+        net_params[param_id]->mutable_cpu_diff());
+    break;
+  }
+  case Caffe::GPU: {
+#ifndef CPU_ONLY
+    caffe_gpu_scal(net_params[param_id]->count(), accum_normalization,
+        net_params[param_id]->mutable_gpu_diff());
+#else
+    NO_GPU;
+#endif
+    break;
+  }
+  default:
+    LOG(FATAL) << "Unknown caffe mode: " << Caffe::mode();
+  }
+}
+
+template <typename Dtype>
+void SGDSolver<Dtype>::Regularize(int param_id) {
+  const vector<shared_ptr<Blob<Dtype> > >& net_params = this->net_->params();
+  const vector<float>& net_params_weight_decay =
+      this->net_->params_weight_decay();
+  Dtype weight_decay = this->param_.weight_decay();
+  string regularization_type = this->param_.regularization_type();
+  Dtype local_decay = weight_decay * net_params_weight_decay[param_id];
+  switch (Caffe::mode()) {
+  case Caffe::CPU: {
+    if (local_decay) {
+      if (regularization_type == "L2") {
+        // add weight decay
+        caffe_axpy(net_params[param_id]->count(),
+            local_decay,
+            net_params[param_id]->cpu_data(),
+            net_params[param_id]->mutable_cpu_diff());
+      } else if (regularization_type == "L1") {
+        caffe_cpu_sign(net_params[param_id]->count(),
+            net_params[param_id]->cpu_data(),
+            temp_[param_id]->mutable_cpu_data());
+        caffe_axpy(net_params[param_id]->count(),
+            local_decay,
+            temp_[param_id]->cpu_data(),
+            net_params[param_id]->mutable_cpu_diff());
+      } else {
+        LOG(FATAL) << "Unknown regularization type: " << regularization_type;
+      }
+    }
+    break;
+  }
+  case Caffe::GPU: {
+#ifndef CPU_ONLY
+    if (local_decay) {
+      if (regularization_type == "L2") {
+        // add weight decay
+        caffe_gpu_axpy(net_params[param_id]->count(),
+            local_decay,
+            net_params[param_id]->gpu_data(),
+            net_params[param_id]->mutable_gpu_diff());
+      } else if (regularization_type == "L1") {
+        caffe_gpu_sign(net_params[param_id]->count(),
+            net_params[param_id]->gpu_data(),
+            temp_[param_id]->mutable_gpu_data());
+        caffe_gpu_axpy(net_params[param_id]->count(),
+            local_decay,
+            temp_[param_id]->gpu_data(),
+            net_params[param_id]->mutable_gpu_diff());
+      } else {
+        LOG(FATAL) << "Unknown regularization type: " << regularization_type;
+      }
+    }
+#else
+    NO_GPU;
+#endif
+    break;
+  }
+  default:
+    LOG(FATAL) << "Unknown caffe mode: " << Caffe::mode();
+  }
+}
+
+template <typename Dtype>
+void SGDSolver<Dtype>::ComputeUpdateValue(int param_id, Dtype rate) {
+  const vector<shared_ptr<Blob<Dtype> > >& net_params = this->net_->params();
+  const vector<float>& net_params_lr = this->net_->params_lr();
+  Dtype momentum = this->param_.momentum();
+  Dtype local_rate = rate * net_params_lr[param_id];
+  // Compute the update to history, then copy it to the parameter diff.
+  switch (Caffe::mode()) {
+  case Caffe::CPU: {
+    caffe_cpu_axpby(net_params[param_id]->count(), local_rate,
+              net_params[param_id]->cpu_diff(), momentum,
+              history_[param_id]->mutable_cpu_data());
+    caffe_copy(net_params[param_id]->count(),
+        history_[param_id]->cpu_data(),
+        net_params[param_id]->mutable_cpu_diff());
+    break;
+  }
+  case Caffe::GPU: {
+#ifndef CPU_ONLY
+    caffe_gpu_axpby(net_params[param_id]->count(), local_rate,
+              net_params[param_id]->gpu_diff(), momentum,
+              history_[param_id]->mutable_gpu_data());
+    caffe_copy(net_params[param_id]->count(),
+        history_[param_id]->gpu_data(),
+        net_params[param_id]->mutable_gpu_diff());
+#else
+    NO_GPU;
+#endif
+    break;
+  }
+  default:
+    LOG(FATAL) << "Unknown caffe mode: " << Caffe::mode();
+  }
+}
+
+template <typename Dtype>
+void SGDSolver<Dtype>::SnapshotSolverState(SolverState* state) {
+  state->clear_history();
+  for (int i = 0; i < history_.size(); ++i) {
+    // Add history
+    BlobProto* history_blob = state->add_history();
+    history_[i]->ToProto(history_blob);
+  }
+}
+
+template <typename Dtype>
+void SGDSolver<Dtype>::RestoreSolverState(const SolverState& state) {
+  CHECK_EQ(state.history_size(), history_.size())
+      << "Incorrect length of history blobs.";
+  LOG(INFO) << "SGDSolver: restoring history";
+  for (int i = 0; i < history_.size(); ++i) {
+    history_[i]->FromProto(state.history(i));
+  }
+}
+
+template <typename Dtype>
+void NesterovSolver<Dtype>::ComputeUpdateValue(int param_id, Dtype rate) {
+  const vector<shared_ptr<Blob<Dtype> > >& net_params = this->net_->params();
+  const vector<float>& net_params_lr = this->net_->params_lr();
+  Dtype momentum = this->param_.momentum();
+  Dtype local_rate = rate * net_params_lr[param_id];
+  switch (Caffe::mode()) {
+  case Caffe::CPU: {
+    // save history momentum for stepping back
+    caffe_copy(net_params[param_id]->count(),
+        this->history_[param_id]->cpu_data(),
+        this->update_[param_id]->mutable_cpu_data());
+
+    // update history
+    caffe_cpu_axpby(net_params[param_id]->count(), local_rate,
+              net_params[param_id]->cpu_diff(), momentum,
+              this->history_[param_id]->mutable_cpu_data());
+
+    // compute update: step back then over step
+    caffe_cpu_axpby(net_params[param_id]->count(), Dtype(1) + momentum,
+        this->history_[param_id]->cpu_data(), -momentum,
+        this->update_[param_id]->mutable_cpu_data());
+
+    // copy
+    caffe_copy(net_params[param_id]->count(),
+        this->update_[param_id]->cpu_data(),
+        net_params[param_id]->mutable_cpu_diff());
+    break;
+  }
+  case Caffe::GPU: {
+#ifndef CPU_ONLY
+    // save history momentum for stepping back
+    caffe_copy(net_params[param_id]->count(),
+        this->history_[param_id]->gpu_data(),
+        this->update_[param_id]->mutable_gpu_data());
+
+    // update history
+    caffe_gpu_axpby(net_params[param_id]->count(), local_rate,
+              net_params[param_id]->gpu_diff(), momentum,
+              this->history_[param_id]->mutable_gpu_data());
+
+    // compute update: step back then over step
+    caffe_gpu_axpby(net_params[param_id]->count(), Dtype(1) + momentum,
+        this->history_[param_id]->gpu_data(), -momentum,
+        this->update_[param_id]->mutable_gpu_data());
+
+    // copy
+    caffe_copy(net_params[param_id]->count(),
+        this->update_[param_id]->gpu_data(),
+        net_params[param_id]->mutable_gpu_diff());
+#else
+    NO_GPU;
+#endif
+    break;
+  }
+  default:
+    LOG(
