@@ -102,4 +102,17 @@ TYPED_TEST(Im2colLayerTest, TestRect) {
 
 
 TYPED_TEST(Im2colLayerTest, TestRectGradient) {
-  typedef typename TypeP
+  typedef typename TypeParam::Dtype Dtype;
+  LayerParameter layer_param;
+  ConvolutionParameter* convolution_param =
+      layer_param.mutable_convolution_param();
+  convolution_param->set_kernel_h(5);
+  convolution_param->set_kernel_w(3);
+  convolution_param->set_stride(2);
+  Im2colLayer<Dtype> layer(layer_param);
+  GradientChecker<Dtype> checker(1e-2, 1e-2);
+  checker.CheckGradientExhaustive(&layer, this->blob_bottom_vec_,
+      this->blob_top_vec_);
+}
+
+}  // namespace caffe
