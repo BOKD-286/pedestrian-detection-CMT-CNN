@@ -98,4 +98,99 @@ def parse_line_for_net_output(regex_obj, row, row_dict_list,
             row = OrderedDict([
                 ('NumIters', iteration),
                 ('Seconds', seconds),
-                ('LearningRate', learnin
+                ('LearningRate', learning_rate)
+            ])
+
+        # output_num is not used; may be used in the future
+        # output_num = output_match.group(1)
+        output_name = output_match.group(2)
+        output_val = output_match.group(3)
+        row[output_name] = float(output_val)
+
+    if row and len(row_dict_list) >= 1 and len(row) == len(row_dict_list[0]):
+        # The row is full, based on the fact that it has the same number of
+        # columns as the first row; append it to the list
+        row_dict_list.append(row)
+        row = None
+
+    return row_dict_list, row
+
+
+def fix_initial_nan_learning_rate(dict_list):
+    """Correct initial value of learning rate
+
+    Learning rate is normally not printed until after the initial test and
+    training step, which means the initial testing and training rows have
+    LearningRate = NaN. Fix this by copying over the LearningRate from the
+    second row, if it exists.
+    """
+
+    if len(dict_list) > 1:
+        dict_list[0]['LearningRate'] = dict_list[1]['LearningRate']
+
+
+def save_csv_files(logfile_path, output_dir, train_dict_list, test_dict_list,
+                   delimiter=',', verbose=False):
+    """Save CSV files to output_dir
+
+    If the input log file is, e.g., caffe.INFO, the names will be
+    caffe.INFO.train and caffe.INFO.test
+    """
+
+    log_basename = os.path.basename(logfile_path)
+    train_filename = os.path.join(output_dir, log_basename + '.train')
+    write_csv(train_filename, train_dict_list, delimiter, verbose)
+
+    test_filename = os.path.join(output_dir, log_basename + '.test')
+    write_csv(test_filename, test_dict_list, delimiter, verbose)
+
+
+def write_csv(output_filename, dict_list, delimiter, verbose=False):
+    """Write a CSV file
+    """
+
+    dialect = csv.excel
+    dialect.delimiter = delimiter
+
+    with open(output_filename, 'w') as f:
+        dict_writer = csv.DictWriter(f, fieldnames=dict_list[0].keys(),
+                                     dialect=dialect)
+        dict_writer.writeheader()
+        dict_writer.writerows(dict_list)
+    if verbose:
+        print 'Wrote %s' % output_filename
+
+
+def parse_args():
+    description = ('Parse a Caffe training log into two CSV files '
+                   'containing training and testing information')
+    parser = argparse.ArgumentParser(description=description)
+
+    parser.add_argument('logfile_path',
+                        help='Path to log file')
+
+    parser.add_argument('output_dir',
+                        help='Directory in which to place output CSV files')
+
+    parser.add_argument('--verbose',
+                        action='store_true',
+                        help='Print some extra info (e.g., output filenames)')
+
+    parser.add_argument('--delimiter',
+                        default=',',
+                        help=('Column delimiter in output files '
+                              '(default: \'%(default)s\')'))
+
+    args = parser.parse_args()
+    return args
+
+
+def main():
+    args = parse_args()
+    train_dict_list, test_dict_list = parse_log(args.logfile_path)
+    save_csv_files(args.logfile_path, args.output_dir, train_dict_list,
+                   test_dict_list, delimiter=args.delimiter)
+
+
+if __name__ == '__main__':
+    main()
