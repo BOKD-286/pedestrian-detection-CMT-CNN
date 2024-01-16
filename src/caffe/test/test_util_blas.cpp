@@ -125,4 +125,10 @@ TYPED_TEST(GemmTest, TestGemvCPUGPU) {
       EXPECT_EQ(x.cpu_data()[i], result_3[i]);
     }
   } else {
-    LOG(ERROR) << "Ski
+    LOG(ERROR) << "Skipping test due to old architecture.";
+  }
+}
+
+}  // namespace caffe
+
+#endif  // CPU_ONLY
