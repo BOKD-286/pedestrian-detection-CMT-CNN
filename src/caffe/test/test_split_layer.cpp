@@ -1012,4 +1012,34 @@ TEST_F(SplitLayerInsertionTest, TestWithInPlace) {
       "  name: 'relu1' "
       "  type: 'ReLU' "
       "  bottom: 'innerprod1' "
-      "  top: '
+      "  top: 'innerprod1' "
+      "} "
+      "layer { "
+      "  name: 'innerprod1_relu1_0_split' "
+      "  type: 'Split' "
+      "  bottom: 'innerprod1' "
+      "  top: 'innerprod1_relu1_0_split_0' "
+      "  top: 'innerprod1_relu1_0_split_1' "
+      "} "
+      "layer { "
+      "  name: 'innerprod2' "
+      "  type: 'InnerProduct' "
+      "  bottom: 'innerprod1_relu1_0_split_0' "
+      "  top: 'innerprod2' "
+      "} "
+      "layer { "
+      "  name: 'loss1' "
+      "  type: 'EuclideanLoss' "
+      "  bottom: 'innerprod1_relu1_0_split_1' "
+      "  bottom: 'label' "
+      "} "
+      "layer { "
+      "  name: 'loss2' "
+      "  type: 'EuclideanLoss' "
+      "  bottom: 'innerprod2' "
+      "  bottom: 'data_data_0_split_1' "
+      "} ";
+  this->RunInsertionTest(input_proto, expected_output_proto);
+}
+
+}  // namespace caffe
